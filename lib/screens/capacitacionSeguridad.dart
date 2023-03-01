@@ -8,21 +8,22 @@ import 'package:portaltransportistas/Screens/body.dart';
 import '../widget/diapostivas_seguridad.dart';
 
 class CapacitacionSeguridad extends StatelessWidget {
-  const CapacitacionSeguridad({super.key});
+  const CapacitacionSeguridad({super.key, required this.cedula});
+  final String cedula;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
-      title: 'Portal de transportista',
+      title: 'Portal de Accesos $cedula',
       theme: ThemeData(
         primarySwatch:
             generateMaterialColor(color: Color.fromARGB(255, 0, 155, 8)),
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Portal de transportista'),
+          title: Text('Portal de transportista $cedula'),
           actions: [
             IconButton(
               icon: Image.asset('assets/Logo_Ransa_Blanco.png'),
@@ -30,7 +31,11 @@ class CapacitacionSeguridad extends StatelessWidget {
             ),
           ],
         ),
-        body: Stack(children: [DiapositivasSeguridad()]),
+        body: Stack(children: [
+          DiapositivasSeguridad(
+            cedula: cedula,
+          )
+        ]),
       ),
     );
   }

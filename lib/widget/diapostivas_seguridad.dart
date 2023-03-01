@@ -1,27 +1,53 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/evaluacion.dart';
+
 final List<String> images = [
-  'assets/DiapositivaSeguridad_6.jpg',
-  'assets/DiapositivaSeguridad_7.jpg.png',
-  'assets/DiapositivaSeguridad_8.jpg',
-  'assets/DiapositivaSeguridad_9.jpg',
-  'assets/DiapositivaSeguridad_10.jpg',
-  'assets/DiapositivaSeguridad_11.jpg.png',
-  'assets/DiapositivaSeguridad_12.jpg',
-  'assets/DiapositivaSeguridad_13.jpg',
-  'assets/DiapositivaSeguridad_14.jpg',
-  'assets/DiapositivaSeguridad_15.jpg',
-  'assets/DiapositivaSeguridad_16.jpg',
-  'assets/DiapositivaSeguridad_17.jpg',
-  'assets/DiapositivaSeguridad_18.jpg',
-  'assets/DiapositivaSeguridad_19.jpg',
-  'assets/DiapositivaSeguridad_20.jpg',
-  'assets/DiapositivaSeguridad_21.jpg',
-  'assets/DiapositivaSeguridad_22.jpg',
-  'assets/DiapositivaSeguridad_23.jpg',
-  'assets/DiapositivaSeguridad_24.jpg',
-  'assets/DiapositivaSeguridad_25.jpg',
+  'Diapositiva1.JPG',
+  'Diapositiva2.JPG',
+  'Diapositiva3.JPG',
+  'Diapositiva4.JPG',
+  'Diapositiva5.JPG',
+  'Diapositiva6.JPG',
+  'Diapositiva7.JPG',
+  'Diapositiva8.JPG',
+  'Diapositiva9.JPG',
+  'Diapositiva10.JPG',
+  'Diapositiva11.JPG',
+  'Diapositiva12.JPG',
+  'Diapositiva13.JPG',
+  'Diapositiva14.JPG',
+  'Diapositiva15.JPG',
+  'Diapositiva16.JPG',
+  'Diapositiva17.JPG',
+  'Diapositiva18.JPG',
+  'Diapositiva19.JPG',
+  'Diapositiva20.JPG',
+  'Diapositiva21.JPG',
+  'Diapositiva22.JPG',
+  'Diapositiva23.JPG',
+  'Diapositiva24.JPG',
+  'Diapositiva25.JPG',
+  'Diapositiva26.JPG',
+  'Diapositiva27.JPG',
+  'Diapositiva28.JPG',
+  'Diapositiva29.JPG',
+  'Diapositiva30.JPG',
+  'Diapositiva31.JPG',
+  'Diapositiva32.JPG',
+  'Diapositiva33.JPG',
+  'Diapositiva34.JPG',
+  'Diapositiva35.JPG',
+  'Diapositiva36.JPG',
+  'Diapositiva37.JPG',
+  'Diapositiva38.JPG',
+  'Diapositiva39.JPG',
+  'Diapositiva40.JPG',
+  'Diapositiva41.JPG',
+  'Diapositiva42.JPG',
+  'Diapositiva43.JPG',
+  'Diapositiva44.JPG',
 ];
 
 List<Widget> generateImagesTiles() {
@@ -33,7 +59,8 @@ List<Widget> generateImagesTiles() {
 }
 
 class DiapositivasSeguridad extends StatefulWidget {
-  const DiapositivasSeguridad({super.key});
+  const DiapositivasSeguridad({super.key, required this.cedula});
+  final String cedula;
 
   @override
   State<DiapositivasSeguridad> createState() => _DiapositivasSeguridadState();
@@ -45,7 +72,6 @@ class _DiapositivasSeguridadState extends State<DiapositivasSeguridad> {
       MediaQuery.of(context).size.height >= 500;
   bool isMobile(BuildContext context) =>
       MediaQuery.of(context).size.height < 500;
-
   //---------------------------
 
   @override
@@ -108,7 +134,16 @@ class _DiapositivasSeguridadState extends State<DiapositivasSeguridad> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: ancho * 0.03,
                                 vertical: altura * 0.03)),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                              builder: (context) => new EvaluacionDataPersonal(
+                                cedula: widget.cedula,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text("Ir a Evaluación"),
                       )
                     ],
@@ -139,7 +174,16 @@ class _DiapositivasSeguridadState extends State<DiapositivasSeguridad> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: ancho * 0.03,
                                 vertical: altura * 0.03)),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                              builder: (context) => new EvaluacionDataPersonal(
+                                cedula: widget.cedula,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text("Ir a Evaluación"),
                       ),
                       SizedBox(

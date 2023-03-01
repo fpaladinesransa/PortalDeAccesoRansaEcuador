@@ -1,9 +1,9 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:portaltransportistas/screens/CapacitacionSeguridad.dart';
 import 'package:portaltransportistas/screens/IngresoData.dart';
 import 'package:portaltransportistas/screens/bodyConsulta.dart';
+import 'package:portaltransportistas/screens/capacitacionSeguridad.dart';
 import 'package:portaltransportistas/screens/evaluacion.dart';
 import 'Screens/body.dart';
 import 'api/ieespost.dart';
@@ -17,12 +17,16 @@ class MyAppMain extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "RutasApp",
-      initialRoute: "/evaluaciondata",
+      initialRoute: "/",
       routes: {
         '/': (_) => MyApp(asegurados: obtenerSeguros()),
-        '/CapacitacionSeguridad': (_) => CapacitacionSeguridad(),
         '/ingresodata': (_) => IngresoDataPersonal(),
-        '/evaluaciondata': (_) => EvaluacionDataPersonal()
+        '/evaluaciondata': (_) => EvaluacionDataPersonal(
+              cedula: '',
+            ),
+        '/CapacitacionSeguridad': (_) => CapacitacionSeguridad(
+              cedula: '',
+            )
       },
     );
   }

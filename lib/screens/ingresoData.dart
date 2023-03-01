@@ -1,8 +1,12 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_color_generator/material_color_generator.dart';
 import 'package:portaltransportistas/Screens/body.dart';
+import 'package:portaltransportistas/screens/capacitacionSeguridad.dart';
+
+import '../api/ieespost.dart';
 
 class IngresoDataPersonal extends StatefulWidget {
   const IngresoDataPersonal({super.key});
@@ -13,7 +17,11 @@ class IngresoDataPersonal extends StatefulWidget {
 
 class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
   late String nameValue;
-  String sedeValue = "";
+  late String cedulaValue;
+  late String fechaValue;
+  late String cargoValue;
+  late String sedeValue;
+
   final nameController = TextEditingController();
   final cedulaController = TextEditingController();
   final fechaController = TextEditingController();
@@ -72,7 +80,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                       decoration: InputDecoration(
                                           labelText: "Nombre y apellido:"),
                                       onSaved: (value) {
-                                        nameValue = value!;
+                                        nameValue = value.toString();
                                       },
                                       validator: ((value) {
                                         if (value!.isEmpty) {
@@ -85,7 +93,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                       decoration:
                                           InputDecoration(labelText: "Cedula:"),
                                       onSaved: (value) {
-                                        nameValue = value!;
+                                        cedulaValue = value!;
                                       },
                                       validator: ((value) {
                                         if (value!.isEmpty) {
@@ -115,7 +123,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                         }
                                       }),
                                       onSaved: (value) {
-                                        nameValue = value!;
+                                        fechaValue = value!;
                                       },
                                       validator: ((value) {
                                         if (value!.isEmpty) {
@@ -128,7 +136,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                       decoration:
                                           InputDecoration(labelText: "Cargo:"),
                                       onSaved: (value) {
-                                        nameValue = value!;
+                                        cargoValue = value!;
                                       },
                                       validator: ((value) {
                                         if (value!.isEmpty) {
@@ -136,27 +144,50 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                         }
                                       }),
                                     ),
-                                    TextDropdownFormField(
-                                      controller: DropdownEditingController(),
-                                      options: [
-                                        "",
-                                        "Guayaquil CD1: Almacenes",
-                                        "Guayaquil CD2: Archivo y Distribución",
-                                        "Quito CD Parque Industrial Sur - Guamaní"
-                                      ],
-                                      onSaved: (value) {
-                                        sedeValue = "";
-                                      },
-                                      decoration: InputDecoration(
-                                          suffixIcon:
-                                              Icon(Icons.arrow_drop_down),
-                                          labelText: "Sede:"),
-                                      dropdownHeight: 150,
-                                      validator: (sedeValue) {
-                                        if (sedeValue == "") {
-                                          return 'Relationship is required';
-                                        }
-                                      },
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 7),
+                                      child: DropdownButtonFormField2(
+                                        decoration: InputDecoration(
+                                          labelText: "Centro de distribución:",
+/*                                           isDense: true,
+ */
+                                          contentPadding: EdgeInsets.zero,
+                                        ),
+                                        isExpanded: true,
+                                        icon: const Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.black45,
+                                        ),
+                                        iconSize: 30,
+                                        buttonHeight: 50,
+                                        buttonPadding:
+                                            const EdgeInsets.only(right: 10),
+                                        dropdownDecoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        items: listacd
+                                            .map((item) =>
+                                                DropdownMenuItem<String>(
+                                                  value: item,
+                                                  child: Text(
+                                                    item,
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ))
+                                            .toList(),
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'Llene este campo';
+                                          }
+                                        },
+                                        onChanged: (value) {},
+                                        onSaved: (value) {
+                                          sedeValue = value.toString();
+                                        },
+                                      ),
                                     ),
                                     SizedBox(
                                       height: ancho * 0.17,
@@ -176,7 +207,13 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                             ),
                             Expanded(
                               flex: 1,
-                              child: Container(),
+                              child: Container(
+                                alignment: Alignment.bottomRight,
+                                child: Image(
+                                  height: 70,
+                                  image: AssetImage('assets/Logo_Ransa.png'),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -211,7 +248,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                       decoration:
                                           InputDecoration(labelText: "Cedula:"),
                                       onSaved: (value) {
-                                        nameValue = value!;
+                                        cedulaValue = value!;
                                       },
                                       validator: ((value) {
                                         if (value!.isEmpty) {
@@ -241,7 +278,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                         }
                                       }),
                                       onSaved: (value) {
-                                        nameValue = value!;
+                                        fechaValue = value!;
                                       },
                                       validator: ((value) {
                                         if (value!.isEmpty) {
@@ -254,7 +291,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                       decoration:
                                           InputDecoration(labelText: "Cargo:"),
                                       onSaved: (value) {
-                                        nameValue = value!;
+                                        cargoValue = value!;
                                       },
                                       validator: ((value) {
                                         if (value!.isEmpty) {
@@ -262,22 +299,50 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                         }
                                       }),
                                     ),
-                                    TextDropdownFormField(
-                                      options: [
-                                        "Guayaquil CD1: Almacenes",
-                                        "Guayaquil CD2: Archivo y Distribución",
-                                        "Quito CD Parque Industrial Sur - Guamaní"
-                                      ],
-                                      decoration: InputDecoration(
-                                          suffixIcon:
-                                              Icon(Icons.arrow_drop_down),
-                                          labelText: "Sede:"),
-                                      dropdownHeight: 150,
-                                      validator: ((value) {
-                                        if (value!.isEmpty) {
-                                          return "Llene este campo";
-                                        }
-                                      }),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 7),
+                                      child: DropdownButtonFormField2(
+                                        decoration: InputDecoration(
+                                          labelText: "Centro de distribución:",
+/*                                           isDense: true,
+ */
+                                          contentPadding: EdgeInsets.zero,
+                                        ),
+                                        isExpanded: true,
+                                        icon: const Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.black45,
+                                        ),
+                                        iconSize: 30,
+                                        buttonHeight: 50,
+                                        buttonPadding:
+                                            const EdgeInsets.only(right: 10),
+                                        dropdownDecoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        items: listacd
+                                            .map((item) =>
+                                                DropdownMenuItem<String>(
+                                                  value: item,
+                                                  child: Text(
+                                                    item,
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ))
+                                            .toList(),
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'Llene este campo';
+                                          }
+                                        },
+                                        onChanged: (value) {},
+                                        onSaved: (value) {
+                                          sedeValue = value.toString();
+                                        },
+                                      ),
                                     ),
                                     SizedBox(
                                       height: ancho * 0.2,
@@ -289,7 +354,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                           onPressed: () {
                                             _showCapacitacionPage(context);
                                           },
-                                          child: Text("Ir a la capacitación")),
+                                          child: Text("Ir a la capacitación ")),
                                     )
                                   ],
                                 ),
@@ -307,7 +372,48 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
   void _showCapacitacionPage(BuildContext context) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      Navigator.of(context).pushNamed("/CapacitacionSeguridad");
+      /* Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CapacitacionSeguridad()),
+      ); */
+      enviarRegistro(cedulaValue, nameValue, fechaValue, cargoValue, sedeValue);
+      Navigator.push(
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new CapacitacionSeguridad(
+            cedula: cedulaValue,
+          ),
+        ),
+      );
     }
   }
 }
+
+final List<String> listacd = [
+  "Guayaquil CD1: Almacenes",
+  "Guayaquil CD2: Archivo y Distribución",
+  "Quito CD Parque Industrial Sur - Guamaní"
+];
+
+/* 
+
+TextDropdownFormField(
+                                      options: [
+                                        "Guayaquil CD1: Almacenes",
+                                        "Guayaquil CD2: Archivo y Distribución",
+                                        "Quito CD Parque Industrial Sur - Guamaní"
+                                      ],
+                                      decoration: InputDecoration(
+                                          suffixIcon:
+                                              Icon(Icons.arrow_drop_down),
+                                          labelText: "Sede:"),
+                                      dropdownHeight: 150,
+                                      onSaved: (value) {
+                                        sedeValue = value!;
+                                      },
+                                      validator: ((value) {
+                                        if (value!.isEmpty) {
+                                          return "Llene este campo";
+                                        }
+                                      }),
+                                    ), */

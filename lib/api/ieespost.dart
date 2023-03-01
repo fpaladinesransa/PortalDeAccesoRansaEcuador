@@ -53,7 +53,7 @@ class ProjectList {
 }
 
 Future<List<ProjectList>> obtenerSeguros({String? query}) async {
-  final response = await http.get(Uri.parse("http://10.132.38.29:8080"));
+  final response = await http.get(Uri.parse("http://10.132.38.25:8080/"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
@@ -82,23 +82,52 @@ Future enviarEvaluacion(
     String respuesta7,
     String respuesta8,
     String respuesta9,
-    String respuesta10) async {
+    String respuesta10,
+    String cedula) async {
+  final response = await http.post(
+      Uri.parse("http://10.132.38.25:8080/actualizacionseguridad"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "pregunta1": respuesta1,
+        "pregunta2": respuesta2,
+        "pregunta3": respuesta3,
+        "pregunta4": respuesta4,
+        "pregunta5": respuesta5,
+        "pregunta6": respuesta6,
+        "pregunta7": respuesta7,
+        "pregunta8": respuesta8,
+        "pregunta9": respuesta9,
+        "pregunta10": respuesta10,
+        "cedula": cedula
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
+
+Future enviarRegistro(
+  String cedula,
+  String nombre,
+  String fecha,
+  String cargo,
+  String cd,
+) async {
   final response =
-      await http.post(Uri.parse("http://10.132.38.29:8080/evaluacion"),
+      await http.post(Uri.parse("http://10.132.38.25:8080/insertseguridad"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode(<String, String>{
-            "pregunta1": respuesta1,
-            "pregunta2": respuesta2,
-            "pregunta3": respuesta3,
-            "pregunta4": respuesta4,
-            "pregunta5": respuesta5,
-            "pregunta6": respuesta6,
-            "pregunta7": respuesta7,
-            "pregunta8": respuesta8,
-            "pregunta9": respuesta9,
-            "pregunta10": respuesta10
+            "cedula": cedula,
+            "nombre": nombre,
+            "fecha": fecha,
+            "cargo": cargo,
+            "cd": cd,
           }));
 
   if (response.statusCode == 200) {
