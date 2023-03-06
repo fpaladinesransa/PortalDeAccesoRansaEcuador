@@ -53,7 +53,7 @@ final List<String> images = [
 List<Widget> generateImagesTiles() {
   return images
       .map((element) => ClipRRect(
-            child: Image.asset(element, fit: BoxFit.cover),
+            child: Image.asset(element),
           ))
       .toList();
 }

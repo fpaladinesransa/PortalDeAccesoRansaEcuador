@@ -17,14 +17,28 @@ class GraciasPantalla extends StatelessWidget {
         ),
         home: Scaffold(
             appBar: AppBar(
-              title: Text('Portal de transportista'),
+              title: Text('Inducción de seguridad Ransa'),
               actions: [
                 IconButton(
                   icon: Image.asset('assets/Logo_Ransa_Blanco.png'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                        builder: (context) => new GraciasPantalla(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
-            body: Container()));
+            body: Center(
+              child: Container(
+                child: Image.asset('assets/Logo_Ransa.png'),
+              ),
+            )));
   }
 }
+
+
+/* GraciasPantalla */

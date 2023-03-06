@@ -55,7 +55,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: Text("Portal de acceso ${widget.cedula}"),
+            title: Text("Inducción de seguridad Ransa ${widget.cedula}"),
             actions: [
               IconButton(
                 icon: Image.asset('assets/Logo_Ransa_Blanco.png'),
@@ -769,8 +769,13 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                             respuesta10,
                                             widget.cedula);
 
-                                        Navigator.of(context).pushNamed(
-                                            "/CapacitacionSeguridad");
+                                        Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                            builder: (context) =>
+                                                new GraciasPantalla(),
+                                          ),
+                                        );
                                       }
                                     },
                                     child: const Text(
@@ -1499,6 +1504,13 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                             respuesta9,
                                             respuesta10,
                                             widget.cedula);
+                                        Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                            builder: (context) =>
+                                                new GraciasPantalla(),
+                                          ),
+                                        );
 
                                         /* Navigator.of(context).pushNamed(
                                             "/CapacitacionSeguridad"); */

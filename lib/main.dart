@@ -5,6 +5,7 @@ import 'package:portaltransportistas/screens/IngresoData.dart';
 import 'package:portaltransportistas/screens/bodyConsulta.dart';
 import 'package:portaltransportistas/screens/capacitacionSeguridad.dart';
 import 'package:portaltransportistas/screens/evaluacion.dart';
+import 'package:portaltransportistas/screens/gracias.dart';
 import 'Screens/body.dart';
 import 'api/ieespost.dart';
 
@@ -16,7 +17,7 @@ class MyAppMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "RutasApp",
+      title: "ingresodata",
       initialRoute: "/",
       routes: {
         '/': (_) => MyApp(asegurados: obtenerSeguros()),
@@ -26,7 +27,8 @@ class MyAppMain extends StatelessWidget {
             ),
         '/CapacitacionSeguridad': (_) => CapacitacionSeguridad(
               cedula: '',
-            )
+            ),
+        '/GraciasPantalla': (_) => GraciasPantalla()
       },
     );
   }

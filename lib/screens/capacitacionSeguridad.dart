@@ -23,7 +23,7 @@ class CapacitacionSeguridad extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Portal de transportista $cedula'),
+          title: Text('Inducción de seguridad Ransa $cedula'),
           actions: [
             IconButton(
               icon: Image.asset('assets/Logo_Ransa_Blanco.png'),

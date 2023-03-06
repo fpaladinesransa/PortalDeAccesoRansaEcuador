@@ -53,7 +53,7 @@ class ProjectList {
 }
 
 Future<List<ProjectList>> obtenerSeguros({String? query}) async {
-  final response = await http.get(Uri.parse("http://10.132.38.25:8080/"));
+  final response = await http.get(Uri.parse("http://192.168.100.116:8080/"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
@@ -85,7 +85,7 @@ Future enviarEvaluacion(
     String respuesta10,
     String cedula) async {
   final response = await http.post(
-      Uri.parse("http://10.132.38.25:8080/actualizacionseguridad"),
+      Uri.parse("http://192.168.100.116:8080/actualizacionseguridad"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -118,7 +118,7 @@ Future enviarRegistro(
   String cd,
 ) async {
   final response =
-      await http.post(Uri.parse("http://10.132.38.25:8080/insertseguridad"),
+      await http.post(Uri.parse("http://192.168.100.116:8080/insertseguridad"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },

@@ -48,7 +48,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
         ),
         home: Scaffold(
             appBar: AppBar(
-              title: Text('Portal de transportista'),
+              title: Text('Inducción de seguridad Ransa'),
               actions: [
                 IconButton(
                   icon: Image.asset('assets/Logo_Ransa_Blanco.png'),
