@@ -5,21 +5,21 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProjectList {
-  ProjectList({
-    required this.nombre,
-    required this.cedula,
-    required this.razonSocial,
-    this.ruc,
-    this.nombreDelEmpleador,
-    this.ciudad,
-    required this.fechaDeDocumentacion,
-    required this.fechaHoraSistema,
-    this.tipoDeNovedad,
-    this.cargo,
-    required this.estado,
-    required this.antedentes,
-    required this.comentario,
-  });
+  ProjectList(
+      {required this.nombre,
+      required this.cedula,
+      required this.razonSocial,
+      this.ruc,
+      this.nombreDelEmpleador,
+      this.ciudad,
+      required this.fechaDeDocumentacion,
+      required this.fechaHoraSistema,
+      this.tipoDeNovedad,
+      this.cargo,
+      required this.estado,
+      required this.antedentes,
+      required this.comentario,
+      required this.examenseguridad});
 
   String nombre;
   String cedula;
@@ -34,6 +34,7 @@ class ProjectList {
   String estado;
   String antedentes;
   String comentario;
+  String examenseguridad;
 
   factory ProjectList.fromJson(Map<String, dynamic> map) => ProjectList(
         nombre: map["Nombre"],
@@ -49,11 +50,12 @@ class ProjectList {
         estado: map["Estado"],
         antedentes: map["Antedentes"],
         comentario: map["Comentario"],
+        examenseguridad: map["Examen_seguridad"],
       );
 }
 
 Future<List<ProjectList>> obtenerSeguros({String? query}) async {
-  final response = await http.get(Uri.parse("http://192.168.100.116:8080/"));
+  final response = await http.get(Uri.parse("http://10.132.38.21:8080/"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
@@ -83,9 +85,12 @@ Future enviarEvaluacion(
     String respuesta8,
     String respuesta9,
     String respuesta10,
+    String fechaIngreso,
+    String calificacion,
+    String estado,
     String cedula) async {
   final response = await http.post(
-      Uri.parse("http://192.168.100.116:8080/actualizacionseguridad"),
+      Uri.parse("http://10.132.38.21:8080/actualizacionseguridad"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -100,6 +105,9 @@ Future enviarEvaluacion(
         "pregunta8": respuesta8,
         "pregunta9": respuesta9,
         "pregunta10": respuesta10,
+        "fechaIngreso": fechaIngreso,
+        "calificacion": calificacion,
+        "estado": estado,
         "cedula": cedula
       }));
 
@@ -118,7 +126,7 @@ Future enviarRegistro(
   String cd,
 ) async {
   final response =
-      await http.post(Uri.parse("http://192.168.100.116:8080/insertseguridad"),
+      await http.post(Uri.parse("http://10.132.38.21:8080/insertseguridad"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },

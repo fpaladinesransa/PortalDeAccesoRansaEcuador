@@ -28,7 +28,11 @@ class MyAppMain extends StatelessWidget {
         '/CapacitacionSeguridad': (_) => CapacitacionSeguridad(
               cedula: '',
             ),
-        '/GraciasPantalla': (_) => GraciasPantalla()
+        '/Gracias': (_) => GraciasPantalla(
+              cedula: '0922002175',
+              puntuacion: '6',
+              resultado: 'denegado',
+            ),
       },
     );
   }

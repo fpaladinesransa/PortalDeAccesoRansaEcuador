@@ -752,28 +752,106 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                   //Pregunta10---------------------
 
                                   const SizedBox(height: 30),
+
                                   TextButton(
                                     onPressed: () async {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
-                                        await enviarEvaluacion(
-                                            respuesta1,
-                                            respuesta2,
-                                            respuesta3,
-                                            respuesta4,
-                                            respuesta5,
-                                            respuesta6,
-                                            respuesta7,
-                                            respuesta8,
-                                            respuesta9,
-                                            respuesta10,
-                                            widget.cedula);
+                                        enviarEvaluacion(
+                                          respuesta1,
+                                          respuesta2,
+                                          respuesta3,
+                                          respuesta4,
+                                          respuesta5,
+                                          respuesta6,
+                                          respuesta7,
+                                          respuesta8,
+                                          respuesta9,
+                                          respuesta10,
+                                          FechaActual(),
+                                          CalcularRespuesta(
+                                              respuesta1,
+                                              respuesta2,
+                                              respuesta3,
+                                              respuesta4,
+                                              respuesta5,
+                                              respuesta6,
+                                              respuesta7,
+                                              respuesta8,
+                                              respuesta9,
+                                              respuesta10)[1],
+                                          //Calificacion
+                                          CalcularRespuesta(
+                                              respuesta1,
+                                              respuesta2,
+                                              respuesta3,
+                                              respuesta4,
+                                              respuesta5,
+                                              respuesta6,
+                                              respuesta7,
+                                              respuesta8,
+                                              respuesta9,
+                                              respuesta10)[0],
+                                          "0928092833",
+                                        );
+
+                                        /* widget.cedula
+                                                                                  FechaActual(),
+                                          //Estado
+                                          CalcularRespuesta(
+                                              respuesta1,
+                                              respuesta2,
+                                              respuesta3,
+                                              respuesta4,
+                                              respuesta5,
+                                              respuesta6,
+                                              respuesta7,
+                                              respuesta8,
+                                              respuesta9,
+                                              respuesta10)[1],
+                                          //Calificacion
+                                          CalcularRespuesta(
+                                              respuesta1,
+                                              respuesta2,
+                                              respuesta3,
+                                              respuesta4,
+                                              respuesta5,
+                                              respuesta6,
+                                              respuesta7,
+                                              respuesta8,
+                                              respuesta9,
+                                              respuesta10)[0], */
 
                                         Navigator.push(
                                           context,
+                                          // ignore: unnecessary_new
                                           new MaterialPageRoute(
                                             builder: (context) =>
-                                                new GraciasPantalla(),
+                                                GraciasPantalla(
+                                              cedula: widget.cedula,
+                                              resultado: CalcularRespuesta(
+                                                  respuesta1,
+                                                  respuesta2,
+                                                  respuesta3,
+                                                  respuesta4,
+                                                  respuesta5,
+                                                  respuesta6,
+                                                  respuesta7,
+                                                  respuesta8,
+                                                  respuesta9,
+                                                  respuesta10)[0],
+                                              puntuacion: CalcularRespuesta(
+                                                  respuesta1,
+                                                  respuesta2,
+                                                  respuesta3,
+                                                  respuesta4,
+                                                  respuesta5,
+                                                  respuesta6,
+                                                  respuesta7,
+                                                  respuesta8,
+                                                  respuesta9,
+                                                  respuesta10)[1],
+                                            ),
                                           ),
                                         );
                                       }
@@ -1493,32 +1571,77 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
                                         await enviarEvaluacion(
-                                            respuesta1,
-                                            respuesta2,
-                                            respuesta3,
-                                            respuesta4,
-                                            respuesta5,
-                                            respuesta6,
-                                            respuesta7,
-                                            respuesta8,
-                                            respuesta9,
-                                            respuesta10,
-                                            widget.cedula);
-                                        Navigator.push(
-                                          context,
-                                          new MaterialPageRoute(
-                                            builder: (context) =>
-                                                new GraciasPantalla(),
-                                          ),
+                                          respuesta1,
+                                          respuesta2,
+                                          respuesta3,
+                                          respuesta4,
+                                          respuesta5,
+                                          respuesta6,
+                                          respuesta7,
+                                          respuesta8,
+                                          respuesta9,
+                                          respuesta10,
+                                          FechaActual(),
+                                          //Estado
+                                          CalcularRespuesta(
+                                              respuesta1,
+                                              respuesta2,
+                                              respuesta3,
+                                              respuesta4,
+                                              respuesta5,
+                                              respuesta6,
+                                              respuesta7,
+                                              respuesta8,
+                                              respuesta9,
+                                              respuesta10)[1],
+                                          //Calificacion
+                                          CalcularRespuesta(
+                                              respuesta1,
+                                              respuesta2,
+                                              respuesta3,
+                                              respuesta4,
+                                              respuesta5,
+                                              respuesta6,
+                                              respuesta7,
+                                              respuesta8,
+                                              respuesta9,
+                                              respuesta10)[0],
+                                          widget.cedula,
                                         );
 
                                         /* Navigator.of(context).pushNamed(
                                             "/CapacitacionSeguridad"); */
+                                        // ignore: use_build_context_synchronously
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const GraciasPantalla()),
+                                            builder: (context) =>
+                                                GraciasPantalla(
+                                              cedula: widget.cedula,
+                                              resultado: CalcularRespuesta(
+                                                  respuesta1,
+                                                  respuesta2,
+                                                  respuesta3,
+                                                  respuesta4,
+                                                  respuesta5,
+                                                  respuesta6,
+                                                  respuesta7,
+                                                  respuesta8,
+                                                  respuesta9,
+                                                  respuesta10)[0],
+                                              puntuacion: CalcularRespuesta(
+                                                  respuesta1,
+                                                  respuesta2,
+                                                  respuesta3,
+                                                  respuesta4,
+                                                  respuesta5,
+                                                  respuesta6,
+                                                  respuesta7,
+                                                  respuesta8,
+                                                  respuesta9,
+                                                  respuesta10)[1],
+                                            ),
+                                          ),
                                         );
                                       }
                                     },
@@ -1548,6 +1671,65 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
       Navigator.of(context).pushNamed("/CapacitacionSeguridad");
     }
   } */
+}
+
+String FechaActual() {
+  var now = new DateTime.now();
+  var formatter = new DateFormat('dd-MM-yyyy');
+  String formattedDate = formatter.format(now);
+  print(formattedDate);
+  return formattedDate;
+}
+
+List CalcularRespuesta(
+    res1, res2, res3, res4, res5, res6, res7, res8, res9, res10) {
+  var contador = 0;
+  String stringValue;
+  String estado;
+  if (res1 ==
+      'Calzado de seguridad + chaleco o ropa reflectiva + casco + mascarilla') {
+    contador += 1;
+  }
+  if (res2 == 'Prohibición') {
+    contador += 1;
+  }
+  if (res3 == 'Falso') {
+    contador += 1;
+  }
+  if (res4 ==
+      'Probabilidad de que un peligro se materialice en determinadas condiciones y genere daños a las personas, equipos y al ambiente') {
+    contador += 1;
+  }
+  if (res5 ==
+      'Es toda condición en el entorno del trabajo que puede causar un accidente') {
+    contador += 1;
+  }
+  if (res6 ==
+      'Todo suceso repentino que sobrevenga por causa o con ocasión del trabajo y que produzca en el trabajador una lesión orgánica, una perturbación funcional, una invalidez o la muerte.') {
+    contador += 1;
+  }
+  if (res7 == 'Físico') {
+    contador += 1;
+  }
+  if (res8 == 'Mecánico') {
+    contador += 1;
+  }
+  if (res9 == 'Trabajos en altura') {
+    contador += 1;
+  }
+  if (res10 == 'Prohibido el ingreso y consumo de alimentos') {
+    contador += 1;
+  }
+
+  if (contador >= 7) {
+    estado = "Aprobado";
+    stringValue = contador.toString();
+  } else {
+    estado = "denegado";
+    stringValue = contador.toString();
+  }
+
+  return [estado, stringValue];
 }
 
 final List<String> pregunta1 = [
