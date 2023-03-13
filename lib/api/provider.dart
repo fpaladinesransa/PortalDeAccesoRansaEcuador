@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProjectList {
   ProjectList(
@@ -55,7 +53,7 @@ class ProjectList {
 }
 
 Future<List<ProjectList>> obtenerSeguros({String? query}) async {
-  final response = await http.get(Uri.parse("http://10.132.38.21:8080/"));
+  final response = await http.get(Uri.parse("http://10.132.38.22:8080/"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
@@ -90,7 +88,7 @@ Future enviarEvaluacion(
     String estado,
     String cedula) async {
   final response = await http.post(
-      Uri.parse("http://10.132.38.21:8080/actualizacionseguridad"),
+      Uri.parse("http://10.132.38.22:8080/actualizacionseguridad"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -126,7 +124,7 @@ Future enviarRegistro(
   String cd,
 ) async {
   final response =
-      await http.post(Uri.parse("http://10.132.38.21:8080/insertseguridad"),
+      await http.post(Uri.parse("http://10.132.38.22:8080/insertseguridad"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -171,3 +169,70 @@ Future enviarRegistro(
     throw Exception('Failed to post');
   }
 } */
+
+class ProjectListAll {
+  ProjectListAll(
+      {required this.nombre,
+      required this.cedula,
+      required this.razonSocial,
+      this.ruc,
+      this.nombreDelEmpleador,
+      this.ciudad,
+      required this.fechaDeDocumentacion,
+      required this.fechaHoraSistema,
+      this.tipoDeNovedad,
+      this.cargo,
+      required this.estado,
+      required this.antedentes,
+      required this.comentario,
+      required this.examenseguridad});
+
+  String nombre;
+  String cedula;
+  String razonSocial;
+  String? ruc;
+  String? nombreDelEmpleador;
+  String? ciudad;
+  DateTime fechaDeDocumentacion;
+  DateTime fechaHoraSistema;
+  String? tipoDeNovedad;
+  String? cargo;
+  String estado;
+  String antedentes;
+  String comentario;
+  String examenseguridad;
+
+  factory ProjectListAll.fromJson(Map<String, dynamic> map) => ProjectListAll(
+        nombre: map["Nombre"],
+        cedula: map["Cedula"],
+        razonSocial: map["Razon_Social"],
+        ruc: map["RUC"],
+        nombreDelEmpleador: map["Nombre_del_Empleador"],
+        ciudad: map["Ciudad"],
+        fechaDeDocumentacion: DateTime.parse(map["Fecha_de_documentacion"]),
+        fechaHoraSistema: DateTime.parse(map["Fecha_hora_sistema"]),
+        tipoDeNovedad: map["Tipo_de_novedad"],
+        cargo: map["Cargo"],
+        estado: map["Estado"],
+        antedentes: map["Antedentes"],
+        comentario: map["Comentario"],
+        examenseguridad: map["Examen_seguridad"],
+      );
+}
+
+Future<List<ProjectListAll>> obtenerSegurosTotales() async {
+  final response =
+      await http.get(Uri.parse("http://10.132.38.22:8080/ConsultaPrincipal"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final ProjectMapAll = responseList
+        .map((project) => ProjectListAll.fromJson(project))
+        .toList();
+    return ProjectMapAll;
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}

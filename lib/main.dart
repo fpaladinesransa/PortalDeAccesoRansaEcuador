@@ -1,26 +1,39 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:portaltransportistas/screens/IngresoData.dart';
-import 'package:portaltransportistas/screens/bodyConsulta.dart';
-import 'package:portaltransportistas/screens/capacitacionSeguridad.dart';
-import 'package:portaltransportistas/screens/evaluacion.dart';
-import 'package:portaltransportistas/screens/gracias.dart';
-import 'Screens/body.dart';
-import 'api/ieespost.dart';
+import 'package:material_color_generator/material_color_generator.dart';
 
-void main() => runApp(MyAppMain());
+import 'package:portaltransportistas/routes/router.dart';
+
+import 'package:portaltransportistas/services/navigation_service.dart';
+import 'Screens/Portal_Estados.dart';
+
+import 'locator.dart';
+
+void main() {
+  setupLocator();
+  Flurorouter.configureRoutes();
+  runApp(MyAppMain());
+}
 
 // ignore: use_key_in_widget_constructors
 class MyAppMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
-      title: "ingresodata",
-      initialRoute: "/",
-      routes: {
-        '/': (_) => MyApp(asegurados: obtenerSeguros()),
+      title: 'Portal de transportista',
+      theme: ThemeData(
+          primarySwatch:
+              generateMaterialColor(color: Color.fromARGB(255, 0, 155, 8))),
+      initialRoute: "/home",
+      onGenerateRoute: Flurorouter.router.generator,
+      navigatorKey: locator<NavigationService>().navigatorKey,
+/*       builder: ((context, child) {
+        return MyApp(asegurados: obtenerSegurosTotales());
+      }),
+ */
+/*       routes: {
+        '/home': (_) => MyApp(asegurados: obtenerSegurosTotales()),
         '/ingresodata': (_) => IngresoDataPersonal(),
         '/evaluaciondata': (_) => EvaluacionDataPersonal(
               cedula: '',
@@ -33,7 +46,7 @@ class MyAppMain extends StatelessWidget {
               puntuacion: '6',
               resultado: 'denegado',
             ),
-      },
+      }, */
     );
   }
 }

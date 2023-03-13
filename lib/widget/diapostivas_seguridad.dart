@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/evaluacion.dart';
+import '../screens/Seguridad_Evaluacion.dart';
 
 final List<String> images = [
   'Diapositiva1.JPG',
