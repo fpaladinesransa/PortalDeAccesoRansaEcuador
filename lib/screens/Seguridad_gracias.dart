@@ -20,6 +20,7 @@ class _GraciasPantallaState extends State<GraciasPantalla> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('Inducción de seguridad Ransa'),
           actions: [
             IconButton(

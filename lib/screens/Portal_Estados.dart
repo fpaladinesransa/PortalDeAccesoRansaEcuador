@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Portal de transportista'),
         actions: [
           IconButton(

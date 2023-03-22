@@ -706,7 +706,10 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
-                                    enviarEvaluacion(
+                                    /*  print(
+                                        "$respuesta1,$respuesta2,$respuesta3,$respuesta4,$respuesta5,$respuesta6,$respuesta7,$respuesta8,$respuesta9,$respuesta10");
+ */
+                                    await enviarEvaluacion(
                                       respuesta1,
                                       respuesta2,
                                       respuesta3,
@@ -718,6 +721,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                       respuesta9,
                                       respuesta10,
                                       FechaActual(),
+                                      //Estado
                                       CalcularRespuesta(
                                           respuesta1,
                                           respuesta2,
@@ -741,40 +745,15 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                           respuesta8,
                                           respuesta9,
                                           respuesta10)[0],
-                                      "0928092833",
+                                      widget.cedula,
                                     );
 
-                                    /* widget.cedula
-                                                                                  FechaActual(),
-                                          //Estado
-                                          CalcularRespuesta(
-                                              respuesta1,
-                                              respuesta2,
-                                              respuesta3,
-                                              respuesta4,
-                                              respuesta5,
-                                              respuesta6,
-                                              respuesta7,
-                                              respuesta8,
-                                              respuesta9,
-                                              respuesta10)[1],
-                                          //Calificacion
-                                          CalcularRespuesta(
-                                              respuesta1,
-                                              respuesta2,
-                                              respuesta3,
-                                              respuesta4,
-                                              respuesta5,
-                                              respuesta6,
-                                              respuesta7,
-                                              respuesta8,
-                                              respuesta9,
-                                              respuesta10)[0], */
-
+                                    /* Navigator.of(context).pushNamed(
+                                            "/CapacitacionSeguridad"); */
+                                    // ignore: use_build_context_synchronously
                                     Navigator.push(
                                       context,
-                                      // ignore: unnecessary_new
-                                      new MaterialPageRoute(
+                                      MaterialPageRoute(
                                         builder: (context) => GraciasPantalla(
                                           cedula: widget.cedula,
                                           resultado: CalcularRespuesta(
@@ -1478,6 +1457,9 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
+                                    /*  print(
+                                        "$respuesta1,$respuesta2,$respuesta3,$respuesta4,$respuesta5,$respuesta6,$respuesta7,$respuesta8,$respuesta9,$respuesta10");
+ */
                                     await enviarEvaluacion(
                                       respuesta1,
                                       respuesta2,
@@ -1581,10 +1563,8 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
 }
 
 String FechaActual() {
-  var now = new DateTime.now();
-  var formatter = new DateFormat('dd-MM-yyyy');
-  String formattedDate = formatter.format(now);
-  print(formattedDate);
+  String formattedDate = DateFormat('MM-dd-yyyy').format(DateTime.now());
+
   return formattedDate;
 }
 
@@ -1635,6 +1615,7 @@ List CalcularRespuesta(
     estado = "denegado";
     stringValue = contador.toString();
   }
+/*   print("$estado,$stringValue"); */
 
   return [estado, stringValue];
 }

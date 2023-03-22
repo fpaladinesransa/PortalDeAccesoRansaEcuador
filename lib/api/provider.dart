@@ -53,7 +53,7 @@ class ProjectList {
 }
 
 Future<List<ProjectList>> obtenerSeguros({String? query}) async {
-  final response = await http.get(Uri.parse("http://10.132.38.22:8080/"));
+  final response = await http.get(Uri.parse("http://10.132.38.26:8080/"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
@@ -88,7 +88,7 @@ Future enviarEvaluacion(
     String estado,
     String cedula) async {
   final response = await http.post(
-      Uri.parse("http://10.132.38.22:8080/actualizacionseguridad"),
+      Uri.parse("http://10.132.38.26:8080/actualizacionseguridad"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -124,7 +124,7 @@ Future enviarRegistro(
   String cd,
 ) async {
   final response =
-      await http.post(Uri.parse("http://10.132.38.22:8080/insertseguridad"),
+      await http.post(Uri.parse("http://10.132.38.26:8080/insertseguridad"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -137,8 +137,10 @@ Future enviarRegistro(
           }));
 
   if (response.statusCode == 200) {
+    print("Ingreso exitoso");
   } else {
     // Si la llamada no fue exitosa, lanza un error.
+    print("Error");
     throw Exception('Failed to post');
   }
 }
@@ -222,7 +224,7 @@ class ProjectListAll {
 
 Future<List<ProjectListAll>> obtenerSegurosTotales() async {
   final response =
-      await http.get(Uri.parse("http://10.132.38.22:8080/ConsultaPrincipal"));
+      await http.get(Uri.parse("http://10.132.38.26:8080/ConsultaPrincipal"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA

@@ -2,9 +2,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:portaltransportistas/api/provider.dart';
 import 'package:portaltransportistas/screens/Seguridad_Capacitacion.dart';
-
-import '../api/provider.dart';
 
 class IngresoDataPersonal extends StatefulWidget {
   const IngresoDataPersonal({super.key});
@@ -38,6 +37,7 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
 
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('Inducción de seguridad Ransa'),
           actions: [
             IconButton(
@@ -111,7 +111,9 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                     }
                                   }),
                                   onSaved: (value) {
-                                    fechaValue = value!;
+                                    fechaValue = DateFormat("MM-dd-yyyy")
+                                        .format(DateFormat('dd-MM-yyyy')
+                                            .parse(value!));
                                   },
                                   validator: ((value) {
                                     if (value!.isEmpty) {
@@ -262,7 +264,9 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
                                     }
                                   }),
                                   onSaved: (value) {
-                                    fechaValue = value!;
+                                    fechaValue = DateFormat("MM-dd-yyyy")
+                                        .format(DateFormat('dd-MM-yyyy')
+                                            .parse(value!));
                                   },
                                   validator: ((value) {
                                     if (value!.isEmpty) {
@@ -354,11 +358,9 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
   void _showCapacitacionPage(BuildContext context) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      /* Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => CapacitacionSeguridad()),
-      ); */
+
       enviarRegistro(cedulaValue, nameValue, fechaValue, cargoValue, sedeValue);
+
       Navigator.push(
         context,
         new MaterialPageRoute(
