@@ -20,7 +20,7 @@ class MyAppConsulta extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Portal de transportista Consulta'),
+        title: Text('Portal de acceso Consulta'),
         actions: [
           IconButton(
             icon: Image.asset('assets/Logo_Ransa_Blanco.png'),

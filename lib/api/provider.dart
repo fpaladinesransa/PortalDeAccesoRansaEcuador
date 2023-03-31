@@ -53,7 +53,8 @@ class ProjectList {
 }
 
 Future<List<ProjectList>> obtenerSeguros({String? query}) async {
-  final response = await http.get(Uri.parse("http://10.132.38.26:8080/"));
+  final response =
+      await http.get(Uri.parse("http://ransaapiecuador.azurewebsites.net/"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
@@ -88,7 +89,8 @@ Future enviarEvaluacion(
     String estado,
     String cedula) async {
   final response = await http.post(
-      Uri.parse("http://10.132.38.26:8080/actualizacionseguridad"),
+      Uri.parse(
+          "http://ransaapiecuador.azurewebsites.net/actualizacionseguridad"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -123,18 +125,18 @@ Future enviarRegistro(
   String cargo,
   String cd,
 ) async {
-  final response =
-      await http.post(Uri.parse("http://10.132.38.26:8080/insertseguridad"),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(<String, String>{
-            "cedula": cedula,
-            "nombre": nombre,
-            "fecha": fecha,
-            "cargo": cargo,
-            "cd": cd,
-          }));
+  final response = await http.post(
+      Uri.parse("http://ransaapiecuador.azurewebsites.net/insertseguridad"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "cedula": cedula,
+        "nombre": nombre,
+        "fecha": fecha,
+        "cargo": cargo,
+        "cd": cd,
+      }));
 
   if (response.statusCode == 200) {
     print("Ingreso exitoso");
@@ -223,8 +225,8 @@ class ProjectListAll {
 }
 
 Future<List<ProjectListAll>> obtenerSegurosTotales() async {
-  final response =
-      await http.get(Uri.parse("http://10.132.38.26:8080/ConsultaPrincipal"));
+  final response = await http.get(
+      Uri.parse("http://ransaapiecuador.azurewebsites.net/ConsultaPrincipal"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA

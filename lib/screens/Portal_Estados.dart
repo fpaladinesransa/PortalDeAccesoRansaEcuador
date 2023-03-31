@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Portal de transportista'),
+        title: Text('Portal de acceso'),
         actions: [
           IconButton(
             icon: Image.asset('assets/Logo_Ransa_Blanco.png'),
