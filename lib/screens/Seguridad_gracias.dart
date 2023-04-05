@@ -42,8 +42,12 @@ class _GraciasPantallaState extends State<GraciasPantalla> {
                       'assets/Logo_Ransa.png',
                       height: 150,
                     ),
-                    Text("Gracias por ayudarnos a ser un RANSA SEGURO",
-                        style: TextStyle(fontSize: 18)),
+                    Text(
+                      "Gracias por ayudarnos a ser un RANSA SEGURO",
+                      style: TextStyle(
+                          fontSize: 18, color: Color.fromARGB(255, 0, 155, 8)),
+                      textAlign: TextAlign.center,
+                    ),
                     Text(
                         "Su puntuacion fue ${widget.puntuacion}/10 lo que le permite ingresar a las instalacioneas.",
                         style: TextStyle(
@@ -58,7 +62,9 @@ class _GraciasPantallaState extends State<GraciasPantalla> {
                     Image.asset('assets/Logo_Ransa.png'),
                     Text(
                         "La puntuación total es ${widget.puntuacion}/10, haga click en el icono de abajo para volver a intentarlo",
-                        style: TextStyle(fontSize: 18)),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 0, 155, 8))),
                     IconButton(
                       icon: Icon(
                         Icons.keyboard_return,

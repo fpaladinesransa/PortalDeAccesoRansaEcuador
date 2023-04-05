@@ -20,7 +20,7 @@ class MyAppConsulta extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Portal de acceso Consulta'),
+        title: Text('Portal de acceso Consulta Ransa'),
         actions: [
           IconButton(
             icon: Image.asset('assets/Logo_Ransa_Blanco.png'),
@@ -36,7 +36,7 @@ class MyAppConsulta extends StatelessWidget {
                 title: TextField(
                     controller: _textoController,
                     decoration: InputDecoration(
-                        hintText: 'Buscar por numero de cedula',
+                        hintText: 'Buscar por número de cedula',
                         border: InputBorder.none),
                     onChanged: (value) {}),
                 trailing: IconButton(

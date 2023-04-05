@@ -4,6 +4,7 @@ import 'package:fluro/fluro.dart';
 
 import '../Screens/Portal_Estados.dart';
 import '../api/provider.dart';
+import '../screens/Seguridad_Capacitacion.dart';
 import '../screens/Seguridad_ingresoPersonal.dart';
 import '../screens/view_404.dart';
 
@@ -13,6 +14,8 @@ class Flurorouter {
   static void configureRoutes() {
     router.define("home", handler: _counterHandler);
     router.define('/capacitacion', handler: _counterHandlerCapacitacion);
+    router.define('/capacitacionSeguridad',
+        handler: _counterHandlerCapacitacionSeguridad);
     router.notFoundHandler = pageNotFound;
   }
 
@@ -26,4 +29,9 @@ class Flurorouter {
   );
   static Handler pageNotFound =
       Handler(handlerFunc: (context, parameters) => View404());
+
+  static Handler _counterHandlerCapacitacionSeguridad = Handler(
+      handlerFunc: (context, parameters) => CapacitacionSeguridad(
+            cedula: '',
+          ));
 }

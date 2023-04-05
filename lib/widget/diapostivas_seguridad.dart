@@ -87,14 +87,15 @@ class _DiapositivasSeguridadState extends State<DiapositivasSeguridad> {
       child: Column(
         children: [
           Container(
-            height: altura * 0.7,
-            child: CarouselSlider(
-              carouselController: controller,
-              items: generateImagesTiles(),
-              options: CarouselOptions(
-                  enlargeCenterPage: true, enableInfiniteScroll: false),
-            ),
-          ),
+              height: altura * 0.7,
+              child: InteractiveViewer(
+                child: CarouselSlider(
+                  carouselController: controller,
+                  items: generateImagesTiles(),
+                  options: CarouselOptions(
+                      enlargeCenterPage: true, enableInfiniteScroll: false),
+                ),
+              )),
           if (isDesktop(context))
             Column(
               children: [

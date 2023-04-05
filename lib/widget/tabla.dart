@@ -12,25 +12,25 @@ SingleChildScrollView tablaBody(List<ProjectList>? data) {
         showCheckboxColumn: false,
         columns: const [
           DataColumn(label: Text("Nombre"), numeric: false, tooltip: "Nombre"),
-          DataColumn(label: Text("Cedula"), numeric: false, tooltip: "Cedula"),
+          DataColumn(label: Text("Cédula"), numeric: false, tooltip: "Cédula"),
           DataColumn(
               label: Text("Documento IEES"), numeric: false, tooltip: "Estado"),
           DataColumn(
-              label: Text("Posee Antecedente"),
+              label: Text("Antecedente"),
               numeric: false,
               tooltip: "Antecedente"),
           DataColumn(
-              label: Text("Examen seguridad"),
+              label: Text("Examen de seguridad"),
               numeric: false,
               tooltip: "Seguridad"),
           DataColumn(
-              label: Text("Razon social"),
+              label: Text("razón social"),
               numeric: false,
-              tooltip: "Razon social"),
+              tooltip: "razón social"),
           DataColumn(
               label: Text("Fecha doc"),
               numeric: false,
-              tooltip: "Fecha documentacion"),
+              tooltip: "Fecha documentación"),
           DataColumn(
               label: Text("Fecha sub"),
               numeric: false,
@@ -76,21 +76,21 @@ SingleChildScrollView tablaBodyAll(List<ProjectListAll>? data) {
         showCheckboxColumn: false,
         columns: const [
           DataColumn(label: Text("Nombre"), numeric: false, tooltip: "Nombre"),
-          DataColumn(label: Text("Cedula"), numeric: false, tooltip: "Cedula"),
+          DataColumn(label: Text("Cédula"), numeric: false, tooltip: "Cédula"),
           DataColumn(
               label: Text("Documento IEES"), numeric: false, tooltip: "Estado"),
           DataColumn(
-              label: Text("Posee Antecedente"),
+              label: Text("Antecedente"),
               numeric: false,
               tooltip: "Antecedente"),
           DataColumn(
-              label: Text("Examen seguridad"),
+              label: Text("Examen de seguridad"),
               numeric: false,
               tooltip: "Seguridad"),
           DataColumn(
-              label: Text("Razon social"),
+              label: Text("Razón social"),
               numeric: false,
-              tooltip: "Razon social"),
+              tooltip: "Razón social"),
           DataColumn(
               label: Text("Fecha doc"),
               numeric: false,

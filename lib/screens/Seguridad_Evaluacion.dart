@@ -822,7 +822,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                     child: Form(
                       key: _formKey,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
@@ -1058,7 +1058,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                               child: Text(
                                                 item,
                                                 style: const TextStyle(
-                                                  fontSize: 14,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ))
@@ -1180,7 +1180,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                               child: Text(
                                                 item,
                                                 style: const TextStyle(
-                                                  fontSize: 14,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ))

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import '../Screens/Portal_Estados.dart';
 import '../api/provider.dart';
+import '../screens/Seguridad_Capacitacion.dart';
 import '../screens/Seguridad_ingresoPersonal.dart';
 import '../screens/view_404.dart';
 
@@ -13,6 +14,13 @@ class RouteGenerator {
 
       case '/capacitacion':
         return _fadeRoute(IngresoDataPersonal(), '/capacitacion');
+
+      case '/CapacitacionSeguridad':
+        return _fadeRoute(
+            CapacitacionSeguridad(
+              cedula: '',
+            ),
+            '/CapacitacionSeguridad');
 
       default:
         return _fadeRoute(View404(), '/404');
