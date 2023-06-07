@@ -1,4 +1,3 @@
-import 'dart:js';
 
 import 'package:fluro/fluro.dart';
 

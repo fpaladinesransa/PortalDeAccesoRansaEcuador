@@ -1,25 +1,26 @@
-import 'dart:async';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:portaltransportistas/api/provider.dart';
+
 import '../widget/tabla.dart';
+import 'portal_estadosconsulta.dart';
 
-class MyAppConsulta extends StatelessWidget {
-  String query;
+class MyApp extends StatelessWidget {
+  final Future<List<ProjectListAll>> asegurados;
 
-  MyAppConsulta(
-    this.query, {
-    Key? key,
-  }) : super(key: key);
+  const MyApp({Key? key, required this.asegurados}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Future<List<ProjectList>> dataLista = obtenerSeguros(query: query);
+
+    Future<List<ProjectListAll>> dataLista = obtenerSegurosTotales();
     TextEditingController _textoController = TextEditingController(text: "");
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Portal de acceso Consulta Ransa'),
+        automaticallyImplyLeading: false,
+        title: Text('Portal de acceso Ransa'),
         actions: [
           IconButton(
             icon: Image.asset('assets/Logo_Ransa_Blanco.png'),
@@ -34,6 +35,14 @@ class MyAppConsulta extends StatelessWidget {
                 leading: Icon(Icons.search),
                 title: TextField(
                     controller: _textoController,
+                    textInputAction: TextInputAction.search,
+                    onSubmitted: (_) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) =>
+                                  MyAppConsulta(_textoController.text))));
+                    },
                     decoration: InputDecoration(
                         hintText: 'Buscar por número de cedula',
                         border: InputBorder.none),
@@ -49,7 +58,7 @@ class MyAppConsulta extends StatelessWidget {
                     })),
           ),
           Center(
-            child: FutureBuilder<List<ProjectList>>(
+            child: FutureBuilder<List<ProjectListAll>>(
               future: dataLista,
               builder: (context, snapshot) {
                 var filterData = snapshot.data;
@@ -72,7 +81,7 @@ class MyAppConsulta extends StatelessWidget {
                       Expanded(
                         child: Container(
                             padding: EdgeInsets.all(5),
-                            child: tablaBody(filterData)),
+                            child: tablaBodyAll(filterData)),
                       )
                     ],
                   );
@@ -95,4 +104,13 @@ class MyAppConsulta extends StatelessWidget {
       ),
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
