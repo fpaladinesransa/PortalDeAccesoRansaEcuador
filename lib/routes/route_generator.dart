@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import '../Screens/Portal_Estados.dart';
+import '../PortalEpp/pages/gh_home.dart';
+import '../PortalEpp/pages/home.dart';
+import '../Screens/portal_estado.dart';
 import '../api/provider.dart';
 import '../screens/Seguridad_Capacitacion.dart';
 import '../screens/Seguridad_ingresoPersonal.dart';
@@ -11,9 +13,13 @@ class RouteGenerator {
     switch (settings.name) {
       case '/home':
         return _fadeRoute(MyApp(asegurados: obtenerSegurosTotales()), '/home');
+        case '/homePortalEPP':
+      return _fadeRoute(SignInScreen(), '/homePortalEPP');
 
       case '/capacitacion':
         return _fadeRoute(IngresoDataPersonal(), '/capacitacion');
+      case '/ghhome':
+        return _fadeRoute(Gh_home(), '/capacitacion');
 
       case '/CapacitacionSeguridad':
         return _fadeRoute(

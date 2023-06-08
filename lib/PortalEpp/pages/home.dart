@@ -22,33 +22,31 @@ class SignInScreen extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.blue,
-                          shape: BoxShape.circle,
-                        ),
-                        height: 40,
-                        width: 40,
+                        child: const Image(
+                           image:
+                              AssetImage('assets/LogoIcono.png'),
+                                height: 30),
                       ),
+
                       TextWidget(
-                        text: '  Anywhere App.',
+                        text: '  Ransa',
                         textcolor: Colors.white,
                         textsize: 22,
                         fontWeight: FontWeight.normal,
                       ),
-                      WSizedBox(wval: 0.1, hval: 0),
-                      TextWidget(
+
+/*                       TextWidget(
                         text: 'Home',
                         textcolor: Colors.grey,
                         textsize: 20,
                         fontWeight: FontWeight.normal,
                       ),
-                      WSizedBox(wval: 0.1, hval: 0),
                       TextWidget(
                         text: 'Join',
                         textcolor: Colors.grey,
                         textsize: 20,
                         fontWeight: FontWeight.normal,
-                      ),
+                      ), */
                     ],
                   ),
                   WSizedBox(wval: 0, hval: 0.2),
@@ -58,25 +56,19 @@ class SignInScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextWidget(
-                            text: 'START FOR FREE',
-                            textcolor: Colors.grey,
-                            textsize: 18,
-                            fontWeight: FontWeight.normal,
-                          ),
                           WSizedBox(wval: 0, hval: 0.02),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               TextWidget(
-                                text: 'Login to your account',
+                                text: 'Portal de EPP',
                                 textcolor: Colors.white,
                                 textsize: 45,
                                 fontWeight: FontWeight.bold,
                               ),
                               Container(
                                 decoration: const BoxDecoration(
-                                  color: Colors.blue,
+                                  color: Colors.green,
                                   shape: BoxShape.circle,
                                 ),
                                 height: 10,
@@ -88,15 +80,9 @@ class SignInScreen extends StatelessWidget {
                           Row(
                             children: [
                               TextWidget(
-                                text: 'Not A member ?',
+                                text: '¿Olvidó su contraseña?',
                                 textcolor: Colors.grey,
-                                textsize: 18,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              TextWidget(
-                                text: ' Sign up',
-                                textcolor: Colors.blue,
-                                textsize: 18,
+                                textsize: 15,
                                 fontWeight: FontWeight.normal,
                               ),
                             ],
@@ -107,9 +93,9 @@ class SignInScreen extends StatelessWidget {
                               bordercolor: Color.fromARGB(255, 50, 54, 69),
                               widh: 0.32,
                               height: 0.05,
-                              icon: Icons.mail,
+                              icon: Icons.person,
                               iconColor: Colors.grey,
-                              hinttext: 'email',
+                              hinttext: 'Usuario',
                               hintColor: Colors.grey,
                               fontsize: 15,
                               obscureText: false),
@@ -127,7 +113,7 @@ class SignInScreen extends StatelessWidget {
                               obscureText: true),
                           WSizedBox(wval: 0, hval: 0.04),
                           CustomButton(
-                              buttontext: 'login to my account',
+                              buttontext: 'Ingresar',
                               width: 0.32,
                               height: 0.05,
                               bordercolor: Color.fromARGB(255,29, 144, 244),

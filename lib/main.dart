@@ -4,7 +4,7 @@ import 'package:material_color_generator/material_color_generator.dart';
 import 'package:portaltransportistas/routes/router.dart';
 
 import 'package:portaltransportistas/services/navigation_service.dart';
-import 'Screens/Portal_Estados.dart';
+import 'Screens/portal_estado.dart';
 
 import 'locator.dart';
 
@@ -21,11 +21,11 @@ class MyAppMain extends StatelessWidget {
     return MaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
-      title: 'Portal de transportista',
+      title: 'Ransa',
       theme: ThemeData(
           primarySwatch:
               generateMaterialColor(color: Color.fromARGB(255, 0, 155, 8))),
-      initialRoute: "/home",
+      initialRoute: "/ghhome",
       onGenerateRoute: Flurorouter.router.generator,
       navigatorKey: locator<NavigationService>().navigatorKey,
 /*       builder: ((context, child) {
