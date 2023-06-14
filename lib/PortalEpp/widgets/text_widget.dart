@@ -18,6 +18,7 @@ class TextWidget extends StatelessWidget {
   Color? textcolor;
   FontWeight? fontWeight;
   String? underline;
+  TextAlign? textAlignt;
 
   TextWidget({
     Key? key,
@@ -26,13 +27,14 @@ class TextWidget extends StatelessWidget {
     this.textcolor,
     this.fontWeight,
     this.underline,
+    this.textAlignt
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.ubuntu(
+      style: GoogleFonts.rubik(
         fontStyle: FontStyle.normal,
         fontSize: textsize,
         fontWeight: fontWeight ?? FontWeight.bold,
@@ -43,7 +45,7 @@ class TextWidget extends StatelessWidget {
               : TextDecoration.none,
         ),
       ),
-      textAlign: TextAlign.center,
+      textAlign: textAlignt ??TextAlign.center,
     );
   }
 }
