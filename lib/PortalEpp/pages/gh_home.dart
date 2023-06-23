@@ -50,7 +50,6 @@ class _Gh_homeState extends State<Gh_home> {
             Container(
               child: Row(children: [
                 const SizedBox(width: 30),
-                
                 Container(
                   width: 950,
                   child: TextWidget(
@@ -268,73 +267,129 @@ class _Gh_homeState extends State<Gh_home> {
                     textsize: 16,
                   ),
                 ),
-                DropboxEPP(
-                    const [
-                      DropdownMenuItem(
-                        child: Text("Si"),
-                        value: "Si",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("No"),
-                        value: "No",
-                      )
-                    ],
-                    dropdownValueEPP),
+                DropboxEPP(const [
+                  DropdownMenuItem(
+                    child: Text("Si"),
+                    value: "Si",
+                  ),
+                  DropdownMenuItem(
+                    child: Text("No"),
+                    value: "No",
+                  )
+                ], dropdownValueEPP),
                 Container(
                   width: 500,
                 ),
-            
-
-                
-                
               ],
             ),
             Container(
-                  height: 30,
-                ),
+              height: 30,
+            ),
+            Container(
+              child: Row(children: [
                 Container(
-                  child: Row(
-                    children: [
-                      Container(width: 30,),
-                      Image(
-                           image:
-                              AssetImage('assets/Bota_de_seguridad.png'),
-                                height: 200),
-                      Container(width: 30,),
-                      
+                  width: 30,
+                ),
+                Image(
+                    image: AssetImage('assets/Bota_de_seguridad.png'),
+                    height: 200),
+                Container(
+                  width: 30,
+                ),
+                Column(
+                  children: [
+                    DropboxRol(
+                    "Nivel de dotación:",
+                    const [
+                      DropdownMenuItem(
+                        child: Text("Dash"),
+                        value: "Dash",
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Sparky"),
+                        value: "Sparky",
+                      )
+                    ],
+                    dropdownValueRol),
+                  DropboxRol(
+                    "Nivel de dotación:",
+                    const [
+                      DropdownMenuItem(
+                        child: Text("Dash"),
+                        value: "Dash",
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Sparky"),
+                        value: "Sparky",
+                      )
+                    ],
+                    dropdownValueRol),
+                    DropboxRol(
+                    "Nivel de dotación:",
+                    const [
+                      DropdownMenuItem(
+                        child: Text("Dash"),
+                        value: "Dash",
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Sparky"),
+                        value: "Sparky",
+                      )
+                    ],
+                    dropdownValueRol),
+                    
 
-                    ]),
-                )
+
+
+
+                  ],
+                ),
+                Container(width: 20,),
+                Column(
+                  children: [
+                    DropboxRol(
+                    "Nivel de dotación:",
+                    const [
+                      DropdownMenuItem(
+                        child: Text("Dash"),
+                        value: "Dash",
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Sparky"),
+                        value: "Sparky",
+                      )
+                    ],
+                    dropdownValueRol),
+                  DropboxRol(
+                    "Nivel de dotación:",
+                    const [
+                      DropdownMenuItem(
+                        child: Text("Dash"),
+                        value: "Dash",
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Sparky"),
+                        value: "Sparky",
+                      )
+                    ],
+                    dropdownValueRol),
+
+                    
+
+
+
+
+                  ],
+                ),
+
+            
+              ]),
+            )
           ],
         ))
       ]),
     );
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   Column DropboxRol(textDrop, itemsL, String? dropdownValue) {
     return Column(
@@ -379,8 +434,6 @@ class _Gh_homeState extends State<Gh_home> {
       });
     }
   }
-  
-
 
   Column DateCampo(BuildContext context) {
     return Column(
@@ -435,7 +488,6 @@ class _Gh_homeState extends State<Gh_home> {
       }),
     );
   }
-  
 
   Container FormInput(textinput) {
     return Container(
@@ -474,9 +526,9 @@ class _Gh_homeState extends State<Gh_home> {
       ),
     );
   }
+
   Column DropboxEPP(itemsL, String? dropdownValue) {
-  
-  return Column(
+    return Column(
       children: [
         Container(
           height: 3,
@@ -499,8 +551,9 @@ class _Gh_homeState extends State<Gh_home> {
         ),
       ],
     );
-}
-void dropdownCallbackEpp(String? selectedValue) {
+  }
+
+  void dropdownCallbackEpp(String? selectedValue) {
     if (selectedValue is String) {
       setState(() {
         dropdownValueEPP = selectedValue;
@@ -508,12 +561,4 @@ void dropdownCallbackEpp(String? selectedValue) {
     }
   }
 /* textcolor: Color.fromARGB(255, 187, 187, 187) */
-
-
-
-    
-  
-  
 }
-
-
