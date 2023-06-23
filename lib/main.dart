@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_color_generator/material_color_generator.dart';
+import 'package:portaltransportistas/bloc/gh_bloc.dart';
 
 import 'package:portaltransportistas/routes/router.dart';
 
 import 'package:portaltransportistas/services/navigation_service.dart';
+import 'PortalEpp/pages/gh_home.dart';
 import 'Screens/portal_estado.dart';
 
 import 'locator.dart';
@@ -13,6 +16,23 @@ void main() {
   Flurorouter.configureRoutes();
   runApp(MyAppMain());
 }
+/* class AppState extends StatelessWidget {
+  const AppState({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  MultiBlocProvider(
+      providers: [
+        BlocProvider<GhBloc>(
+          create: (context) => GhBloc(),
+        ),
+      ],
+      child: MyAppMain(),
+    );
+  }
+}
+ */
+
 
 // ignore: use_key_in_widget_constructors
 class MyAppMain extends StatelessWidget {
@@ -21,6 +41,7 @@ class MyAppMain extends StatelessWidget {
     return MaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
+
       title: 'Ransa',
       theme: ThemeData(
           primarySwatch:
