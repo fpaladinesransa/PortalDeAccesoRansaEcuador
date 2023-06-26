@@ -24,11 +24,13 @@ class _Gh_homeState extends State<Gh_home> {
   String? dropdownValueEPP;
   String? dropdownDecBotas;
 
+
   final fechaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     //final sideMenuProvider = Provider.of<SideMenuProvider>(context);
+    
 
     return ChangeNotifierProvider(
       create: (context) => RegisterFormProvider(),
@@ -77,21 +79,21 @@ class _Gh_homeState extends State<Gh_home> {
                           width: 30,
                         ),
                         Container(
-                          child: FormInput(registerFormProvider.nombre),
+                          child: FormInput("Nombre:",registerFormProvider.nombre),
                           width: 300,
                         ),
                         Container(
                           width: 30,
                         ),
                         Container(
-                          child: FormInput("Apellido:"),
+                          child: FormInput("Apellido:",registerFormProvider.apellido),
                           width: 300,
                         ),
                         Container(
                           width: 30,
                         ),
                         Container(
-                          child: FormInput("Cedula:"),
+                          child: FormInput("Cedula:",registerFormProvider.cedula),
                           width: 300,
                         ),
                       ],
@@ -112,31 +114,40 @@ class _Gh_homeState extends State<Gh_home> {
                             "Area de trabajo:",
                             const [
                               DropdownMenuItem(
-                                child: Text("Dash"),
-                                value: "Dash",
+                                child: Text("Almacenes"),
+                                value: "Almacenes",
                               ),
                               DropdownMenuItem(
-                                child: Text("Sparky"),
-                                value: "Sparky",
-                              )
+                                child: Text("Distribución"),
+                                value: "Distribucion",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Administración"),
+                                value: "Administración",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Seguridad"),
+                                value: "Seguridad",
+                              ),
                             ],
-                            dropdownValueRol),
+                            registerFormProvider.areadetrabajo),
                         Container(
                           width: 30,
                         ),
+                        
                         DropboxRol(
                             "Rol asignado",
                             const [
                               DropdownMenuItem(
-                                child: Text("Dash"),
-                                value: "Dash",
+                                child: Text("Operario"),
+                                value: "Operario",
                               ),
                               DropdownMenuItem(
-                                child: Text("Sparky"),
-                                value: "Sparky",
+                                child: Text("Supervisor"),
+                                value: "Supervisor",
                               )
                             ],
-                            dropdownValueRol),
+                            registerFormProvider.rolasignado),
 
                         /* Container(child:  DropboxCampo(),) */
                       ],
@@ -148,7 +159,7 @@ class _Gh_homeState extends State<Gh_home> {
                           width: 30,
                         ),
                         Container(
-                          child: FormInput("Cargo:"),
+                          child: FormInput("Cargo:",dropdownValueRol),
                           width: 300,
                         ),
                         Container(
@@ -158,15 +169,27 @@ class _Gh_homeState extends State<Gh_home> {
                             "Nivel de dotación:",
                             const [
                               DropdownMenuItem(
-                                child: Text("Dash"),
-                                value: "Dash",
+                                child: Text("Nivel 1"),
+                                value: "Nivel1",
                               ),
                               DropdownMenuItem(
-                                child: Text("Sparky"),
-                                value: "Sparky",
+                                child: Text("Nivel 2"),
+                                value: "Nivel2",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Nivel 3"),
+                                value: "Nivel3",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Nivel 4"),
+                                value: "Nivel4",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Nivel 5"),
+                                value: "Nivel5",
                               )
                             ],
-                            dropdownValueRol),
+                            registerFormProvider.niveldedotacion),
                         Container(
                           width: 30,
                         ),
@@ -182,7 +205,7 @@ class _Gh_homeState extends State<Gh_home> {
                                 value: "Sparky",
                               )
                             ],
-                            dropdownValueRol),
+                            registerFormProvider.empresa),
                       ],
                     ),
                     const SizedBox(height: 30),
@@ -192,7 +215,7 @@ class _Gh_homeState extends State<Gh_home> {
                           width: 30,
                         ),
                         Container(
-                          child: FormInput("Ciudad:"),
+                          child: FormInput("Ciudad:",registerFormProvider.ciudad),
                           width: 300,
                         ),
                         Container(
@@ -210,7 +233,7 @@ class _Gh_homeState extends State<Gh_home> {
                                 value: "Sparky",
                               )
                             ],
-                            dropdownValueRol),
+                            registerFormProvider.pais),
                         Container(
                           width: 330,
                         ),
@@ -392,41 +415,49 @@ class _Gh_homeState extends State<Gh_home> {
     );
   }
 
-  Column DropboxRol(textDrop, itemsL, String? dropdownValue) {
-    return Column(
-      children: [
-        Container(
-          width: 300,
-          child: TextWidget(
-            text: textDrop,
-            fontWeight: FontWeight.normal,
-            textcolor: Color.fromARGB(255, 110, 110, 110),
-            textsize: 16,
-            textAlignt: TextAlign.left,
+  Container DropboxRol(textDrop, itemsL, dropdownValue) {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            width: 300,
+            child: TextWidget(
+              text: textDrop,
+              fontWeight: FontWeight.normal,
+              textcolor: Color.fromARGB(255, 110, 110, 110),
+              textsize: 16,
+              textAlignt: TextAlign.left,
+            ),
           ),
-        ),
-        Container(
-          height: 3,
-        ),
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10)),
-          width: 300,
-          child: DropdownButton(
-              items: itemsL,
-              borderRadius: BorderRadius.circular(10),
-              dropdownColor: Colors.white,
-              isExpanded: true,
-              underline: SizedBox(),
-              icon: Icon(Icons.arrow_drop_down),
-              value: dropdownValue,
-              onChanged: dropdownCallbackRol),
-        ),
-      ],
+          Container(
+            height: 3,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(10)),
+            width: 300,
+            child: DropdownButton(
+                items: itemsL,
+                borderRadius: BorderRadius.circular(10),
+                dropdownColor: Colors.white,
+                isExpanded: true,  
+                underline: SizedBox(),
+                icon: Icon(Icons.arrow_drop_down),
+                value: dropdownValue,
+                onChanged: (newValue) {
+                  setState(() {
+              dropdownValue = newValue;
+              print(newValue);
+              });
+            },),
+          ),
+        ],
+      ),
     );
+    
   }
-
+  
   void dropdownCallbackRol(String? selectedValue) {
     if (selectedValue is String) {
       setState(() {
@@ -490,7 +521,7 @@ class _Gh_homeState extends State<Gh_home> {
     );
   }
 
-  Container FormInput(textinput) {
+  Container FormInput(titleinput,valueinput) {
     return Container(
       child: Column(
         children: [
@@ -498,7 +529,7 @@ class _Gh_homeState extends State<Gh_home> {
             alignment: Alignment.centerLeft,
             child: Container(
               child: TextWidget(
-                text: textinput,
+                text: titleinput,
                 fontWeight: FontWeight.normal,
                 textcolor: Color.fromARGB(255, 110, 110, 110),
                 textsize: 16,
@@ -510,7 +541,7 @@ class _Gh_homeState extends State<Gh_home> {
             height: 3,
           ),
           TextFormField(
-            onChanged: (value) => textinput=value,
+            onChanged: (value) => valueinput=value,
             validator: (value){
               if (value==null || value.isEmpty) return "Llene este campo";
               return null;
@@ -566,3 +597,4 @@ class _Gh_homeState extends State<Gh_home> {
   } */
 /* textcolor: Color.fromARGB(255, 187, 187, 187) */
 }
+
