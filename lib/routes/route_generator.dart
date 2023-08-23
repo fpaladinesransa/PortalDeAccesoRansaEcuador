@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import '../PortalEpp/pages/dropdownprovider.dart';
 import '../PortalEpp/pages/gh_home.dart';
+import '../PortalEpp/pages/gh_activo.dart';
+import '../PortalEpp/pages/gh_renovar.dart';
 import '../PortalEpp/pages/home.dart';
+import '../PortalEpp/provider/providerEPP.dart';
 import '../Screens/portal_estado.dart';
 import '../api/provider.dart';
 import '../screens/Seguridad_Capacitacion.dart';
@@ -16,10 +20,18 @@ class RouteGenerator {
         case '/homePortalEPP':
       return _fadeRoute(SignInScreen(), '/homePortalEPP');
 
+      case '/prueba':
+      return _fadeRoute(DropdowntextArea(titulo: '',), '/prueba');
+
       case '/capacitacion':
         return _fadeRoute(IngresoDataPersonal(), '/capacitacion');
       case '/ghhome':
-        return _fadeRoute(Gh_home(), '/capacitacion');
+        return _fadeRoute(Gh_home(), '/ghhome');
+      case '/ghRenovar':
+        return _fadeRoute(GhRenovarequipo(), '/ghRenovar');
+      
+      case '/ghRenovar':
+        return _fadeRoute(GhActivoequipo(), '/ghActivo');
 
       case '/CapacitacionSeguridad':
         return _fadeRoute(

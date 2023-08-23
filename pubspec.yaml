@@ -36,6 +36,7 @@ dependencies:
   dropdown_button2: ^1.9.4
   dropdown_plus: ^0.0.9
   easy_dynamic_theme: ^2.2.0
+  excel: ^2.1.0
   fluro: ^2.0.5
   flutter:
     sdk: flutter

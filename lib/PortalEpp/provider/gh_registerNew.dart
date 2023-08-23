@@ -3,17 +3,22 @@ import 'package:flutter/material.dart';
 class RegisterFormProvider extends ChangeNotifier{
   GlobalKey<FormState> formKey= new GlobalKey<FormState>();
 
-  String nombre="";
+  String nombre="Nombre";
   String fecha="01-01-2023";
   String apellido="";
   String cedula="";
-  String areadetrabajo="";
-  String rolasignado="";
+  String? areadetrabajo;
+  String? rolasignado;
   String cargo="";
-  String niveldedotacion="";
-  String empresa="";
+  String? niveldedotacion;
+  String? empresa;
   String ciudad="";
-  String pais="";
+  String? pais;
+  String nombreTabla="Nombre";
+
+  get nombreTablaText {
+    return nombreTabla;
+  }
 
 
 
@@ -25,9 +30,236 @@ class RegisterFormProvider extends ChangeNotifier{
       print("No funciono");
     }
   }
+}
+
+
+class DropdownService with ChangeNotifier{
+  String nombreTabla="Nombre";
+
+  var areaDropdownList=['Almacenes', 'Distribución ','Administración','Seguridad'];
+  var nombreSelect;
+  setnombreSelect(value) {
+    nombreSelect=value;
+    notifyListeners();}
+
+  var apellidoSelect;
+  setapellidoSelect(value) {
+    nombreSelect=value;
+    notifyListeners();}
+  var cedulaSelect;
+  setcedulaSelect(value) {
+    nombreSelect=value;
+    notifyListeners();}
+
+  var cargoSelect;
+  setcargoSelect(value) {
+    cargoSelect=value;
+    notifyListeners();}
+
+  var ciudadSelect;
+  setciudadSelect(value) {
+    ciudadSelect=value;
+    notifyListeners();}
+  
+  
+  var areaselected;
+  setAreaValue(value) {
+    areaselected=value;
+    notifyListeners();}
+
+  var rolDropdownList=['Operario','Supervisor'];
+  var rolselected;
+  setRolValue(value) {
+    rolselected=value;
+    notifyListeners();
+  }
+
+  var nivelDropdownList=['Nivel 1','Nivel 2','Nivel 3','Nivel 4','Nivel 5'];
+  var nivelselected;
+  setNivelValue(value) {
+    nivelselected=value;
+    notifyListeners();
+  }
+
+  var empresaDropdownList=['Logiran S.A','Transpenac S.A'];
+  var empresaselected;
+  setEmpresaValue(value) {
+    empresaselected=value;
+    notifyListeners();
+  }
+
+  var paisDropdownList=['Ecuador'];
+  var paisselected;
+  setPaisValue(value) {
+    paisselected=value;
+    notifyListeners();
+  }
+
+  var sinoDropdownList=['Si','No'];
+  var estadoEpplist=['Entregado','Pendiente'];
+  var botasDropdownList=['Si','No'];
+
+  //Botas--------------------------------------------
+  var botasselected;
+  setBotasValue(value) {
+    botasselected=value;
+    notifyListeners();
+  }
+  var botasCantidad;
+  setBotasCantidad(value) {
+    botasCantidad=value;
+    notifyListeners();
+  }
+  var botasProveedor;
+  setBotasProveedor(value) {
+    botasProveedor=value;
+    notifyListeners();
+  }
+
+  var botasEstado;
+  var botasfechacompra;
+  var botasfechaController = TextEditingController();
+  setBotasEstado(value) {
+    botasEstado=value;
+    notifyListeners();
+  }
+
+
+  //Casco-------------
+
+  var cascoselected;
+  setCascoValue(value) {
+    cascoselected=value;
+    notifyListeners();
+  }
+  var cascosCantidad;
+  setCascoCantidad(value) {
+    cascosCantidad=value;
+    notifyListeners();
+  }
+
+  var cascosProveedor;
+  setCascoProveedor(value) {
+    cascosProveedor=value;
+    notifyListeners();
+  }
+
+  var cascosEstado;
+  var cascosfechacompra;
+  var cascosfechaController = TextEditingController();
+  setCascosEstado(value) {
+    cascosEstado=value;
+    notifyListeners();
+  }
+
+  //Camisetas-----------
+
+
+
+  var camisetasselected;
+  setCamisetasValue(value) {
+    camisetasselected=value;
+    notifyListeners();
+  }
+  var camisetasCantidad;
+  setCamisetasCantidad(value) {
+    camisetasCantidad=value;
+    notifyListeners();
+  }
+  var camisetasProveedor;
+  setCamisetasProveedor(value) {
+    camisetasProveedor=value;
+    notifyListeners();
+  }
+  var camisetasEstado;
+  var camisetasfechacompra;
+  var camisetasfechaController = TextEditingController();
+  setCamisetasEstado(value) {
+    camisetasEstado=value;
+    notifyListeners();
+  }
+
+//Camisas variable
+  
+
+  var camisasselected;
+  setCamisasValue(value) {
+    camisasselected=value;
+    notifyListeners();
+  }
+
+  var camisasCantidad;
+  setCamisasCantidad(value) {
+    camisasCantidad=value;
+    notifyListeners();
+  }
+  var camisasProveedor;
+   setCamisasProveedor(value) {
+    camisasProveedor=value;
+    notifyListeners();
+  }
+
+  var camisasEstado;
+  var camisasfechacompra;
+  var camisasfechaController = TextEditingController();
+  setCamisasEstado(value) {
+    camisasEstado=value;
+    notifyListeners();
+  }
+//Chalecos variables
+  var chalecoselected;
+  setChalecoValue(value) {
+    chalecoselected=value;
+    notifyListeners();
+  }
+  var chalecosCantidad;
+  setChalecossCanitdad(value) {
+    chalecosCantidad=value;
+    notifyListeners();
+  }
+  var chalecosProveedor;
+  setChalecosProveedor(value) {
+    chalecosProveedor=value;
+    notifyListeners();
+  }
+
+  var chalecosfechacompra;
+  var chalecosfechaController = TextEditingController();
+
+  var chalecosEstado;
+  setChalecossEstado(value) {
+    chalecosEstado=value;
+    notifyListeners();
+  }
+
+  var renovarlista=['Asignar de inventario','Asignar nuevo equipo'];
+  var renovarSelect;
+  setrenovarSelect(value) {
+    renovarSelect=value;
+    notifyListeners();}
 
 
 
 
+
+
+
+
+
+}
+
+class VariablesExt extends ChangeNotifier{
+  GlobalKey<FormState> formKey= new GlobalKey<FormState>();
+
+  String _cedula="0920021";
+
+  get cedula {
+    return _cedula;
+  }
+
+  set cedulafun(String cedula){
+    this._cedula=cedula;
+    notifyListeners();
+  }
 
 }

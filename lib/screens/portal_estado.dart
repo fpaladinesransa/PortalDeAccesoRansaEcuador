@@ -61,7 +61,10 @@ class MyApp extends StatelessWidget {
             child: FutureBuilder<List<ProjectListAll>>(
               future: dataLista,
               builder: (context, snapshot) {
+
                 var filterData = snapshot.data;
+                print(filterData);
+
 
                 if (snapshot.hasData) {
                   return Column(

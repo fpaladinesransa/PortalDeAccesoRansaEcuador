@@ -182,7 +182,6 @@ EstadoAntecedentes(antecedentes) {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text("Si"));
-    ;
   }
   if (antecedentes == "") {
     return Container(
@@ -195,7 +194,6 @@ EstadoAntecedentes(antecedentes) {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text("Sin registro"));
-    ;
   }
 }
 

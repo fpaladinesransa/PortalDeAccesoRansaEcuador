@@ -29,11 +29,12 @@ class Gh_menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double ancho = MediaQuery.of(context).size.width;
 
     //final sideMenuProvider = Provider.of<SideMenuProvider>(context);
 
     return Container(
-      width: 270,
+      width: ancho*0.2,
       height: double.infinity,
       decoration: buildBoxDecoration(),
       child: ListView(

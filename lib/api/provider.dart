@@ -54,7 +54,7 @@ class ProjectList {
 
 Future<List<ProjectList>> obtenerSeguros({String? query}) async {
   final response =
-      await http.get(Uri.parse("http://ransaapiecuador.azurewebsites.net/"));
+      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
@@ -90,7 +90,7 @@ Future enviarEvaluacion(
     String cedula) async {
   final response = await http.post(
       Uri.parse(
-          "http://ransaapiecuador.azurewebsites.net/actualizacionseguridad"),
+          "https://ransaapiecuador.azurewebsites.net/actualizacionseguridad"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -126,7 +126,7 @@ Future enviarRegistro(
   String cd,
 ) async {
   final response = await http.post(
-      Uri.parse("http://ransaapiecuador.azurewebsites.net/insertseguridad"),
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/insertseguridad"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -226,11 +226,12 @@ class ProjectListAll {
 
 Future<List<ProjectListAll>> obtenerSegurosTotales() async {
   final response = await http.get(
-      Uri.parse("http://ransaapiecuador.azurewebsites.net/ConsultaPrincipal"));
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/ConsultaPrincipal"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
+    print(responseList);
     final ProjectMapAll = responseList
         .map((project) => ProjectListAll.fromJson(project))
         .toList();
