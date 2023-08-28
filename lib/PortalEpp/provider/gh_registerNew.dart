@@ -226,6 +226,11 @@ class DropdownService with ChangeNotifier{
   var chalecosfechacompra;
   var chalecosfechaController = TextEditingController();
 
+
+  
+  var fechacompraA;
+  var fechaControllerA = TextEditingController();
+
   var chalecosEstado;
   setChalecossEstado(value) {
     chalecosEstado=value;
@@ -237,6 +242,10 @@ class DropdownService with ChangeNotifier{
   setrenovarSelect(value) {
     renovarSelect=value;
     notifyListeners();}
+  
+
+
+
 
 
 
@@ -251,6 +260,80 @@ class DropdownService with ChangeNotifier{
 class VariablesExt extends ChangeNotifier{
   GlobalKey<FormState> formKey= new GlobalKey<FormState>();
 
+  List _selectEpp=[];
+  String _idInic="";
+  String _nombres="";
+  String _apellido="";
+  String _epp="";
+  String _id="";
+  String _fechaCompra="";
+
+
+  get selectEpp {
+    return _selectEpp;
+  }
+  set selectEppfun(List selectEpp){
+    this._selectEpp=selectEpp;
+    notifyListeners();
+  }
+  
+
+    get idInic {
+    return _idInic;
+  }
+  set idInicfun(String idInic){
+    this._idInic=idInic;
+    notifyListeners();
+  }
+
+  get nombres {
+    return _nombres;
+  }
+  set nombresfun(String nombres){
+    this._nombres=nombres;
+    notifyListeners();
+  }
+
+  get apellido {
+    return _apellido;
+  }
+  set apellidofun(String apellido){
+    this._apellido=apellido;
+    notifyListeners();
+  }
+
+  get epp {
+    return _epp;
+  }
+  set eppfun(String epp){
+    this._epp=epp;
+    notifyListeners();
+  }
+
+  get id {
+    return _id;
+  }
+  set idfun(String id){
+    this._id=id;
+    notifyListeners();
+  }
+
+  get fechaCompra {
+    return _fechaCompra;
+  }
+  set fechaComprafun(String fechaCompra){
+    this._fechaCompra=fechaCompra;
+    notifyListeners();
+  }
+
+  
+
+
+
+
+
+
+
   String _cedula="0920021";
 
   get cedula {
@@ -261,5 +344,8 @@ class VariablesExt extends ChangeNotifier{
     this._cedula=cedula;
     notifyListeners();
   }
+
+
+  
 
 }
