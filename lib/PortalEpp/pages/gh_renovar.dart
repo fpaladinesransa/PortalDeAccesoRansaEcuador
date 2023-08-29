@@ -1,4 +1,3 @@
-import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:portaltransportistas/PortalEpp/pages/dropdownprovider.dart';
@@ -71,96 +70,111 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
                     ),
                   ),
                   Container(height: 50,),
-                  Row(
-                    children: [
-                      Container(
-                        child:Text("Buscar:  ", style: TextStyle(color: Colors.grey, fontSize: 20),)
-                      ),
-                      Container(
-                        height: 57,
-                        width: 300,
-                        child: Card(
-                                  child: ListTile(
-                                      title: TextField(
-                          
-                          controller: _textoController,
-                          style:TextStyle(color: Colors.grey),
-
-                          textInputAction: TextInputAction.search,
-                          onSubmitted: (_) {
-                          },
-                          decoration: InputDecoration(
-                              border: InputBorder.none),
-                          onChanged: (value) {}),
-                                      trailing: IconButton(
-                          icon: Icon(Icons.search),
-                          onPressed: () {
-                                                      })),
-                                ),
-                      ),
-                      Container(width: 400,),
-                      Container(child: 
-                      FutureBuilder<List<EppActivo>>(
-                        future: dataLista,                        
-                        builder: (context, snapshot) => Text("Cantidad de registros: ${cantidadLista(snapshot.data)}", style: TextStyle(color: Colors.grey, fontSize: 20),),)
-                      ),
-
-                      
-                       
-                    ],
+                  Container(
+                    width: ancho*0.8,
+                    child: Row(
+                      children: [
+                        Container(width:ancho*0.1),
+                        Container(
+                          child:Text("Buscar:  ", style: TextStyle(color: Colors.grey, fontSize: 20),)
+                        ),
+                        Container(
+                          height: 57,
+                          width: ancho*0.15,
+                          child: Card(
+                                    child: ListTile(
+                                        title: TextField(
+                            
+                            controller: _textoController,
+                            style:TextStyle(color: Colors.grey),
+                  
+                            textInputAction: TextInputAction.search,
+                            onSubmitted: (_) {
+                            },
+                            decoration: InputDecoration(
+                                border: InputBorder.none),
+                            onChanged: (value) {}),
+                                        trailing: IconButton(
+                            icon: Icon(Icons.search),
+                            onPressed: () {
+                                                        })),
+                                  ),
+                        ),
+                        Container(width: ancho*0.3,),
+                        Container(child: 
+                        FutureBuilder<List<EppActivo>>(
+                          future: dataLista,                        
+                          builder: (context, snapshot) => Text("Cantidad de registros: ${cantidadLista(snapshot.data)}", style: TextStyle(color: Colors.grey, fontSize: 20),),)
+                        ),
+                  
+                        
+                         
+                      ],
+                    ),
                   ),
                   Container(height: 20,),
                   Container(
-                    alignment: Alignment.topCenter,
-                    height: 400,
-                    width: 1200,
-                    child: FutureBuilder<List<EppActivo>>(
-                  future: dataLista,
-                  builder: (context, snapshot) {
-                    var filterData = snapshot.data;
-
-                    if (snapshot.hasData) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        verticalDirection: VerticalDirection.down,   
-                        children: <Widget>[
-                        
-                          Expanded(
-                            child: Container(
-                                child: TablaRenovar(data:filterData,)
+                    width: ancho*0.8,
+                    child: Row(
+                      
+                      children: [
+                        Container(width:ancho*0.1),
+                        Container(
+                          height: 400,
+                          width:ancho*0.6,
+                          child: FutureBuilder<List<EppActivo>>(
+                        future: dataLista,
+                        builder: (context, snapshot) {
+                          var filterData = snapshot.data;
+                  
+                          if (snapshot.hasData) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              verticalDirection: VerticalDirection.down,   
+                              children: <Widget>[
                               
-                                ),
-                          )
-                        ],
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
-                    }
-                    return CircularProgressIndicator();
-                  },
-                ),               
+                                Expanded(
+                                  child: Container(
+                                      child: TablaRenovar(data:filterData,)
+                                    
+                                      ),
+                                )
+                              ],
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          }
+                          return CircularProgressIndicator();
+                        },
+                                  ),               
+                        ),
+                      ],
+                    ),
                   ),
-                Row(
-                  children: [
-                    DropdownRenovarEquipo(titulo: 'Ingrese una opcion',),
-                    Container(width: 650,)
-                  ],
+                Container(
+                  width: ancho*0.8,
+                  child: Row(
+                    children: [
+                      Container(width: ancho*0.1,),
+                      DropdownRenovarEquipo(titulo: 'Ingrese una opcion',),
+                    ],
+                  ),
                 ),
                 Container(height: 25,),
                 Container(
-                  width: 950,
+                  width: ancho*0.8,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      
+                    Container(width:ancho*0.1),
                     Visibility(        
                           visible: variablesDropdown.renovarSelect.toString()=='Asignar de inventario'? true:false,
                           child: Container(                              
                               alignment: Alignment.topLeft,
-                              height: 400,
-                              width: 600,
+                              height: 300,
+                              width: ancho*0.6,
                               child: FutureBuilder<List<EppSinAsignar>>(
                             future: dataListaSinAseignar,
                             builder: (context, snapshot) {
@@ -206,22 +220,110 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
                 ),
                 Container(height: 100,),
                 Container(
-                  width: 1000,
-                  child: TextWidget(
-                              text: "Asignar EPP:",
-                              textAlignt: TextAlign.left,
-                              fontWeight: FontWeight.normal,
-                              textcolor: Color.fromARGB(255, 110, 110, 110),
-                              textsize: 20,
-                            ),
+                  width: ancho*0.8,
+                  child: Row(
+                    children: [
+                      Container(width: ancho*0.1,),
+                      Container(
+                        width: ancho*0.6,
+                        child: TextWidget(
+                                    text: "Asignar EPP:",
+                                    textAlignt: TextAlign.left,
+                                    fontWeight: FontWeight.normal,
+                                    textcolor: Color.fromARGB(255, 110, 110, 110),
+                                    textsize: 20,
+                                  ),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 10,),
                 Container(
-                              height: 1,
-                              width: 1000,
-                              color: Color.fromARGB(255, 110, 110, 110)),
+                  width: ancho*0.8,
+                  child: Row(
+                    children: [
+                      Container(width: ancho*0.1,),
+                      Container(
+                                    height: 1,
+                                    width: 1000,
+                                    color: Color.fromARGB(255, 110, 110, 110)),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20,),
 
-                Text("${variables.idInic},${variables.nombres},${variables.apellido},${variables.epp},${variables.id},${variables.fechaCompra}"),
+                Container(
+                  width: ancho*0.8,
+                  child: Row(
+                    children: [
+                      Container(width:ancho*0.1),
+                      SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                              child: DataTable(
+                      decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 194, 194, 194)),borderRadius: BorderRadius.circular(10)),
+                      sortColumnIndex: 0,
+                      showCheckboxColumn: false,
+                      columns: const [
+                        DataColumn(label: Text("ID"), numeric: true, tooltip: "Id"),
+                        DataColumn(label: Text("Nombres"), numeric: false, tooltip: "Nombre"),
+                        DataColumn(label: Text("Apellidos"), numeric: false, tooltip: "Apellidos"),
+                        DataColumn(
+                            label: Text("EPP"),
+                            numeric: false,
+                            tooltip: "EPP"),
+                      ],
+                      rows: <DataRow>[
+                        DataRow(
+                          cells: <DataCell>[
+                            DataCell(Text('${variables.idInic}')),
+                            DataCell(Text('${variables.nombres}')),
+                            DataCell(Text('${variables.apellido}')),
+                            DataCell(Text('${variables.epp}')),
+                          ],)]
+
+                              ),
+                          ),
+                           SizedBox(width: 20,),
+
+                          const Column(
+                            children: [
+                              Text("Asignar recurso"),
+                              Icon(
+                                    Icons.arrow_forward_outlined,
+                                    color: Color( 0xff009B3A ),
+                                    size: 14.0,
+                                  ),
+                            ],
+                          ),
+                          SizedBox(width: 20,),
+
+                          SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                              child: DataTable(
+                      decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 194, 194, 194)),borderRadius: BorderRadius.circular(10)),
+                      sortColumnIndex: 0,
+                      showCheckboxColumn: false,
+                      columns: const [
+                        DataColumn(label: Text("ID"), numeric: true, tooltip: "Id"),
+                        DataColumn(label: Text("Fecha compra"), numeric: false, tooltip: "Fecha compra"),
+                      ],
+                      rows: <DataRow>[
+                        DataRow(
+                          cells: <DataCell>[
+                            DataCell(Text('${variables.id}')),
+                            DataCell(Text('${variables.fechaCompra}')),
+                          ],)]
+
+                              ),
+                          ),
+
+                    ],
+                  ),
+                ),
+                SizedBox(height: 50,),
+
+
+
                 
                 Row(
                   children: [

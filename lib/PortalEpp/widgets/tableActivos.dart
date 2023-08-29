@@ -147,8 +147,6 @@ class _TablaRenovarState extends State<TablaRenovar> {
         scrollDirection: Axis.horizontal,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-
-
               child: DataTable(
                 decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 194, 194, 194)),borderRadius: BorderRadius.circular(10)),
                 sortColumnIndex: 0,
@@ -188,7 +186,7 @@ class _TablaRenovarState extends State<TablaRenovar> {
                             isAdding? {variables.selectEpp.add(valor),
                             variables.nombresfun=valor.nombres.toString(),
                             variables.apellidofun=valor.apellidos.toString(),
-                            variables.eppfun=valor.apellidos.toString(),
+                            variables.eppfun=valor.nombreEpp.toString(),
                             variables.idInicfun=valor.id.toString(),
                             
 
@@ -198,7 +196,7 @@ class _TablaRenovarState extends State<TablaRenovar> {
                             isAdding? {variables.selectEpp.add(valor),
                             variables.nombresfun=valor.nombres.toString(),
                             variables.apellidofun=valor.apellidos.toString(),
-                            variables.eppfun=valor.apellidos.toString(),
+                            variables.eppfun=valor.nombreEpp.toString(),
                             variables.idInicfun=valor.id.toString(),
                             }:variables.selectEpp.remove(valor);
                             
