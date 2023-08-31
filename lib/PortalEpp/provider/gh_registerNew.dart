@@ -231,6 +231,9 @@ class DropdownService with ChangeNotifier{
   var fechacompraA;
   var fechaControllerA = TextEditingController();
 
+  var fechaEntrega;
+  var fechaEntregaController = TextEditingController();
+
   var chalecosEstado;
   setChalecossEstado(value) {
     chalecosEstado=value;
@@ -267,6 +270,15 @@ class VariablesExt extends ChangeNotifier{
   String _epp="";
   String _id="";
   String _fechaCompra="";
+  String _fechaEntrega="";
+  String _fechaRenovar="";
+    String _cedula="";
+
+  var fechacompraA;
+  var fechaControllerA = TextEditingController();
+
+  var fechaEntregaA;
+  var fechaEntregaController = TextEditingController();
 
 
   get selectEpp {
@@ -326,6 +338,24 @@ class VariablesExt extends ChangeNotifier{
     notifyListeners();
   }
 
+  get fechaEntrega {
+    return _fechaEntrega;
+  }
+
+  set fechaEntregafun(String fechaEntrega){
+    this._fechaEntrega=fechaEntrega;
+    notifyListeners();
+  }
+
+  get fechaRenovar {
+    return _fechaRenovar;
+  }
+
+  set fechaRenovarfun(String fechaRenovar){
+    this._fechaEntrega=fechaRenovar;
+    notifyListeners();
+  }
+
   
 
 
@@ -334,7 +364,6 @@ class VariablesExt extends ChangeNotifier{
 
 
 
-  String _cedula="0920021";
 
   get cedula {
     return _cedula;

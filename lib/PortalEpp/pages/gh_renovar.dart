@@ -3,10 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:portaltransportistas/PortalEpp/pages/dropdownprovider.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/tableActivos.dart';
 import 'package:provider/provider.dart';
-
+import '../../widget/separadortitulo.dart';
 import '../provider/gh_registerNew.dart';
 import '../provider/providerEPP.dart';
 import '../widgets/menu.dart';
+import '../widgets/message_input.dart';
 import '../widgets/text_widget.dart';
 
 
@@ -25,35 +26,18 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
   String nombreButon="Prueba";
   late String fechaValue;
   String opcionRenovar="";
-
-
-  
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
 
     Future<List<EppActivo>> dataLista = eppRenovartotales();
     Future<List<EppSinAsignar>> dataListaSinAseignar = eppEquiposSinAsignar();
-
-
     TextEditingController _textoController = TextEditingController(text: "");
     final variables = Provider.of<VariablesExt>(context, listen: true);
     final variablesDropdown = Provider.of<DropdownService>(context, listen: true);
-
-    
-
-    
-
     double ancho = MediaQuery.of(context).size.width;
     return Builder(
       builder: (context) {
         return Scaffold(
-          
           body: Row(children: [      
             Gh_menu(),
             SingleChildScrollView(
@@ -70,29 +54,31 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
                     ),
                   ),
                   Container(height: 50,),
+                  SeparadorTitulo(titulo: 'EPP por Renovar',),
+                  Container(height: 50,),
+
                   Container(
                     width: ancho*0.8,
                     child: Row(
                       children: [
-                        Container(width:ancho*0.1),
+                        Container(width:ancho*0.05),
                         Container(
-                          child:Text("Buscar:  ", style: TextStyle(color: Colors.grey, fontSize: 20),)
+                          child:Text("Buscar:  ", style: TextStyle(color: Color(0xFF6E6E6E), fontSize: 20),)
                         ),
                         Container(
                           height: 57,
                           width: ancho*0.15,
                           child: Card(
                                     child: ListTile(
-                                        title: TextField(
-                            
+                                        title: TextField(      
                             controller: _textoController,
-                            style:TextStyle(color: Colors.grey),
+                            style:TextStyle(color: Color(0xFF6E6E6E)),
                   
                             textInputAction: TextInputAction.search,
                             onSubmitted: (_) {
                             },
                             decoration: InputDecoration(
-                                border: InputBorder.none),
+                            border: InputBorder.none),
                             onChanged: (value) {}),
                                         trailing: IconButton(
                             icon: Icon(Icons.search),
@@ -104,24 +90,25 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
                         Container(child: 
                         FutureBuilder<List<EppActivo>>(
                           future: dataLista,                        
-                          builder: (context, snapshot) => Text("Cantidad de registros: ${cantidadLista(snapshot.data)}", style: TextStyle(color: Colors.grey, fontSize: 20),),)
+                          builder: (context, snapshot) => Text("Cantidad de registros: ${cantidadLista(snapshot.data)}", style: TextStyle(color: Color(0xFF6E6E6E), fontSize: 20),),)
                         ),
-                  
-                        
-                         
                       ],
                     ),
                   ),
                   Container(height: 20,),
                   Container(
+                    
                     width: ancho*0.8,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+
                       
                       children: [
-                        Container(width:ancho*0.1),
+                        Container(width:ancho*0.05),
                         Container(
                           height: 400,
-                          width:ancho*0.6,
+                          width:ancho*0.7,
                           child: FutureBuilder<List<EppActivo>>(
                         future: dataLista,
                         builder: (context, snapshot) {
@@ -152,23 +139,33 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
                       ],
                     ),
                   ),
+                SeparadorTitulo(titulo: 'Recursos disponibles',),
+                Container(height: 20,),
                 Container(
                   width: ancho*0.8,
                   child: Row(
                     children: [
-                      Container(width: ancho*0.1,),
+                      Container(width: ancho*0.05,),
                       DropdownRenovarEquipo(titulo: 'Ingrese una opcion',),
+                      Container(width: ancho*0.05,),
+                      Container(
+                        child: Consumer<VariablesExt>(builder: (context, value, child) {
+                          return DateCampo(context, value.fechaEntregaA,
+                                      value.fechaEntregaController,"Fecha de entrega");
+                          }),
+                      ),
                     ],
                   ),
                 ),
                 Container(height: 25,),
+                
                 Container(
                   width: ancho*0.8,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                    Container(width:ancho*0.1),
+                    Container(width:ancho*0.05),
                     Visibility(        
                           visible: variablesDropdown.renovarSelect.toString()=='Asignar de inventario'? true:false,
                           child: Container(                              
@@ -205,11 +202,16 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
                         ),
                         Visibility(
                   visible: variablesDropdown.renovarSelect.toString()=='Asignar nuevo equipo'? true:false,
-                  child: Container(
-                    child: Consumer<DropdownService>(builder: (context, value, child) {
-                      return DateCampo(context, value.fechacompraA,
-                                  value.fechaControllerA);
-                      }),
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Consumer<VariablesExt>(builder: (context, value, child) {
+                          return DateCampo(context, value.fechacompraA,
+                                      value.fechaControllerA,"Fecha de compra");
+                          }),
+                      ),
+                        
+                    ],
                   ),
                 ),
 
@@ -219,45 +221,53 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
                   ),
                 ),
                 Container(height: 100,),
-                Container(
-                  width: ancho*0.8,
-                  child: Row(
-                    children: [
-                      Container(width: ancho*0.1,),
-                      Container(
-                        width: ancho*0.6,
-                        child: TextWidget(
-                                    text: "Asignar EPP:",
-                                    textAlignt: TextAlign.left,
-                                    fontWeight: FontWeight.normal,
-                                    textcolor: Color.fromARGB(255, 110, 110, 110),
-                                    textsize: 20,
-                                  ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 10,),
-                Container(
-                  width: ancho*0.8,
-                  child: Row(
-                    children: [
-                      Container(width: ancho*0.1,),
-                      Container(
-                                    height: 1,
-                                    width: 1000,
-                                    color: Color.fromARGB(255, 110, 110, 110)),
-                    ],
-                  ),
-                ),
+                SeparadorTitulo(titulo: 'Asignar EPP',),
+                
                 SizedBox(height: 20,),
 
                 Container(
                   width: ancho*0.8,
                   child: Row(
                     children: [
-                      Container(width:ancho*0.1),
-                      SingleChildScrollView(
+                      Container(width:ancho*0.05),
+                          SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                              child: DataTable(
+                      decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 194, 194, 194)),borderRadius: BorderRadius.circular(10)),
+                      sortColumnIndex: 0,
+                      showCheckboxColumn: false,
+                      columns: const [
+                        DataColumn(label: Text("ID"), numeric: true, tooltip: "Id"),
+                        DataColumn(label: Text("Fecha compra"), numeric: false, tooltip: "Fecha compra"),
+                        DataColumn(label: Text("Fecha de entrega"), numeric: false, tooltip: "Fecha de entrega"),
+                      ],
+                      rows: <DataRow>[
+                        DataRow(
+                          cells: <DataCell>[
+                            DataCell(Text('${variables.id}')),
+                            DataCell(Text('${variables.fechaCompra}')),
+                            DataCell(Text('${variables.fechaEntrega}')),
+                          ],)]
+
+                              ),
+                          ),
+                      
+                          SizedBox(width: 20,),
+
+                          const Column(
+                            children: [
+                              Text("Asignar recurso"),
+                              Icon(
+                                    Icons.arrow_forward_outlined,
+                                    color: Color( 0xff009B3A ),
+                                    size: 14.0,
+                                  ),
+                            ],
+                          ),
+                          SizedBox(width: 20,),
+
+                          
+                          SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                               child: DataTable(
                       decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 194, 194, 194)),borderRadius: BorderRadius.circular(10)),
@@ -283,39 +293,6 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
 
                               ),
                           ),
-                           SizedBox(width: 20,),
-
-                          const Column(
-                            children: [
-                              Text("Asignar recurso"),
-                              Icon(
-                                    Icons.arrow_forward_outlined,
-                                    color: Color( 0xff009B3A ),
-                                    size: 14.0,
-                                  ),
-                            ],
-                          ),
-                          SizedBox(width: 20,),
-
-                          SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                              child: DataTable(
-                      decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 194, 194, 194)),borderRadius: BorderRadius.circular(10)),
-                      sortColumnIndex: 0,
-                      showCheckboxColumn: false,
-                      columns: const [
-                        DataColumn(label: Text("ID"), numeric: true, tooltip: "Id"),
-                        DataColumn(label: Text("Fecha compra"), numeric: false, tooltip: "Fecha compra"),
-                      ],
-                      rows: <DataRow>[
-                        DataRow(
-                          cells: <DataCell>[
-                            DataCell(Text('${variables.id}')),
-                            DataCell(Text('${variables.fechaCompra}')),
-                          ],)]
-
-                              ),
-                          ),
 
                     ],
                   ),
@@ -324,7 +301,6 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
 
 
 
-                
                 Row(
                   children: [
                     SizedBox(
@@ -338,7 +314,9 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Color( 0xff009B3A ),
                                     ),
-                                    onPressed: () {                      
+                                    onPressed: () {  
+                                      mostrarDialogRenovar(context);
+
                                     },
                                     child: const Text('Actualizar data'),
                                   );
@@ -370,36 +348,15 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   //-------------------------FechaKey------------------------------------
-
-
-
-
-    Column DateCampo(BuildContext context, fechavalue, fechaController) {
+    Column DateCampo(BuildContext context, fechavalue, fechaController,titulo) {
+    final variables = Provider.of<VariablesExt>(context, listen: false);
     return Column(
       children: [
         Container(
           width: 300,
           child: TextWidget(
-            text: "Fecha de compra:",
+            text: "$titulo",
             fontWeight: FontWeight.normal,
             textcolor: Color.fromARGB(255, 110, 110, 110),
             textsize: 16,
@@ -410,16 +367,11 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
           height: 3,
         ),
         Container(
-          child: DateForm(context, fechavalue, fechaController),
+          
           width: 300,
-        ),
-      ],
-    );
-  }
-  TextFormField DateForm(BuildContext context, fechavalue, fechaControler) {
-    return TextFormField(
+          child: TextFormField(
       onChanged: (value) => fechavalue = value,
-      controller: fechaControler,
+      controller: fechaController,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -428,25 +380,30 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
             context: context,
             initialDate: DateTime.now(),
             firstDate: DateTime(2000),
-            lastDate: DateTime(2100));
+            lastDate: DateTime(2100)); 
         if (pickeddate != null) {
           setState(() {
-            fechaControler.text = DateFormat("dd-MM-yyyy").format(pickeddate);
+            fechaController.text = DateFormat("dd-MM-yyyy").format(pickeddate);
           });
         }
+        titulo=="Fecha de compra"?variables.fechaComprafun=fechaController.text:variables.fechaEntregafun=fechaController.text;
       }),
       onSaved: (value) {
         fechaValue = DateFormat("MM-dd-yyyy")
             .format(DateFormat('dd-MM-yyyy').parse(value!));
+        //variables.fechaComprafun=fechaValue.toString();
+     
       },
       validator: ((value) {
         if (value!.isEmpty) {
           return "Llene este campo";
         }
       }),
+    )
+        ),
+      ],
     );
   }
 } 
  
-
 

@@ -91,6 +91,7 @@ class EppSinAsignar{
     required this.nombreEpp, 
     required this.fechaCompra,
     required this.estado,
+    required this.fechainventario,
 
 
 }
@@ -100,6 +101,7 @@ class EppSinAsignar{
   String nombreEpp;
   DateTime fechaCompra;
   String estado;
+  DateTime fechainventario;
 
 
   factory EppSinAsignar.fromJson(Map<String, dynamic> map) => EppSinAsignar(
@@ -107,6 +109,7 @@ class EppSinAsignar{
         nombreEpp: map["NombreEpp"],
         fechaCompra: DateTime.parse(map["FechaCompra"]),
         estado: map["Estado"],
+        fechainventario: DateTime.parse(map["FechaenInventario"])
       );
 
 
@@ -130,5 +133,94 @@ Future<List<EppSinAsignar>> eppEquiposSinAsignar() async {
   } else {
     // Si la llamada no fue exitosa, lanza un error.
     throw Exception('Failed to load post');
+  }
+}
+
+
+
+
+Future enviarRenovacion(
+    String nombreEpp,
+    String estado,
+    String cedula,
+    String fechaRenovar,
+    String fechaDeEntrega,
+    String id,
+) async {
+  final response = await http.post(
+      Uri.parse(
+          "https://ransaapiecuador.azurewebsites.net/EppequiposUpdateRenovar"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "NombreEpp": nombreEpp,
+        "Estado": estado,
+        "Cedula": cedula,
+        "FechaRenovar": fechaRenovar,
+        "FechaDeEntrega": fechaDeEntrega,
+        "ID": id,
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
+
+
+
+
+Future enviarRenovacionBaja(
+    String estado,
+    String fechabaja,
+    String id,
+) async {
+  final response = await http.post(
+      Uri.parse(
+          "https://ransaapiecuador.azurewebsites.net/EppequiposRenovarBaja"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "Estado": estado,
+        "Fechabaja": fechabaja,
+        "ID": id,
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
+
+
+Future insertRenovacionNuevoEquipo(
+    String nombreepp,
+    String fechaCompra,
+    String estado,
+    String cedula,
+    String fechaRenovar,
+) async {
+  final response = await http.post(
+      Uri.parse(
+          "https://ransaapiecuador.azurewebsites.net/insertequiposEpp"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "NombreEpp": nombreepp,
+        "FechaCompra": fechaCompra,
+        "Estado": estado,
+        "Cedula": cedula,
+        "FechaRenovar": fechaRenovar,
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
   }
 }

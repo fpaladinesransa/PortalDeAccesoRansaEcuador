@@ -147,6 +147,8 @@ class _TablaRenovarState extends State<TablaRenovar> {
         scrollDirection: Axis.horizontal,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
+
+
               child: DataTable(
                 decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 194, 194, 194)),borderRadius: BorderRadius.circular(10)),
                 sortColumnIndex: 0,
@@ -199,12 +201,7 @@ class _TablaRenovarState extends State<TablaRenovar> {
                             variables.eppfun=valor.nombreEpp.toString(),
                             variables.idInicfun=valor.id.toString(),
                             }:variables.selectEpp.remove(valor);
-                            
-                  
-                          }
-                          
-                  
-                  
+                          } 
                         });
                         
 
@@ -247,8 +244,6 @@ class TablaEppSinAsignar extends StatefulWidget {
 List selectEpp=[];
 
 class _TablaEppSinAsignarState extends State<TablaEppSinAsignar> {
-  
-  
   @override
   Widget build(BuildContext context) {
     final variables = Provider.of<VariablesExt>(context, listen: false);
@@ -269,6 +264,10 @@ class _TablaEppSinAsignarState extends State<TablaEppSinAsignar> {
               label: Text("Estado"),
               numeric: false,
               tooltip: "Estado"),
+          DataColumn(
+              label: Text("Fecha en inventario"),
+              numeric: false,
+              tooltip: "Fecha en inventario"),
           
         ],
         rows: widget.data!
@@ -282,26 +281,21 @@ class _TablaEppSinAsignarState extends State<TablaEppSinAsignar> {
                     isAdding? {
                       selectEpp.add(valor),
                       variables.idfun=valor.id.toString(),
-                      variables.fechaComprafun=valor.fechaCompra.toString(),
-                      
+                      variables.fechaComprafun=valor.fechaCompra.day.toString()+"/"+valor.fechaCompra.month.toString()+"/"+valor.fechaCompra.year.toString(),                     
                       }:selectEpp.remove(valor);
                   } else {
                     isAdding? {selectEpp.add(valor),
                     variables.idfun=valor.id.toString(),
-                    variables.fechaComprafun=valor.fechaCompra.toString(),
-                    
+                    variables.fechaComprafun=valor.fechaCompra.day.toString()+"/"+valor.fechaCompra.month.toString()+"/"+valor.fechaCompra.year.toString(),                  
                     }:selectEpp.remove(valor);
-
                   }
-                  
-
-
                 }),
                 cells: [
                 DataCell(Text(valor.id.toString())),
                 DataCell(Text(valor.nombreEpp)),
                 DataCell(Text(valor.fechaCompra.day.toString()+"/" +valor.fechaCompra.month.toString()+"/"+valor.fechaCompra.year.toString())),
                 DataCell(Text(valor.estado)),
+                DataCell(Text(valor.fechainventario.day.toString()+"/" +valor.fechainventario.month.toString()+"/"+valor.fechainventario.year.toString())),
               ]),
             )
             .toList(),
