@@ -224,3 +224,192 @@ Future insertRenovacionNuevoEquipo(
     throw Exception('Failed to post');
   }
 }
+
+class EppSolicitudList{
+  EppSolicitudList({
+    required this.id,
+    required this.nombres,
+    required this.apellidos, 
+    required this.cedula,
+    required this.fechaCompra,
+    required this.fechaDeEntrega,
+    required this.nombreEpp,
+    required this.estado,
+    required this.motivo,    
+    required this.comentarios,
+}
+  );
+  int id;
+  String nombres;
+  String apellidos;
+  String cedula;
+  DateTime fechaCompra;
+  DateTime fechaDeEntrega;
+  String nombreEpp;
+  String estado;
+  String motivo;
+  String comentarios;
+  factory EppSolicitudList.fromJson(Map<String, dynamic> map) => EppSolicitudList(
+        id:map["ID"],
+        nombres: map["Nombres"],
+        apellidos: map["Apellido"],
+        cedula: map["Cedula"],
+        fechaCompra: DateTime.parse(map["FechaCompra"]),
+        fechaDeEntrega: DateTime.parse(map["FechaDeEntrega"]),
+        nombreEpp: map["NombreEpp"],
+        estado: map["Estado"],
+        motivo: map["Motivo"],
+        comentarios: map["Comentarios"],
+      );
+}
+
+
+
+Future<List<EppSolicitudList>> eppSolicitudEppGH() async {
+  
+  final response = await http.get(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/SelectGHsolicitud"));
+      
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+
+    final EppSolicitudListAll = responseList
+        .map((project) => EppSolicitudList.fromJson(project))
+        .toList();
+
+    
+    return EppSolicitudListAll;
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+
+
+
+Future insertGHsolicitud(
+    String requrimiento,
+    String solicitud,
+    String motivo,
+    String fechaSolicitud,
+    String comentarios,
+    String estado,
+    String id
+
+) async {
+  final response = await http.post(
+      Uri.parse(
+          "https://ransaapiecuador.azurewebsites.net/InsertGHsolicitud"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "Requerimiento": requrimiento,
+        "Solicitante": solicitud,
+        "Motivo": motivo,
+        "Fecha_Solicitud": fechaSolicitud,
+        "Comentario": comentarios,
+        "Estado": estado,
+        "ID_Epp": id,
+
+
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
+
+
+Future actualizarGHsolicitud(
+    String tieneSolicitud,
+    String estado,
+    String comentarios,
+    String id,
+
+
+) async {
+  final response = await http.post(
+      Uri.parse(
+          "https://ransaapiecuador.azurewebsites.net/UpdateGHSolicitud"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "TieneSolicitud": tieneSolicitud,
+        "Estado": estado,
+        "Comentarios": comentarios,
+        "ID": id,
+
+
+
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
+
+
+
+
+
+
+class EppSelectFirmaGH{
+  EppSelectFirmaGH({
+    required this.id,
+    required this.nombres,
+    required this.apellidos, 
+    required this.cedula,
+    required this.nombreEpp,
+    required this.estado,
+    required this.urlFirma,    
+}
+  );
+  int id;
+  String nombres;
+  String apellidos;
+  String cedula;
+  String nombreEpp;
+  String estado;
+  String urlFirma;
+  factory EppSelectFirmaGH.fromJson(Map<String, dynamic> map) => EppSelectFirmaGH(
+        id:map["ID"],
+        nombres: map["Nombres"],
+        apellidos: map["Apellido"],
+        cedula: map["Cedula"],
+        nombreEpp: map["NombreEpp"],
+        estado: map["Estado"],
+        urlFirma: map["UrlFirma"],
+
+      );
+}
+
+
+
+Future<List<EppSelectFirmaGH>> eppSelectFirmaGH() async {
+  
+  final response = await http.get(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/SelectGhFirma"));
+      
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+
+    final EppSelectFirmaGHAll = responseList
+        .map((project) => EppSelectFirmaGH.fromJson(project))
+        .toList();
+
+    
+    return EppSelectFirmaGHAll;
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}

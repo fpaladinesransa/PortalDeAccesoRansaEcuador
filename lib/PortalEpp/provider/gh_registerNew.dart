@@ -272,7 +272,7 @@ class VariablesExt extends ChangeNotifier{
   String _fechaCompra="";
   String _fechaEntrega="";
   String _fechaRenovar="";
-    String _cedula="";
+  String _cedula="";
 
   var fechacompraA;
   var fechaControllerA = TextEditingController();
@@ -355,15 +355,6 @@ class VariablesExt extends ChangeNotifier{
     this._fechaEntrega=fechaRenovar;
     notifyListeners();
   }
-
-  
-
-
-
-
-
-
-
 
   get cedula {
     return _cedula;

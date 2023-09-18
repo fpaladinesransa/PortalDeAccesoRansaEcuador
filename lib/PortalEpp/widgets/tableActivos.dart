@@ -190,6 +190,7 @@ class _TablaRenovarState extends State<TablaRenovar> {
                             variables.apellidofun=valor.apellidos.toString(),
                             variables.eppfun=valor.nombreEpp.toString(),
                             variables.idInicfun=valor.id.toString(),
+                            variables.cedulafun=valor.cedula.toString(),
                             
 
                             
@@ -200,6 +201,7 @@ class _TablaRenovarState extends State<TablaRenovar> {
                             variables.apellidofun=valor.apellidos.toString(),
                             variables.eppfun=valor.nombreEpp.toString(),
                             variables.idInicfun=valor.id.toString(),
+                            variables.cedulafun=valor.cedula.toString(),
                             }:variables.selectEpp.remove(valor);
                           } 
                         });

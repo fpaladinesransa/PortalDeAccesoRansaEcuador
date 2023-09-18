@@ -2,9 +2,11 @@
 import 'package:fluro/fluro.dart';
 
 import '../PortalEpp/pages/dropdownprovider.dart';
+import '../PortalEpp/pages/gh_actasEntrega.dart';
 import '../PortalEpp/pages/gh_home.dart';
 import '../PortalEpp/pages/gh_activo.dart';
 import '../PortalEpp/pages/gh_renovar.dart';
+import '../PortalEpp/pages/gh_solicitudEPP.dart';
 import '../PortalEpp/pages/home.dart';
 import '../PortalEpp/provider/providerEPP.dart';
 import '../screens/portal_estado.dart';
@@ -25,48 +27,59 @@ class Flurorouter {
     router.define('/prueba', handler: _counterHandlerGh_prueba);
     router.define('/ghRenovar', handler: _counterHandlerGhRenovarequipo);
     router.define('/ghActivo', handler: _counterHandlerGhActivoequipo);
+    router.define('/capacitacionSeguridad',handler: _counterHandlerCapacitacionSeguridad);
+    router.define('/ghSolicitudEpp',handler: _counterHandlerGhSolicitudEPPState);
+    router.define('/ghActasEntrega',handler: _counterHandlerGHActasEntrega);
 
-
-/*     router.define( rootRoute, handler: AdminHandlers.login, transitionType: TransitionType.none );
- */    router.define('/capacitacionSeguridad',
-        handler: _counterHandlerCapacitacionSeguridad);
+   
     router.notFoundHandler = pageNotFound;
   }
 
 
 
 
-  static Handler _counterHandler = Handler(
+  static final Handler _counterHandler = Handler(
     handlerFunc: (context, parameters) =>
         MyApp(asegurados: obtenerSegurosTotales()),
   );
 
-  static Handler _counterHandlerCapacitacion = Handler(
+  static final Handler _counterHandlerCapacitacion = Handler(
     handlerFunc: (context, parameters) => const IngresoDataPersonal(),
   );
-    static Handler _counterHandlerGh_home = Handler(
+    static final Handler _counterHandlerGh_home = Handler(
     handlerFunc: (context, parameters) => const Gh_home(),
   );
 
-static Handler _counterHandlerGh_prueba = Handler(
+static final Handler _counterHandlerGh_prueba = Handler(
     handlerFunc: (context, parameters) => const DropdowntextArea(titulo: '',),
   );
 
-static Handler _counterHandlerGhRenovarequipo = Handler(
+static final Handler _counterHandlerGhRenovarequipo = Handler(
     handlerFunc: (context, parameters) =>  GhRenovarequipo(),
   );
-static Handler _counterHandlerGhActivoequipo = Handler(
+static final Handler _counterHandlerGhActivoequipo = Handler(
     handlerFunc: (context, parameters) =>  GhActivoequipo(),
   );
+static final Handler _counterHandlerGHActasEntrega = Handler(
+    handlerFunc: (context, parameters) =>  GHActasEntrega(),
+  );
 
-  static Handler _counterhomePortalEPP = Handler(
+  
+
+  static final Handler _counterhomePortalEPP = Handler(
     handlerFunc: (context, parameters) => const SignInScreen(),
   );
   static Handler pageNotFound =
       Handler(handlerFunc: (context, parameters) => View404());
 
-  static Handler _counterHandlerCapacitacionSeguridad = Handler(
+  static final Handler _counterHandlerCapacitacionSeguridad = Handler(
       handlerFunc: (context, parameters) => CapacitacionSeguridad(
             cedula: '',
           ));
+    
+  static final Handler _counterHandlerGhSolicitudEPPState = Handler(
+      handlerFunc: (context, parameters) => GhSolicitudEPPState());
+  
+  
+
 }

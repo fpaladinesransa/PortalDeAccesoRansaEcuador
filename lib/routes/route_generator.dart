@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import '../PortalEpp/pages/dropdownprovider.dart';
+import '../PortalEpp/pages/gh_actasEntrega.dart';
 import '../PortalEpp/pages/gh_home.dart';
 import '../PortalEpp/pages/gh_activo.dart';
 import '../PortalEpp/pages/gh_renovar.dart';
+import '../PortalEpp/pages/gh_solicitudEPP.dart';
 import '../PortalEpp/pages/home.dart';
 import '../PortalEpp/provider/providerEPP.dart';
 import '../Screens/portal_estado.dart';
@@ -28,17 +30,20 @@ class RouteGenerator {
       case '/ghhome':
         return _fadeRoute(Gh_home(), '/ghhome');
       case '/ghRenovar':
-        return _fadeRoute(GhRenovarequipo(), '/ghRenovar');
-      
-      case '/ghRenovar':
+        return _fadeRoute(GhRenovarequipo(), '/ghRenovar');   
+      case '/ghActivo':
         return _fadeRoute(GhActivoequipo(), '/ghActivo');
 
+      case '/ghSolicitudEpp':
+        return _fadeRoute(GhSolicitudEPPState(), '/ghSolicitudEpp');
+      
+      case '/ghActasEntrega':
+        return _fadeRoute(GHActasEntrega(), '/ghActasEntrega');
+
       case '/CapacitacionSeguridad':
-        return _fadeRoute(
-            CapacitacionSeguridad(
-              cedula: '',
-            ),
-            '/CapacitacionSeguridad');
+        return _fadeRoute(CapacitacionSeguridad(cedula: '',),'/CapacitacionSeguridad');
+
+
 
       default:
         return _fadeRoute(View404(), '/404');
