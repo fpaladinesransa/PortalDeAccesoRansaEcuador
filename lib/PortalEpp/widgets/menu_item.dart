@@ -47,9 +47,10 @@ class _MenuItemState extends State<MenuItem> {
                   SizedBox( width: 10 ),
                   Text(
                     widget.text,
-                    style: GoogleFonts.roboto(
+                    style: TextStyle(
+                      color: Colors.white,
                       fontSize: 16,
-                      color: Colors.white
+                      fontFamily: 'UniviaProRegular',
                     ),
                   )
                 ],

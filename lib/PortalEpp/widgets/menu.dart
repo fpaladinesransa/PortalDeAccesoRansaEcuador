@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:portaltransportistas/locator.dart';
+import 'package:portaltransportistas/services/navigation_service.dart';
 /* import 'package:provider/provider.dart';
 
 import 'package:admin_dashboard/providers/sidemenu_provider.dart';
@@ -49,29 +51,25 @@ class Gh_menu extends StatelessWidget {
           MenuItem( text: 'Home', icon: Icons.account_box, onPressed: (){
 
           }),
-          MenuItem( text: 'Generar nuevos regitros', icon: Icons.file_upload, onPressed: (){
-            Navigator.push(context,MaterialPageRoute(builder: (context) => 
-            Gh_home(),),);
+          MenuItem( text: 'Generar nuevos regitros', icon: Icons.file_upload, 
+          onPressed: (){
+            locator<NavigationService>().navigateTo('/ghhome');
           }),
           MenuItem( text: 'Renovar equipos', icon: Icons.autorenew, onPressed: (){
-            Navigator.push(context,MaterialPageRoute(builder: (context) => 
-            GhRenovarequipo(),),);
+            locator<NavigationService>().navigateTo('/ghRenovar');
+
           }),
           MenuItem( text: 'Equipos activos', icon: Icons.dashboard_outlined, onPressed: (){
-            Navigator.push(context,MaterialPageRoute(builder: (context) => 
-            GhActivoequipo(),),);
+            locator<NavigationService>().navigateTo('/ghActivo');
           }),
           MenuItem( text: 'Pendientes de entrega', icon: Icons.pageview, onPressed: (){
-            Navigator.push(context,MaterialPageRoute(builder: (context) => 
-            Gh_home(),),);
+            locator<NavigationService>().navigateTo('/404');
           }),
           MenuItem( text: 'Actas de entrega', icon: Icons.picture_as_pdf, onPressed: (){
-            Navigator.push(context,MaterialPageRoute(builder: (context) => 
-            GHActasEntrega(),),);
+            locator<NavigationService>().navigateTo('/ghActasEntrega');
           }),
           MenuItem( text: 'Solicitud EPP', icon: Icons.person, onPressed: (){
-            Navigator.push(context,MaterialPageRoute(builder: (context) => 
-            GhSolicitudEPPState(),),);
+            locator<NavigationService>().navigateTo('/ghSolicitudEpp');
           }),
         ],
       ),

@@ -20,16 +20,16 @@ class Flurorouter {
   static String rootRoute     = '/';
 
   static void configureRoutes() {
-    router.define("home", handler: _counterHandler);
-    router.define('/capacitacion', handler: _counterHandlerCapacitacion);
-    router.define('/homePortalEPP', handler: _counterhomePortalEPP);
-    router.define('/ghhome', handler: _counterHandlerGh_home);
-    router.define('/prueba', handler: _counterHandlerGh_prueba);
-    router.define('/ghRenovar', handler: _counterHandlerGhRenovarequipo);
-    router.define('/ghActivo', handler: _counterHandlerGhActivoequipo);
-    router.define('/capacitacionSeguridad',handler: _counterHandlerCapacitacionSeguridad);
-    router.define('/ghSolicitudEpp',handler: _counterHandlerGhSolicitudEPPState);
-    router.define('/ghActasEntrega',handler: _counterHandlerGHActasEntrega);
+    router.define("home", handler: _counterHandler, transitionType: TransitionType.fadeIn);
+    router.define('/capacitacion', handler: _counterHandlerCapacitacion, transitionType: TransitionType.fadeIn);
+    router.define('/homePortalEPP', handler: _counterhomePortalEPP, transitionType: TransitionType.fadeIn);
+    router.define('/ghhome', handler: _counterHandlerGh_home, transitionType: TransitionType.fadeIn);
+    router.define('/prueba', handler: _counterHandlerGh_prueba, transitionType: TransitionType.fadeIn);
+    router.define('/ghRenovar', handler: _counterHandlerGhRenovarequipo, transitionType: TransitionType.fadeIn);
+    router.define('/ghActivo', handler: _counterHandlerGhActivoequipo, transitionType: TransitionType.fadeIn);
+    router.define('/capacitacionSeguridad',handler: _counterHandlerCapacitacionSeguridad, transitionType: TransitionType.fadeIn);
+    router.define('/ghSolicitudEpp',handler: _counterHandlerGhSolicitudEPPState, transitionType: TransitionType.fadeIn);
+    router.define('/ghActasEntrega',handler: _counterHandlerGHActasEntrega, transitionType: TransitionType.fadeIn);
 
    
     router.notFoundHandler = pageNotFound;
