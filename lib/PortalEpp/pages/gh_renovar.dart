@@ -398,6 +398,7 @@ class _GhRenovarequipoState extends State<GhRenovarequipo> {
         if (value!.isEmpty) {
           return "Llene este campo";
         }
+        return null;
       }),
     )
         ),
