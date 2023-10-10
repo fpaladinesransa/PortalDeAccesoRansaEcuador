@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
 import '../PortalEpp/pages/dropdownprovider.dart';
 import '../PortalEpp/pages/gh_actasEntrega.dart';
 import '../PortalEpp/pages/gh_home.dart';
@@ -42,6 +43,9 @@ class RouteGenerator {
 
       case '/CapacitacionSeguridad':
         return _fadeRoute(CapacitacionSeguridad(cedula: '',),'/CapacitacionSeguridad');
+
+      case '/gh_CrearUsuario':
+        return _fadeRoute(Gh_CrearUsuario(),'/gh_CrearUsuario');
 
 
 

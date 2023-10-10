@@ -325,6 +325,17 @@ Future insertGHsolicitud(
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 Future actualizarGHsolicitud(
     String tieneSolicitud,
     String estado,
@@ -408,6 +419,106 @@ Future<List<EppSelectFirmaGH>> eppSelectFirmaGH() async {
 
     
     return EppSelectFirmaGHAll;
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+//InsertActadeEntrega
+
+
+Future insertActadeEntregaEpp(
+    String idepp,
+    String nombre,
+    String apellido,
+    String cedula,
+    String firma,
+    String estado,
+    String epp,
+    String codigoTrabajador
+
+) async {
+  final response = await http.post(
+      Uri.parse(
+          "https://ransaapiecuador.azurewebsites.net/InsertGHsolicitud"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "ID_epp": idepp,
+        "Nombre": nombre,
+        "Apellidos": apellido,
+        "Cedula": cedula,
+        "Firma": firma,
+        "Estado": estado,
+        "epp": epp,
+        "CodigoTrabajador": codigoTrabajador,
+
+
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
+
+
+
+
+
+class EppSelectActadeEntrega{
+  EppSelectActadeEntrega({
+    required this.idepp,
+    required this.nombres,
+    required this.apellidos, 
+    required this.cedula,
+    required this.firma,
+    required this.estado,
+    required this.epp,
+    required this.codigoTrabajador   
+}
+  );
+  String idepp;
+  String nombres;
+  String apellidos;
+  String cedula;
+  String firma;
+  String estado;
+  String epp;
+  String codigoTrabajador;
+  factory EppSelectActadeEntrega.fromJson(Map<String, dynamic> map) => EppSelectActadeEntrega(
+        idepp:map["ID_epp"],
+        nombres: map["Nombre"],
+        apellidos: map["Apellidos"],
+        cedula: map["Cedula"],
+        firma: map["Firma"],
+        estado: map["Estado"],
+        epp: map["epp"],
+        codigoTrabajador: map["CodigoTrabajador"],
+
+      );
+}
+
+
+
+Future<List<EppSelectActadeEntrega>> eppSelectActadeEntrega() async {
+  
+  final response = await http.get(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/SelectAllActadeEntregaEpp"));
+      
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+
+    final EppSelectActadeEntregaAll = responseList
+        .map((project) => EppSelectActadeEntrega.fromJson(project))
+        .toList();
+
+    
+    return EppSelectActadeEntregaAll;
   } else {
     // Si la llamada no fue exitosa, lanza un error.
     throw Exception('Failed to load post');

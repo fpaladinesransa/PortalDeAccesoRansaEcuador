@@ -1,5 +1,6 @@
 
 import 'package:fluro/fluro.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
 
 import '../PortalEpp/pages/dropdownprovider.dart';
 import '../PortalEpp/pages/gh_actasEntrega.dart';
@@ -30,6 +31,7 @@ class Flurorouter {
     router.define('/capacitacionSeguridad',handler: _counterHandlerCapacitacionSeguridad, transitionType: TransitionType.fadeIn);
     router.define('/ghSolicitudEpp',handler: _counterHandlerGhSolicitudEPPState, transitionType: TransitionType.fadeIn);
     router.define('/ghActasEntrega',handler: _counterHandlerGHActasEntrega, transitionType: TransitionType.fadeIn);
+    router.define('/gh_CrearUsuario',handler: _counterHandlerGh_CrearUsuario, transitionType: TransitionType.fadeIn);
 
    
     router.notFoundHandler = pageNotFound;
@@ -62,6 +64,9 @@ static final Handler _counterHandlerGhActivoequipo = Handler(
   );
 static final Handler _counterHandlerGHActasEntrega = Handler(
     handlerFunc: (context, parameters) =>  GHActasEntrega(),
+  );
+  static final Handler _counterHandlerGh_CrearUsuario = Handler(
+    handlerFunc: (context, parameters) =>  Gh_CrearUsuario(),
   );
 
   
