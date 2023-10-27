@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../widget/diapostivas_seguridad.dart';
 
 class CapacitacionSeguridad extends StatelessWidget {
-  const CapacitacionSeguridad({super.key, required this.cedula});
+  const CapacitacionSeguridad({super.key, required this.cedula, required this.cd});
   final String cedula;
+  final String cd;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class CapacitacionSeguridad extends StatelessWidget {
       ),
       body: Stack(children: [
         DiapositivasSeguridad(
-          cedula: cedula,
+          cedula: cedula, cd: cd,
         )
       ]),
     );

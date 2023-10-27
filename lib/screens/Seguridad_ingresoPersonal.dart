@@ -2,8 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:portaltransportistas/api/provider.dart';
-import 'package:portaltransportistas/screens/Seguridad_Capacitacion.dart';
+import 'package:portaltransportistas/api/provider.dart';import 'package:portaltransportistas/screens/Seguridad_Capacitacion.dart';
 
 class IngresoDataPersonal extends StatefulWidget {
   const IngresoDataPersonal({super.key});
@@ -363,9 +362,9 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
 
       Navigator.push(
         context,
-        new MaterialPageRoute(
-          builder: (context) => new CapacitacionSeguridad(
-            cedula: cedulaValue,
+        MaterialPageRoute(
+          builder: (context) =>  CapacitacionSeguridad(
+            cedula: cedulaValue, cd: sedeValue,
           ),
         ),
       );
@@ -375,8 +374,12 @@ class _IngresoDataPersonalState extends State<IngresoDataPersonal> {
 
 final List<String> listacd = [
   "Guayaquil CD1: Almacenes",
-  "Guayaquil CD2: Archivo y Distribución",
-  "Quito CD Parque Industrial Sur - Guamaní"
+  "Guayaquil CD2: Distribución",
+  "Quito CD Parque Industrial Sur - Guamaní",
+  "Babahoyo CD",
+  "Milagro CD",
+  "Manta CD",
+  "Machala CD"
 ];
 
 /* 

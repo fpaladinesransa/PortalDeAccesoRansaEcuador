@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/message_input.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/text_widget.dart';
@@ -33,8 +34,11 @@ class _Gh_CrearUsuarioState extends State<Gh_CrearUsuario> {
     final bytes = await data.toByteData(format: ui.ImageByteFormat.png);
     
     String base64String=base64Encode(bytes!.buffer.asUint8List());
+    print(base64String);
+    insertActadeEntregaEpp("1","Freddy","Paladines","0922002175",base64String,"Ingresado","Casco","093434412");
 
     await Navigator.of(context).push(
+      
       MaterialPageRoute(
         builder: (BuildContext context) {
           return Scaffold(
@@ -58,6 +62,7 @@ class _Gh_CrearUsuarioState extends State<Gh_CrearUsuario> {
 
   @override
   Widget build(BuildContext context) {
+    
     return   Scaffold(
       body: 
         Row(
@@ -68,6 +73,22 @@ class _Gh_CrearUsuarioState extends State<Gh_CrearUsuario> {
                 key:formKey,
                 child: Column(
                   children: [
+                    FutureBuilder<List<EppSelectActadeEntrega>>(
+                      future: eppSelectActadeEntrega(),
+                      builder: (context, snapshot) { 
+                        if (snapshot.hasData) {
+                          return Container(
+                            child: Image.memory(base64Decode(snapshot.data!.first.firma))
+                            
+                            );
+                          
+    }
+    return CircularProgressIndicator();
+
+                       },
+                      //child:Text(eppSelectActadeEntrega().toString())
+
+                    ),
                     Row(
                       children: [
                         Container(
@@ -101,8 +122,6 @@ class _Gh_CrearUsuarioState extends State<Gh_CrearUsuario> {
             alignment: Alignment.centerLeft,
             child: Row(
               children: [
-                
-              
                Container(
                   width: 300,
                   child: TextWidget(
@@ -149,11 +168,13 @@ class _Gh_CrearUsuarioState extends State<Gh_CrearUsuario> {
                           
                           
                               onPressed: () {
+                                
                           
                           
                                 if (formKey.currentState!
                                     .validate()) {
                                   mostrarDialog(context);
+
                                 }
                               },
                               child: const Text('Generar solicitud'),

@@ -7,8 +7,9 @@ import 'package:portaltransportistas/screens/Seguridad_gracias.dart';
 import '../api/provider.dart';
 
 class EvaluacionDataPersonal extends StatefulWidget {
-  const EvaluacionDataPersonal({super.key, required this.cedula});
+  const EvaluacionDataPersonal({super.key, required this.cedula,required this.cd});
   final String cedula;
+  final String cd;
 
   @override
   State<EvaluacionDataPersonal> createState() => _EvaluacionDataPersonalState();
@@ -44,7 +45,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Inducción de seguridad Ransa ${widget.cedula}"),
+        title: Text("Inducción de seguridad Ransa ${widget.cd}"),
         actions: [
           IconButton(
             icon: Image.asset('assets/Logo_Ransa_Blanco.png'),
@@ -745,6 +746,8 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                           respuesta8,
                                           respuesta9,
                                           respuesta10)[0],
+                                          CondicionalCD3(widget.cd),
+
                                       widget.cedula,
                                     );
 
@@ -777,7 +780,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                               respuesta7,
                                               respuesta8,
                                               respuesta9,
-                                              respuesta10)[1],
+                                              respuesta10)[1], cd: widget.cd,
                                         ),
                                       ),
                                     );
@@ -1276,8 +1279,8 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                  const Padding(
+                                    padding: EdgeInsets.all(10.0),
                                     child: Image(
                                       image:
                                           AssetImage('assets/SeguridadPG8.jpg'),
@@ -1496,6 +1499,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                           respuesta8,
                                           respuesta9,
                                           respuesta10)[0],
+                                          CondicionalCD3(widget.cd),
                                       widget.cedula,
                                     );
 
@@ -1528,7 +1532,7 @@ class _EvaluacionDataPersonalState extends State<EvaluacionDataPersonal> {
                                               respuesta7,
                                               respuesta8,
                                               respuesta9,
-                                              respuesta10)[1],
+                                              respuesta10)[1], cd: widget.cd,
                                         ),
                                       ),
                                     );
@@ -1567,7 +1571,20 @@ String FechaActual() {
 
   return formattedDate;
 }
+String CondicionalCD3(cd) {
+  String valor;
+  if (cd=='Babahoyo CD' || cd=='Milagro CD' || cd=='Manta CD' || cd=='Machala CD'){
+    valor="No";}
+    else {
+      valor="Si";
+    }
+  return valor;
 
+
+  
+
+  
+}
 List CalcularRespuesta(
     res1, res2, res3, res4, res5, res6, res7, res8, res9, res10) {
   var contador = 0;

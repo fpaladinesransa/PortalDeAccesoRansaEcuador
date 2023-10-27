@@ -59,8 +59,9 @@ List<Widget> generateImagesTiles() {
 }
 
 class DiapositivasSeguridad extends StatefulWidget {
-  const DiapositivasSeguridad({super.key, required this.cedula});
+  const DiapositivasSeguridad({super.key, required this.cedula, required this.cd});
   final String cedula;
+  final String cd;
 
   @override
   State<DiapositivasSeguridad> createState() => _DiapositivasSeguridadState();
@@ -138,9 +139,9 @@ class _DiapositivasSeguridadState extends State<DiapositivasSeguridad> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            new MaterialPageRoute(
-                              builder: (context) => new EvaluacionDataPersonal(
-                                cedula: widget.cedula,
+                            MaterialPageRoute(
+                              builder: (context) =>  EvaluacionDataPersonal(
+                                cedula: widget.cedula, cd: widget.cd,
                               ),
                             ),
                           );
@@ -178,9 +179,9 @@ class _DiapositivasSeguridadState extends State<DiapositivasSeguridad> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            new MaterialPageRoute(
-                              builder: (context) => new EvaluacionDataPersonal(
-                                cedula: widget.cedula,
+                             MaterialPageRoute(
+                              builder: (context) =>  EvaluacionDataPersonal(
+                                cedula: widget.cedula, cd: '',
                               ),
                             ),
                           );

@@ -6,11 +6,13 @@ class GraciasPantalla extends StatefulWidget {
     super.key,
     required this.resultado,
     required this.puntuacion,
-    required this.cedula,
+    required this.cedula, 
+    required this.cd,
   });
   final String resultado;
   final String puntuacion;
   final String cedula;
+  final String cd;
   @override
   State<GraciasPantalla> createState() => _GraciasPantallaState();
 }
@@ -76,7 +78,7 @@ class _GraciasPantallaState extends State<GraciasPantalla> {
                           context,
                           new MaterialPageRoute(
                             builder: (context) => new CapacitacionSeguridad(
-                              cedula: widget.cedula,
+                              cedula: widget.cedula, cd: widget.cd,
                             ),
                           ),
                         );

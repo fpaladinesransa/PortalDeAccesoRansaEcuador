@@ -48,7 +48,10 @@ dependencies:
   lottie: ^2.6.0
   material_color_generator: ^1.1.0
   meta: ^1.9.1
+  open_file: ^3.3.2
+  pdf: ^3.10.4
   shared_preferences: ^2.0.18
+  syncfusion_flutter_pdf: ^23.1.40
   syncfusion_flutter_signaturepad: ^23.1.39
 
 dev_dependencies:

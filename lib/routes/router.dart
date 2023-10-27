@@ -1,7 +1,12 @@
 
 import 'package:fluro/fluro.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
-
+import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoBabahoyo.dart';
+import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoMachala.dart';
+import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoManta.dart';
+import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoMilagro.dart';
+import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoQuito.dart';
 import '../PortalEpp/pages/dropdownprovider.dart';
 import '../PortalEpp/pages/gh_actasEntrega.dart';
 import '../PortalEpp/pages/gh_home.dart';
@@ -32,6 +37,14 @@ class Flurorouter {
     router.define('/ghSolicitudEpp',handler: _counterHandlerGhSolicitudEPPState, transitionType: TransitionType.fadeIn);
     router.define('/ghActasEntrega',handler: _counterHandlerGHActasEntrega, transitionType: TransitionType.fadeIn);
     router.define('/gh_CrearUsuario',handler: _counterHandlerGh_CrearUsuario, transitionType: TransitionType.fadeIn);
+    router.define('/gh_MostrarPDF',handler: _counterHandlerGh_MostrarPDF, transitionType: TransitionType.fadeIn);
+    router.define('/portalEstadoQuito',handler: _counterHandlerportalEstadoQuito, transitionType: TransitionType.fadeIn);
+    router.define('/portalEstadoMilagro',handler: _counterHandlerEstadoMilagro, transitionType: TransitionType.fadeIn);
+    router.define('/portalEstadoMachala',handler: _counterHandlerEstadoMachala, transitionType: TransitionType.fadeIn);
+    router.define('/portalEstadoBabahoyo',handler: _counterHandlerEstadoBabahoyo, transitionType: TransitionType.fadeIn);
+    router.define('/portalEstadoManta',handler: _counterHandlerEstadoManta, transitionType: TransitionType.fadeIn);
+
+
 
    
     router.notFoundHandler = pageNotFound;
@@ -51,6 +64,9 @@ class Flurorouter {
     static final Handler _counterHandlerGh_home = Handler(
     handlerFunc: (context, parameters) => const Gh_home(),
   );
+  static final Handler _counterHandlerportalEstadoQuito = Handler(
+    handlerFunc: (context, parameters) => const PortalEstadoQuito(),
+  );
 
 static final Handler _counterHandlerGh_prueba = Handler(
     handlerFunc: (context, parameters) => const DropdowntextArea(titulo: '',),
@@ -59,6 +75,33 @@ static final Handler _counterHandlerGh_prueba = Handler(
 static final Handler _counterHandlerGhRenovarequipo = Handler(
     handlerFunc: (context, parameters) =>  GhRenovarequipo(),
   );
+static final Handler _counterHandlerGh_MostrarPDF = Handler(
+    handlerFunc: (context, parameters) =>  Gh_MostrarPDF(),
+  );
+
+static final Handler _counterHandlerEstadoMilagro = Handler(
+    handlerFunc: (context, parameters) =>  PortalEstadoMilagro(""),
+  );
+
+
+static final Handler _counterHandlerEstadoBabahoyo = Handler(
+    handlerFunc: (context, parameters) =>  PortalEstadoBabahoyo(""),
+  );
+
+static final Handler _counterHandlerEstadoMachala = Handler(
+    handlerFunc: (context, parameters) =>  PortalEstadoMachala(""),
+  );
+
+static final Handler _counterHandlerEstadoManta = Handler(
+    handlerFunc: (context, parameters) =>  PortalEstadoManta(""),
+  );
+
+
+
+
+
+
+  
 static final Handler _counterHandlerGhActivoequipo = Handler(
     handlerFunc: (context, parameters) =>  GhActivoequipo(),
   );
@@ -79,7 +122,7 @@ static final Handler _counterHandlerGHActasEntrega = Handler(
 
   static final Handler _counterHandlerCapacitacionSeguridad = Handler(
       handlerFunc: (context, parameters) => CapacitacionSeguridad(
-            cedula: '',
+            cedula: '', cd: '',
           ));
     
   static final Handler _counterHandlerGhSolicitudEPPState = Handler(

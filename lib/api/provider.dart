@@ -73,6 +73,327 @@ Future<List<ProjectList>> obtenerSeguros({String? query}) async {
   }
 }
 
+
+//---------------------Quito-----------------
+
+class TablasQuito {
+  TablasQuito(
+      {
+      required this.cedula,
+      required this.nombre,
+      required this.fecha,
+      required this.estado,
+      required this.antedentes,
+      required this.comentario,
+});
+
+  String cedula;
+  String nombre;
+  DateTime fecha;
+  String estado;
+  String antedentes;
+  String comentario;
+
+
+  factory TablasQuito.fromJson(Map<String, dynamic> map) => TablasQuito(
+        cedula: map["cedula"],
+        nombre: map["nombre"],
+        fecha: DateTime.parse(map["fecha"]),
+        estado: map["estado"],
+        antedentes: map["Antedentes"],
+        comentario: map["Comentario"],
+
+      );
+}
+
+Future<List<TablasQuito>> obtenerTablasQuito({String? query}) async {
+  final response =
+      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoQuito"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final TablasQuitoMap =
+        responseList.map((project) => TablasQuito.fromJson(project)).toList();
+    if (query != null) {
+      return TablasQuitoMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return TablasQuitoMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+
+class TablasQuitoConsulta {
+  TablasQuitoConsulta(
+      {
+      required this.cedula,
+      required this.nombre,
+      required this.fecha,
+      required this.estado,
+      required this.antedentes,
+      required this.comentario,
+});
+
+  String cedula;
+  String nombre;
+  DateTime fecha;
+  String estado;
+  String antedentes;
+  String comentario;
+
+
+  factory TablasQuitoConsulta.fromJson(Map<String, dynamic> map) => TablasQuitoConsulta(
+        cedula: map["cedula"],
+        nombre: map["nombre"],
+        fecha: DateTime.parse(map["fecha"]),
+        estado: map["estado"],
+        antedentes: map["Antedentes"],
+        comentario: map["Comentario"],
+
+      );
+}
+
+Future<List<TablasQuitoConsulta>> obtenerTablasQuitoConsulta({String? query}) async {
+  final response =
+      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoQuito"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final TablasQuitoConsultaMap =
+        responseList.map((project) => TablasQuitoConsulta.fromJson(project)).toList();
+    if (query != null) {
+      return TablasQuitoConsultaMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return TablasQuitoConsultaMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+//------------------------Manta-------------------------
+
+class TablasMantaConsulta {
+  TablasMantaConsulta(
+      {
+      required this.cedula,
+      required this.nombre,
+      required this.fecha,
+      required this.estado,
+      required this.antedentes,
+      required this.comentario,
+});
+
+  String cedula;
+  String nombre;
+  DateTime fecha;
+  String estado;
+  String antedentes;
+  String comentario;
+
+
+  factory TablasMantaConsulta.fromJson(Map<String, dynamic> map) => TablasMantaConsulta(
+        cedula: map["cedula"],
+        nombre: map["nombre"],
+        fecha: DateTime.parse(map["fecha"]),
+        estado: map["estado"],
+        antedentes: map["Antedentes"],
+        comentario: map["Comentario"],
+
+      );
+}
+
+Future<List<TablasMantaConsulta>> obtenerTablasMantaConsulta({String? query}) async {
+  final response =
+      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoManta"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final TablasMantaConsultaMap =
+        responseList.map((project) => TablasMantaConsulta.fromJson(project)).toList();
+    if (query != null) {
+      return TablasMantaConsultaMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return TablasMantaConsultaMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+//---------------Babahoyo-------------
+class TablasBabahoyoConsulta {
+  TablasBabahoyoConsulta(
+      {
+      required this.cedula,
+      required this.nombre,
+      required this.fecha,
+      required this.estado,
+      required this.antedentes,
+      required this.comentario,
+});
+
+  String cedula;
+  String nombre;
+  DateTime fecha;
+  String estado;
+  String antedentes;
+  String comentario;
+
+
+  factory TablasBabahoyoConsulta.fromJson(Map<String, dynamic> map) => TablasBabahoyoConsulta(
+        cedula: map["cedula"],
+        nombre: map["nombre"],
+        fecha: DateTime.parse(map["fecha"]),
+        estado: map["estado"],
+        antedentes: map["Antedentes"],
+        comentario: map["Comentario"],
+
+      );
+}
+
+Future<List<TablasBabahoyoConsulta>> obtenerTablasBabahoyoConsulta({String? query}) async {
+  final response =
+      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoManta"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final TablasBabahoyoConsultaMap =
+        responseList.map((project) => TablasBabahoyoConsulta.fromJson(project)).toList();
+    if (query != null) {
+      return TablasBabahoyoConsultaMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return TablasBabahoyoConsultaMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+
+//---------------------Machala---------------------
+class TablasMachalaConsulta {
+  TablasMachalaConsulta(
+      {
+      required this.cedula,
+      required this.nombre,
+      required this.fecha,
+      required this.estado,
+      required this.antedentes,
+      required this.comentario,
+});
+
+  String cedula;
+  String nombre;
+  DateTime fecha;
+  String estado;
+  String antedentes;
+  String comentario;
+
+
+  factory TablasMachalaConsulta.fromJson(Map<String, dynamic> map) => TablasMachalaConsulta(
+        cedula: map["cedula"],
+        nombre: map["nombre"],
+        fecha: DateTime.parse(map["fecha"]),
+        estado: map["estado"],
+        antedentes: map["Antedentes"],
+        comentario: map["Comentario"],
+
+      );
+}
+
+Future<List<TablasMachalaConsulta>> obtenerTablasMachalaConsulta({String? query}) async {
+  final response =
+      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoMachala"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final TablasMachalaConsultaMap =
+        responseList.map((project) => TablasMachalaConsulta.fromJson(project)).toList();
+    if (query != null) {
+      return TablasMachalaConsultaMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return TablasMachalaConsultaMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+class TablasMilagroConsulta {
+  TablasMilagroConsulta(
+      {
+      required this.cedula,
+      required this.nombre,
+      required this.fecha,
+      required this.estado,
+      required this.antedentes,
+      required this.comentario,
+});
+
+  String cedula;
+  String nombre;
+  DateTime fecha;
+  String estado;
+  String antedentes;
+  String comentario;
+
+
+  factory TablasMilagroConsulta.fromJson(Map<String, dynamic> map) => TablasMilagroConsulta(
+        cedula: map["cedula"],
+        nombre: map["nombre"],
+        fecha: DateTime.parse(map["fecha"]),
+        estado: map["estado"],
+        antedentes: map["Antedentes"],
+        comentario: map["Comentario"],
+
+      );
+}
+
+Future<List<TablasMilagroConsulta>> obtenerTablasMilagroConsulta({String? query}) async {
+  final response =
+      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoMilagro"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final TablasMilagroConsultaMap =
+        responseList.map((project) => TablasMilagroConsulta.fromJson(project)).toList();
+    if (query != null) {
+      return TablasMilagroConsultaMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return TablasMilagroConsultaMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+
+
+
+
+
+
 Future enviarEvaluacion(
     String respuesta1,
     String respuesta2,
@@ -87,6 +408,7 @@ Future enviarEvaluacion(
     String fechaIngreso,
     String calificacion,
     String estado,
+    String consultaAntecedentes,
     String cedula) async {
   final response = await http.post(
       Uri.parse(
@@ -108,6 +430,7 @@ Future enviarEvaluacion(
         "fechaIngreso": fechaIngreso,
         "calificacion": calificacion,
         "estado": estado,
+        "consultaAntecedentes":consultaAntecedentes,
         "cedula": cedula
       }));
 

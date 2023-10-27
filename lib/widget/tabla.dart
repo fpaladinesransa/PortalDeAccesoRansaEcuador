@@ -130,6 +130,83 @@ SingleChildScrollView tablaBodyAll(List<ProjectListAll>? data) {
   );
 }
 
+SingleChildScrollView tablaBodyAllCD3(List? data) {
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: DataTable(
+        sortColumnIndex: 0,
+        showCheckboxColumn: false,
+        columns: const [
+          DataColumn(label: Text("Cedula"), numeric: false, tooltip: "Cedula"),
+          DataColumn(label: Text("Nombre"), numeric: false, tooltip: "Nombre"),
+          DataColumn(label: Text("Fecha"), numeric: false, tooltip: "Fecha en que realizo el examen"),
+          DataColumn(label: Text("Estado"),numeric: false,tooltip: "Estado"),
+          DataColumn(label: Text("Antecedentes"),numeric: false,tooltip: "Antecedentes"),
+          DataColumn(label: Text("Comentarios"),numeric: false,tooltip: "Comentarios"),
+        ],
+        rows: data!
+            .map(
+              (valor) => DataRow(cells: [
+                DataCell(Text(valor.cedula)),
+                DataCell(Text(valor.nombre)),
+                DataCell(Text("${valor.fecha.day}/${valor.fecha.month}/${valor.fecha.year}")),                
+                DataCell(EstadoSeguridad(valor.estado)),
+                DataCell(EstadoAntecedentes(valor.antedentes)),
+                DataCell(Text(valor.comentario)),
+              ]),
+            )
+            .toList(),
+      ),
+    ),
+  );
+}
+SingleChildScrollView tablaBodyConsultaQuito(List<TablasQuitoConsulta>? data) {
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: DataTable(
+        sortColumnIndex: 0,
+        showCheckboxColumn: false,
+        columns: const [
+          DataColumn(label: Text("Cedula"), numeric: false, tooltip: "Cedula"),
+          DataColumn(label: Text("Nombre"), numeric: false, tooltip: "Nombre"),
+          DataColumn(label: Text("Fecha"), numeric: false, tooltip: "Fecha en que realizo el examen"),
+          DataColumn(label: Text("Estado"),numeric: false,tooltip: "Estado"),
+          DataColumn(label: Text("Antecedentes"),numeric: false,tooltip: "Antecedentes"),
+          DataColumn(label: Text("Comentarios"),numeric: false,tooltip: "Comentarios"),
+        ],
+        rows: data!
+            .map(
+              (valor) => DataRow(cells: [
+                DataCell(Text(valor.cedula)),
+                DataCell(Text(valor.nombre)),
+                DataCell(Text("${valor.fecha.day}/${valor.fecha.month}/${valor.fecha.year}")),                
+                DataCell(EstadoSeguridad(valor.estado)),
+                DataCell(EstadoAntecedentes(valor.antedentes)),
+                DataCell(Text(valor.comentario)),
+              ]),
+            )
+            .toList(),
+      ),
+    ),
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 EstadoSeguridad(examenSeguridad) {
   if (examenSeguridad == "Aprobado") {
     return Container(
