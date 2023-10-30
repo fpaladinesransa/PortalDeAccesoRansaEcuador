@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu.dart';
+import 'package:portaltransportistas/PortalEpp/widgets/message_input.dart';
 
 import '../../widget/separadortitulo.dart';
 import '../provider/providerEPP.dart';
@@ -107,7 +108,9 @@ class _GHActasEntregaState extends State<GHActasEntrega> {
                                                   DataCell(Text(valor.estado)),
                                                   
                                                   DataCell(
-                                                      onTap: () {            
+                                                      onTap: () { 
+                                                      mostrarDocumentoActEntrega(context,valor.nombres,valor.apellidos,"123242151",valor.nombreEpp,valor.cedula,"1241241");
+                                                                   
                                                       },
                                                       Icon(
                                                     Icons.description,

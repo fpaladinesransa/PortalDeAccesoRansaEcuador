@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 
-import 'customer_model.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 const String nombre="Freddy Arturo";

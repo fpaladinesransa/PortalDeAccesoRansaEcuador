@@ -54,7 +54,7 @@ class MyAppMain extends StatelessWidget {
         theme: ThemeData(
             primarySwatch:
                 generateMaterialColor(color: Color.fromARGB(255, 0, 155, 8))),
-        initialRoute: "/gh_MostrarPDF",
+        initialRoute: "/ghActasEntrega",
         onGenerateRoute: Flurorouter.router.generator,
         navigatorKey: locator<NavigationService>().navigatorKey,
       ),

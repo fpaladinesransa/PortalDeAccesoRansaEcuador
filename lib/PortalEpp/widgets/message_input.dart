@@ -1,4 +1,5 @@
 import 'package:lottie/lottie.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -290,6 +291,41 @@ Future<void> enviadoCorrectamente(context, titulo,pagina) async {
               //Actualizar registro
             },
           )
+        ],
+      );
+    },
+  );
+}
+
+
+
+
+
+Future<void> mostrarDocumentoActEntrega(context, nombre, apellido,numero,epp,cedula,firma) async {
+
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        // <-- SEE HERE
+  
+        content:GhMostrarActEntrega(nombre,apellido,numero,epp,cedula,firma),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Descargar'),
+            onPressed: () {
+            },
+          ),
+          TextButton(
+              child: const Text('Volver'),
+              onPressed: () {
+                Navigator.of(context).pop();
+/*                   insertRenovacionNuevoEquipo(value.epp,value.fechaCompra,"Vigente",value.cedula,value.fechaRenovar),
+                  print("Nuevo recurso") */
+                      },
+
+            )
         ],
       );
     },

@@ -1,7 +1,12 @@
 
 import 'package:fluro/fluro.dart';
+import 'package:portaltransportistas/PortalEpp/pages/col_eppActivo.dart';
+import 'package:portaltransportistas/PortalEpp/pages/col_firma.dart';
+import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
+import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoBabahoyo.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoMachala.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoManta.dart';
@@ -22,7 +27,7 @@ import '../screens/Seguridad_ingresoPersonal.dart';
 import '../screens/view_404.dart';
 
 class Flurorouter {
-  static final FluroRouter router = new FluroRouter();
+  static final FluroRouter router =  FluroRouter();
   static String rootRoute     = '/';
 
   static void configureRoutes() {
@@ -37,12 +42,19 @@ class Flurorouter {
     router.define('/ghSolicitudEpp',handler: _counterHandlerGhSolicitudEPPState, transitionType: TransitionType.fadeIn);
     router.define('/ghActasEntrega',handler: _counterHandlerGHActasEntrega, transitionType: TransitionType.fadeIn);
     router.define('/gh_CrearUsuario',handler: _counterHandlerGh_CrearUsuario, transitionType: TransitionType.fadeIn);
-    router.define('/gh_MostrarPDF',handler: _counterHandlerGh_MostrarPDF, transitionType: TransitionType.fadeIn);
+    router.define('/col_Solicitud',handler: _counterHandlerColSolicitudes, transitionType: TransitionType.fadeIn);
+    router.define('/col_Home',handler: _counterHandlerColHome, transitionType: TransitionType.fadeIn);
+    router.define('/col_Firma',handler: _counterHandlerColFirma, transitionType: TransitionType.fadeIn);
+    router.define('/col_EppActivo',handler: _counterHandlerColEppActivo, transitionType: TransitionType.fadeIn);
+
+   
+   
     router.define('/portalEstadoQuito',handler: _counterHandlerportalEstadoQuito, transitionType: TransitionType.fadeIn);
     router.define('/portalEstadoMilagro',handler: _counterHandlerEstadoMilagro, transitionType: TransitionType.fadeIn);
     router.define('/portalEstadoMachala',handler: _counterHandlerEstadoMachala, transitionType: TransitionType.fadeIn);
     router.define('/portalEstadoBabahoyo',handler: _counterHandlerEstadoBabahoyo, transitionType: TransitionType.fadeIn);
     router.define('/portalEstadoManta',handler: _counterHandlerEstadoManta, transitionType: TransitionType.fadeIn);
+    
 
 
 
@@ -52,15 +64,18 @@ class Flurorouter {
 
 
 
-
   static final Handler _counterHandler = Handler(
     handlerFunc: (context, parameters) =>
         MyApp(asegurados: obtenerSegurosTotales()),
   );
+  static final Handler _counterHandlerColSolicitudes = Handler(handlerFunc: (context, parameters) => const ColSolicitudes(),);
+  static final Handler _counterHandlerColHome = Handler(handlerFunc: (context, parameters) => const ColHome(),);
+  static final Handler _counterHandlerColFirma = Handler(handlerFunc: (context, parameters) => const ColFirma(),);
+  static final Handler _counterHandlerColEppActivo = Handler(handlerFunc: (context, parameters) => const ColEppActivo(),);
 
-  static final Handler _counterHandlerCapacitacion = Handler(
-    handlerFunc: (context, parameters) => const IngresoDataPersonal(),
-  );
+
+  static final Handler _counterHandlerCapacitacion = Handler(handlerFunc: (context, parameters) => const IngresoDataPersonal(),);
+ 
     static final Handler _counterHandlerGh_home = Handler(
     handlerFunc: (context, parameters) => const Gh_home(),
   );

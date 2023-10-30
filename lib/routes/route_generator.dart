@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:portaltransportistas/PortalEpp/pages/col_eppActivo.dart';
+import 'package:portaltransportistas/PortalEpp/pages/col_firma.dart';
+import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
+import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoQuito.dart';
@@ -10,7 +14,6 @@ import '../PortalEpp/pages/gh_activo.dart';
 import '../PortalEpp/pages/gh_renovar.dart';
 import '../PortalEpp/pages/gh_solicitudEPP.dart';
 import '../PortalEpp/pages/home.dart';
-import '../PortalEpp/provider/providerEPP.dart';
 import '../Screens/portal_estado.dart';
 import '../api/provider.dart';
 import '../screens/Seguridad_Capacitacion.dart';
@@ -42,7 +45,7 @@ class RouteGenerator {
       
       case '/ghActasEntrega':
         return _fadeRoute(GHActasEntrega(), '/ghActasEntrega');
-
+     
       case '/CapacitacionSeguridad':
         return _fadeRoute(CapacitacionSeguridad(cedula: '', cd: '',),'/CapacitacionSeguridad');
 
@@ -51,9 +54,17 @@ class RouteGenerator {
       
       case '/gh_MostrarPDF':
         return _fadeRoute(Gh_MostrarPDF(),'/gh_MostrarPDF');
-      
       case '/portalEstadoQuito':
         return _fadeRoute(PortalEstadoQuito(),'/portalEstadoQuito');
+      case '/col_Solicitud':
+        return _fadeRoute(ColSolicitudes(),'/col_Solicitud');
+      case '/col_Home':
+        return _fadeRoute(ColHome(),'/col_Home');
+      case '/col_Firma':
+        return _fadeRoute(ColFirma(),'/col_Firma');
+      
+      case '/col_EppActivo':
+        return _fadeRoute(ColEppActivo(),'/col_EppActivo');
 
 
 
