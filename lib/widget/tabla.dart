@@ -141,19 +141,29 @@ SingleChildScrollView tablaBodyAllCD3(List? data) {
         columns: const [
           DataColumn(label: Text("Cedula"), numeric: false, tooltip: "Cedula"),
           DataColumn(label: Text("Nombre"), numeric: false, tooltip: "Nombre"),
-          DataColumn(label: Text("Fecha"), numeric: false, tooltip: "Fecha en que realizo el examen"),
-          DataColumn(label: Text("Estado"),numeric: false,tooltip: "Estado"),
-          DataColumn(label: Text("Antecedentes"),numeric: false,tooltip: "Antecedentes"),
-          DataColumn(label: Text("Comentarios"),numeric: false,tooltip: "Comentarios"),
+          DataColumn(
+              label: Text("Fecha"),
+              numeric: false,
+              tooltip: "Fecha en que realizo el examen"),
+          DataColumn(label: Text("Estado"), numeric: false, tooltip: "Estado"),
+          DataColumn(
+              label: Text("Antecedentes"),
+              numeric: false,
+              tooltip: "Antecedentes"),
+          DataColumn(
+              label: Text("Comentarios"),
+              numeric: false,
+              tooltip: "Comentarios"),
         ],
         rows: data!
             .map(
               (valor) => DataRow(cells: [
                 DataCell(Text(valor.cedula)),
                 DataCell(Text(valor.nombre)),
-                DataCell(Text("${valor.fecha.day}/${valor.fecha.month}/${valor.fecha.year}")),                
+                DataCell(Text(
+                    "${valor.fecha.day}/${valor.fecha.month}/${valor.fecha.year}")),
                 DataCell(EstadoSeguridad(valor.estado)),
-                DataCell(EstadoAntecedentes(valor.antedentes)),
+                DataCell(EstadoAntecedentesCD3(valor.antedentes)),
                 DataCell(Text(valor.comentario)),
               ]),
             )
@@ -162,6 +172,7 @@ SingleChildScrollView tablaBodyAllCD3(List? data) {
     ),
   );
 }
+
 SingleChildScrollView tablaBodyConsultaQuito(List<TablasQuitoConsulta>? data) {
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
@@ -173,19 +184,29 @@ SingleChildScrollView tablaBodyConsultaQuito(List<TablasQuitoConsulta>? data) {
         columns: const [
           DataColumn(label: Text("Cedula"), numeric: false, tooltip: "Cedula"),
           DataColumn(label: Text("Nombre"), numeric: false, tooltip: "Nombre"),
-          DataColumn(label: Text("Fecha"), numeric: false, tooltip: "Fecha en que realizo el examen"),
-          DataColumn(label: Text("Estado"),numeric: false,tooltip: "Estado"),
-          DataColumn(label: Text("Antecedentes"),numeric: false,tooltip: "Antecedentes"),
-          DataColumn(label: Text("Comentarios"),numeric: false,tooltip: "Comentarios"),
+          DataColumn(
+              label: Text("Fecha"),
+              numeric: false,
+              tooltip: "Fecha en que realizo el examen"),
+          DataColumn(label: Text("Estado"), numeric: false, tooltip: "Estado"),
+          DataColumn(
+              label: Text("Antecedentes"),
+              numeric: false,
+              tooltip: "Antecedentes"),
+          DataColumn(
+              label: Text("Comentarios"),
+              numeric: false,
+              tooltip: "Comentarios"),
         ],
         rows: data!
             .map(
               (valor) => DataRow(cells: [
                 DataCell(Text(valor.cedula)),
                 DataCell(Text(valor.nombre)),
-                DataCell(Text("${valor.fecha.day}/${valor.fecha.month}/${valor.fecha.year}")),                
+                DataCell(Text(
+                    "${valor.fecha.day}/${valor.fecha.month}/${valor.fecha.year}")),
                 DataCell(EstadoSeguridad(valor.estado)),
-                DataCell(EstadoAntecedentes(valor.antedentes)),
+                DataCell(EstadoAntecedentesCD3(valor.antedentes)),
                 DataCell(Text(valor.comentario)),
               ]),
             )
@@ -194,18 +215,6 @@ SingleChildScrollView tablaBodyConsultaQuito(List<TablasQuitoConsulta>? data) {
     ),
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 EstadoSeguridad(examenSeguridad) {
   if (examenSeguridad == "Aprobado") {
@@ -312,5 +321,57 @@ EstadoDocumentacionIEES(documentacionIees) {
         ),
         child: Text("Sin registro"));
     ;
+  }
+}
+
+EstadoAntecedentesCD3(antecedentes) {
+  if (antecedentes == "No") {
+    return Container(
+        decoration: BoxDecoration(
+          color: Colors.green,
+          border: Border.all(
+            color: Colors.green,
+            width: 8,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text("No"));
+  }
+  if (antecedentes == "Si") {
+    return Container(
+        decoration: BoxDecoration(
+          color: Colors.red,
+          border: Border.all(
+            color: Colors.red,
+            width: 8,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text("Si"));
+  }
+  if (antecedentes == "Error Consulta") {
+    return Container(
+        decoration: BoxDecoration(
+          color: Colors.red,
+          border: Border.all(
+            color: Colors.red,
+            width: 8,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text("Error consulta"));
+  }
+
+  if (antecedentes == "") {
+    return Container(
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 0, 26, 255),
+          border: Border.all(
+            color: const Color.fromARGB(255, 0, 26, 255),
+            width: 8,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text("Revisando.."));
   }
 }

@@ -73,19 +73,17 @@ Future<List<ProjectList>> obtenerSeguros({String? query}) async {
   }
 }
 
-
 //---------------------Quito-----------------
 
 class TablasQuito {
-  TablasQuito(
-      {
-      required this.cedula,
-      required this.nombre,
-      required this.fecha,
-      required this.estado,
-      required this.antedentes,
-      required this.comentario,
-});
+  TablasQuito({
+    required this.cedula,
+    required this.nombre,
+    required this.fecha,
+    required this.estado,
+    required this.antedentes,
+    required this.comentario,
+  });
 
   String cedula;
   String nombre;
@@ -94,7 +92,6 @@ class TablasQuito {
   String antedentes;
   String comentario;
 
-
   factory TablasQuito.fromJson(Map<String, dynamic> map) => TablasQuito(
         cedula: map["cedula"],
         nombre: map["nombre"],
@@ -102,13 +99,12 @@ class TablasQuito {
         estado: map["estado"],
         antedentes: map["Antedentes"],
         comentario: map["Comentario"],
-
       );
 }
 
 Future<List<TablasQuito>> obtenerTablasQuito({String? query}) async {
-  final response =
-      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoQuito"));
+  final response = await http
+      .get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoQuito"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
@@ -127,17 +123,15 @@ Future<List<TablasQuito>> obtenerTablasQuito({String? query}) async {
   }
 }
 
-
 class TablasQuitoConsulta {
-  TablasQuitoConsulta(
-      {
-      required this.cedula,
-      required this.nombre,
-      required this.fecha,
-      required this.estado,
-      required this.antedentes,
-      required this.comentario,
-});
+  TablasQuitoConsulta({
+    required this.cedula,
+    required this.nombre,
+    required this.fecha,
+    required this.estado,
+    required this.antedentes,
+    required this.comentario,
+  });
 
   String cedula;
   String nombre;
@@ -146,27 +140,28 @@ class TablasQuitoConsulta {
   String antedentes;
   String comentario;
 
-
-  factory TablasQuitoConsulta.fromJson(Map<String, dynamic> map) => TablasQuitoConsulta(
+  factory TablasQuitoConsulta.fromJson(Map<String, dynamic> map) =>
+      TablasQuitoConsulta(
         cedula: map["cedula"],
         nombre: map["nombre"],
         fecha: DateTime.parse(map["fecha"]),
         estado: map["estado"],
         antedentes: map["Antedentes"],
         comentario: map["Comentario"],
-
       );
 }
 
-Future<List<TablasQuitoConsulta>> obtenerTablasQuitoConsulta({String? query}) async {
-  final response =
-      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoQuito"));
+Future<List<TablasQuitoConsulta>> obtenerTablasQuitoConsulta(
+    {String? query}) async {
+  final response = await http
+      .get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoQuito"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
-    final TablasQuitoConsultaMap =
-        responseList.map((project) => TablasQuitoConsulta.fromJson(project)).toList();
+    final TablasQuitoConsultaMap = responseList
+        .map((project) => TablasQuitoConsulta.fromJson(project))
+        .toList();
     if (query != null) {
       return TablasQuitoConsultaMap.where((element) =>
           element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
@@ -182,15 +177,14 @@ Future<List<TablasQuitoConsulta>> obtenerTablasQuitoConsulta({String? query}) as
 //------------------------Manta-------------------------
 
 class TablasMantaConsulta {
-  TablasMantaConsulta(
-      {
-      required this.cedula,
-      required this.nombre,
-      required this.fecha,
-      required this.estado,
-      required this.antedentes,
-      required this.comentario,
-});
+  TablasMantaConsulta({
+    required this.cedula,
+    required this.nombre,
+    required this.fecha,
+    required this.estado,
+    required this.antedentes,
+    required this.comentario,
+  });
 
   String cedula;
   String nombre;
@@ -199,27 +193,28 @@ class TablasMantaConsulta {
   String antedentes;
   String comentario;
 
-
-  factory TablasMantaConsulta.fromJson(Map<String, dynamic> map) => TablasMantaConsulta(
+  factory TablasMantaConsulta.fromJson(Map<String, dynamic> map) =>
+      TablasMantaConsulta(
         cedula: map["cedula"],
         nombre: map["nombre"],
         fecha: DateTime.parse(map["fecha"]),
         estado: map["estado"],
         antedentes: map["Antedentes"],
         comentario: map["Comentario"],
-
       );
 }
 
-Future<List<TablasMantaConsulta>> obtenerTablasMantaConsulta({String? query}) async {
-  final response =
-      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoManta"));
+Future<List<TablasMantaConsulta>> obtenerTablasMantaConsulta(
+    {String? query}) async {
+  final response = await http
+      .get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoManta"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
-    final TablasMantaConsultaMap =
-        responseList.map((project) => TablasMantaConsulta.fromJson(project)).toList();
+    final TablasMantaConsultaMap = responseList
+        .map((project) => TablasMantaConsulta.fromJson(project))
+        .toList();
     if (query != null) {
       return TablasMantaConsultaMap.where((element) =>
           element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
@@ -234,15 +229,14 @@ Future<List<TablasMantaConsulta>> obtenerTablasMantaConsulta({String? query}) as
 
 //---------------Babahoyo-------------
 class TablasBabahoyoConsulta {
-  TablasBabahoyoConsulta(
-      {
-      required this.cedula,
-      required this.nombre,
-      required this.fecha,
-      required this.estado,
-      required this.antedentes,
-      required this.comentario,
-});
+  TablasBabahoyoConsulta({
+    required this.cedula,
+    required this.nombre,
+    required this.fecha,
+    required this.estado,
+    required this.antedentes,
+    required this.comentario,
+  });
 
   String cedula;
   String nombre;
@@ -251,27 +245,28 @@ class TablasBabahoyoConsulta {
   String antedentes;
   String comentario;
 
-
-  factory TablasBabahoyoConsulta.fromJson(Map<String, dynamic> map) => TablasBabahoyoConsulta(
+  factory TablasBabahoyoConsulta.fromJson(Map<String, dynamic> map) =>
+      TablasBabahoyoConsulta(
         cedula: map["cedula"],
         nombre: map["nombre"],
         fecha: DateTime.parse(map["fecha"]),
         estado: map["estado"],
         antedentes: map["Antedentes"],
         comentario: map["Comentario"],
-
       );
 }
 
-Future<List<TablasBabahoyoConsulta>> obtenerTablasBabahoyoConsulta({String? query}) async {
-  final response =
-      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoManta"));
+Future<List<TablasBabahoyoConsulta>> obtenerTablasBabahoyoConsulta(
+    {String? query}) async {
+  final response = await http.get(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoBabahoyo"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
-    final TablasBabahoyoConsultaMap =
-        responseList.map((project) => TablasBabahoyoConsulta.fromJson(project)).toList();
+    final TablasBabahoyoConsultaMap = responseList
+        .map((project) => TablasBabahoyoConsulta.fromJson(project))
+        .toList();
     if (query != null) {
       return TablasBabahoyoConsultaMap.where((element) =>
           element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
@@ -284,18 +279,16 @@ Future<List<TablasBabahoyoConsulta>> obtenerTablasBabahoyoConsulta({String? quer
   }
 }
 
-
 //---------------------Machala---------------------
 class TablasMachalaConsulta {
-  TablasMachalaConsulta(
-      {
-      required this.cedula,
-      required this.nombre,
-      required this.fecha,
-      required this.estado,
-      required this.antedentes,
-      required this.comentario,
-});
+  TablasMachalaConsulta({
+    required this.cedula,
+    required this.nombre,
+    required this.fecha,
+    required this.estado,
+    required this.antedentes,
+    required this.comentario,
+  });
 
   String cedula;
   String nombre;
@@ -304,27 +297,28 @@ class TablasMachalaConsulta {
   String antedentes;
   String comentario;
 
-
-  factory TablasMachalaConsulta.fromJson(Map<String, dynamic> map) => TablasMachalaConsulta(
+  factory TablasMachalaConsulta.fromJson(Map<String, dynamic> map) =>
+      TablasMachalaConsulta(
         cedula: map["cedula"],
         nombre: map["nombre"],
         fecha: DateTime.parse(map["fecha"]),
         estado: map["estado"],
         antedentes: map["Antedentes"],
         comentario: map["Comentario"],
-
       );
 }
 
-Future<List<TablasMachalaConsulta>> obtenerTablasMachalaConsulta({String? query}) async {
-  final response =
-      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoMachala"));
+Future<List<TablasMachalaConsulta>> obtenerTablasMachalaConsulta(
+    {String? query}) async {
+  final response = await http.get(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoMachala"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
-    final TablasMachalaConsultaMap =
-        responseList.map((project) => TablasMachalaConsulta.fromJson(project)).toList();
+    final TablasMachalaConsultaMap = responseList
+        .map((project) => TablasMachalaConsulta.fromJson(project))
+        .toList();
     if (query != null) {
       return TablasMachalaConsultaMap.where((element) =>
           element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
@@ -338,15 +332,14 @@ Future<List<TablasMachalaConsulta>> obtenerTablasMachalaConsulta({String? query}
 }
 
 class TablasMilagroConsulta {
-  TablasMilagroConsulta(
-      {
-      required this.cedula,
-      required this.nombre,
-      required this.fecha,
-      required this.estado,
-      required this.antedentes,
-      required this.comentario,
-});
+  TablasMilagroConsulta({
+    required this.cedula,
+    required this.nombre,
+    required this.fecha,
+    required this.estado,
+    required this.antedentes,
+    required this.comentario,
+  });
 
   String cedula;
   String nombre;
@@ -355,27 +348,28 @@ class TablasMilagroConsulta {
   String antedentes;
   String comentario;
 
-
-  factory TablasMilagroConsulta.fromJson(Map<String, dynamic> map) => TablasMilagroConsulta(
+  factory TablasMilagroConsulta.fromJson(Map<String, dynamic> map) =>
+      TablasMilagroConsulta(
         cedula: map["cedula"],
         nombre: map["nombre"],
         fecha: DateTime.parse(map["fecha"]),
         estado: map["estado"],
         antedentes: map["Antedentes"],
         comentario: map["Comentario"],
-
       );
 }
 
-Future<List<TablasMilagroConsulta>> obtenerTablasMilagroConsulta({String? query}) async {
-  final response =
-      await http.get(Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoMilagro"));
+Future<List<TablasMilagroConsulta>> obtenerTablasMilagroConsulta(
+    {String? query}) async {
+  final response = await http.get(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/ingresoMilagro"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
-    final TablasMilagroConsultaMap =
-        responseList.map((project) => TablasMilagroConsulta.fromJson(project)).toList();
+    final TablasMilagroConsultaMap = responseList
+        .map((project) => TablasMilagroConsulta.fromJson(project))
+        .toList();
     if (query != null) {
       return TablasMilagroConsultaMap.where((element) =>
           element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
@@ -387,12 +381,6 @@ Future<List<TablasMilagroConsulta>> obtenerTablasMilagroConsulta({String? query}
     throw Exception('Failed to load post');
   }
 }
-
-
-
-
-
-
 
 Future enviarEvaluacion(
     String respuesta1,
@@ -430,7 +418,7 @@ Future enviarEvaluacion(
         "fechaIngreso": fechaIngreso,
         "calificacion": calificacion,
         "estado": estado,
-        "consultaAntecedentes":consultaAntecedentes,
+        "consultaAntecedentes": consultaAntecedentes,
         "cedula": cedula
       }));
 
