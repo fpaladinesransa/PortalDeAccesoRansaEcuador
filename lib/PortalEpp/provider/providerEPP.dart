@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class EppActivo{
+class EppActivo {
   EppActivo({
     required this.id,
     required this.nombres,
@@ -11,9 +11,8 @@ class EppActivo{
     required this.fechaCompra,
     required this.fechaRenovar,
     required this.nombreEpp,
-    required this.estado, 
-}
-  );
+    required this.estado,
+  });
   int id;
   String nombres;
   String apellidos;
@@ -33,69 +32,56 @@ class EppActivo{
         nombreEpp: map["NombreEpp"],
         estado: map["Estado"],
       );
-
-
 }
+
 Future<List<EppActivo>> eppActivostotales() async {
-  
   final response = await http.get(
       Uri.parse("https://ransaapiecuador.azurewebsites.net/Eppequiposactivos"));
-      
+
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
 
-    final EppActivoAll = responseList
-        .map((project) => EppActivo.fromJson(project))
-        .toList();
+    final EppActivoAll =
+        responseList.map((project) => EppActivo.fromJson(project)).toList();
 
-    
     return EppActivoAll;
   } else {
     // Si la llamada no fue exitosa, lanza un error.
     throw Exception('Failed to load post');
   }
 }
-
 
 Future<List<EppActivo>> eppRenovartotales() async {
-  
   final response = await http.get(
       Uri.parse("https://ransaapiecuador.azurewebsites.net/EppequiposRenovar"));
-  
+
   //Nombres,Apellido,Cedula,FechaCompra,FechaRenovar,NombreEpp,Renovar
-      
+
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
 
-    final EppActivoAll = responseList
-        .map((project) => EppActivo.fromJson(project))
-        .toList();
+    final EppActivoAll =
+        responseList.map((project) => EppActivo.fromJson(project)).toList();
 
-    
     return EppActivoAll;
   } else {
     // Si la llamada no fue exitosa, lanza un error.
     throw Exception('Failed to load post');
   }
 }
-
-
 
 //--------------------------------------------------------------------------------------
 
-class EppSinAsignar{
+class EppSinAsignar {
   EppSinAsignar({
     required this.id,
-    required this.nombreEpp, 
+    required this.nombreEpp,
     required this.fechaCompra,
     required this.estado,
     required this.fechainventario,
-
-
-}
-  );
+  });
 
   int id;
   String nombreEpp;
@@ -103,32 +89,25 @@ class EppSinAsignar{
   String estado;
   DateTime fechainventario;
 
-
   factory EppSinAsignar.fromJson(Map<String, dynamic> map) => EppSinAsignar(
-        id: map["ID"],
-        nombreEpp: map["NombreEpp"],
-        fechaCompra: DateTime.parse(map["FechaCompra"]),
-        estado: map["Estado"],
-        fechainventario: DateTime.parse(map["FechaenInventario"])
-      );
-
-
+      id: map["ID"],
+      nombreEpp: map["NombreEpp"],
+      fechaCompra: DateTime.parse(map["FechaCompra"]),
+      estado: map["Estado"],
+      fechainventario: DateTime.parse(map["FechaenInventario"]));
 }
 
 Future<List<EppSinAsignar>> eppEquiposSinAsignar() async {
-  
-  final response = await http.get(
-      Uri.parse("https://ransaapiecuador.azurewebsites.net/EppequiposRenovarsinAsignar"));
-      
+  final response = await http.get(Uri.parse(
+      "https://ransaapiecuador.azurewebsites.net/EppequiposRenovarsinAsignar"));
+
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
 
-    final EppSinAsignarAll = responseList
-        .map((project) => EppSinAsignar.fromJson(project))
-        .toList();
+    final EppSinAsignarAll =
+        responseList.map((project) => EppSinAsignar.fromJson(project)).toList();
 
-    
     return EppSinAsignarAll;
   } else {
     // Si la llamada no fue exitosa, lanza un error.
@@ -136,16 +115,13 @@ Future<List<EppSinAsignar>> eppEquiposSinAsignar() async {
   }
 }
 
-
-
-
 Future enviarRenovacion(
-    String nombreEpp,
-    String estado,
-    String cedula,
-    String fechaRenovar,
-    String fechaDeEntrega,
-    String id,
+  String nombreEpp,
+  String estado,
+  String cedula,
+  String fechaRenovar,
+  String fechaDeEntrega,
+  String id,
 ) async {
   final response = await http.post(
       Uri.parse(
@@ -169,13 +145,10 @@ Future enviarRenovacion(
   }
 }
 
-
-
-
 Future enviarRenovacionBaja(
-    String estado,
-    String fechabaja,
-    String id,
+  String estado,
+  String fechabaja,
+  String id,
 ) async {
   final response = await http.post(
       Uri.parse(
@@ -196,17 +169,15 @@ Future enviarRenovacionBaja(
   }
 }
 
-
 Future insertRenovacionNuevoEquipo(
-    String nombreepp,
-    String fechaCompra,
-    String estado,
-    String cedula,
-    String fechaRenovar,
+  String nombreepp,
+  String fechaCompra,
+  String estado,
+  String cedula,
+  String fechaRenovar,
 ) async {
   final response = await http.post(
-      Uri.parse(
-          "https://ransaapiecuador.azurewebsites.net/insertequiposEpp"),
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/insertequiposEpp"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -225,20 +196,19 @@ Future insertRenovacionNuevoEquipo(
   }
 }
 
-class EppSolicitudList{
+class EppSolicitudList {
   EppSolicitudList({
     required this.id,
     required this.nombres,
-    required this.apellidos, 
+    required this.apellidos,
     required this.cedula,
     required this.fechaCompra,
     required this.fechaDeEntrega,
     required this.nombreEpp,
     required this.estado,
-    required this.motivo,    
+    required this.motivo,
     required this.comentarios,
-}
-  );
+  });
   int id;
   String nombres;
   String apellidos;
@@ -249,8 +219,9 @@ class EppSolicitudList{
   String estado;
   String motivo;
   String comentarios;
-  factory EppSolicitudList.fromJson(Map<String, dynamic> map) => EppSolicitudList(
-        id:map["ID"],
+  factory EppSolicitudList.fromJson(Map<String, dynamic> map) =>
+      EppSolicitudList(
+        id: map["ID"],
         nombres: map["Nombres"],
         apellidos: map["Apellido"],
         cedula: map["Cedula"],
@@ -263,13 +234,10 @@ class EppSolicitudList{
       );
 }
 
-
-
 Future<List<EppSolicitudList>> eppSolicitudEppGH() async {
-  
   final response = await http.get(
       Uri.parse("https://ransaapiecuador.azurewebsites.net/SelectGHsolicitud"));
-      
+
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
@@ -278,7 +246,6 @@ Future<List<EppSolicitudList>> eppSolicitudEppGH() async {
         .map((project) => EppSolicitudList.fromJson(project))
         .toList();
 
-    
     return EppSolicitudListAll;
   } else {
     // Si la llamada no fue exitosa, lanza un error.
@@ -286,22 +253,10 @@ Future<List<EppSolicitudList>> eppSolicitudEppGH() async {
   }
 }
 
-
-
-
-Future insertGHsolicitud(
-    String requrimiento,
-    String solicitud,
-    String motivo,
-    String fechaSolicitud,
-    String comentarios,
-    String estado,
-    String id
-
-) async {
+Future insertGHsolicitud(String requrimiento, String solicitud, String motivo,
+    String fechaSolicitud, String comentarios, String estado, String id) async {
   final response = await http.post(
-      Uri.parse(
-          "https://ransaapiecuador.azurewebsites.net/InsertGHsolicitud"),
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/InsertGHsolicitud"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -313,8 +268,6 @@ Future insertGHsolicitud(
         "Comentario": comentarios,
         "Estado": estado,
         "ID_Epp": id,
-
-
       }));
 
   if (response.statusCode == 200) {
@@ -324,29 +277,14 @@ Future insertGHsolicitud(
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 Future actualizarGHsolicitud(
-    String tieneSolicitud,
-    String estado,
-    String comentarios,
-    String id,
-
-
+  String tieneSolicitud,
+  String estado,
+  String comentarios,
+  String id,
 ) async {
   final response = await http.post(
-      Uri.parse(
-          "https://ransaapiecuador.azurewebsites.net/UpdateGHSolicitud"),
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/UpdateGHSolicitud"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -355,9 +293,6 @@ Future actualizarGHsolicitud(
         "Estado": estado,
         "Comentarios": comentarios,
         "ID": id,
-
-
-
       }));
 
   if (response.statusCode == 200) {
@@ -367,22 +302,16 @@ Future actualizarGHsolicitud(
   }
 }
 
-
-
-
-
-
-class EppSelectFirmaGH{
+class EppSelectFirmaGH {
   EppSelectFirmaGH({
     required this.id,
     required this.nombres,
-    required this.apellidos, 
+    required this.apellidos,
     required this.cedula,
     required this.nombreEpp,
     required this.estado,
-    required this.urlFirma,    
-}
-  );
+    required this.urlFirma,
+  });
   int id;
   String nombres;
   String apellidos;
@@ -390,25 +319,22 @@ class EppSelectFirmaGH{
   String nombreEpp;
   String estado;
   String urlFirma;
-  factory EppSelectFirmaGH.fromJson(Map<String, dynamic> map) => EppSelectFirmaGH(
-        id:map["ID"],
+  factory EppSelectFirmaGH.fromJson(Map<String, dynamic> map) =>
+      EppSelectFirmaGH(
+        id: map["ID"],
         nombres: map["Nombres"],
         apellidos: map["Apellido"],
         cedula: map["Cedula"],
         nombreEpp: map["NombreEpp"],
         estado: map["Estado"],
         urlFirma: map["UrlFirma"],
-
       );
 }
 
-
-
 Future<List<EppSelectFirmaGH>> eppSelectFirmaGH() async {
-  
   final response = await http.get(
       Uri.parse("https://ransaapiecuador.azurewebsites.net/SelectGhFirma"));
-      
+
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
@@ -417,7 +343,6 @@ Future<List<EppSelectFirmaGH>> eppSelectFirmaGH() async {
         .map((project) => EppSelectFirmaGH.fromJson(project))
         .toList();
 
-    
     return EppSelectFirmaGHAll;
   } else {
     // Si la llamada no fue exitosa, lanza un error.
@@ -427,6 +352,109 @@ Future<List<EppSelectFirmaGH>> eppSelectFirmaGH() async {
 
 //InsertActadeEntrega
 
+class EppSelectActadeEntrega {
+  EppSelectActadeEntrega(
+      {required this.idepp,
+      required this.nombres,
+      required this.apellidos,
+      required this.cedula,
+      required this.firma,
+      required this.estado,
+      required this.epp,
+      required this.codigoTrabajador});
+  String idepp;
+  String nombres;
+  String apellidos;
+  String cedula;
+  String firma;
+  String estado;
+  String epp;
+  String codigoTrabajador;
+  factory EppSelectActadeEntrega.fromJson(Map<String, dynamic> map) =>
+      EppSelectActadeEntrega(
+        idepp: map["ID_epp"],
+        nombres: map["Nombre"],
+        apellidos: map["Apellidos"],
+        cedula: map["Cedula"],
+        firma: map["Firma"],
+        estado: map["Estado"],
+        epp: map["epp"],
+        codigoTrabajador: map["CodigoTrabajador"],
+      );
+}
+
+Future<List<EppSelectActadeEntrega>> eppSelectActadeEntrega() async {
+  final response = await http.get(Uri.parse(
+      "https://ransaapiecuador.azurewebsites.net/SelectAllActadeEntregaEpp"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+
+    final EppSelectActadeEntregaAll = responseList
+        .map((project) => EppSelectActadeEntrega.fromJson(project))
+        .toList();
+
+    return EppSelectActadeEntregaAll;
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+class TablasColFaltaFirmaSel {
+  TablasColFaltaFirmaSel({
+    required this.nombreEpp,
+    required this.fechaCompra,
+    required this.estado,
+    required this.cedula,
+    required this.fechaRenovar,
+    required this.fechaDeEntrega,
+    required this.id,
+  });
+
+  String nombreEpp;
+  DateTime fechaCompra;
+  String estado;
+  String cedula;
+  DateTime fechaRenovar;
+  DateTime fechaDeEntrega;
+  int id;
+
+  factory TablasColFaltaFirmaSel.fromJson(Map<String, dynamic> map) =>
+      TablasColFaltaFirmaSel(
+        nombreEpp: map["NombreEpp"],
+        fechaCompra: DateTime.parse(map["FechaCompra"]),
+        estado: map["Estado"],
+        cedula: map["Cedula"],
+        fechaRenovar: DateTime.parse(map["FechaRenovar"]),
+        fechaDeEntrega: DateTime.parse(map["FechaDeEntrega"]),
+        id: map["ID"],
+      );
+}
+
+Future<List<TablasColFaltaFirmaSel>> obtenerTablasColFaltaFirmaSel(
+    {String? query}) async {
+  final response = await http.get(Uri.parse(
+      "https://ransaapiecuador.azurewebsites.net/ColFirmaFaltanteCedula"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final TablasColFaltaFirmaSelMap = responseList
+        .map((project) => TablasColFaltaFirmaSel.fromJson(project))
+        .toList();
+    if (query != null) {
+      return TablasColFaltaFirmaSelMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return TablasColFaltaFirmaSelMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
 
 Future insertActadeEntregaEpp(
     String idepp,
@@ -436,9 +464,7 @@ Future insertActadeEntregaEpp(
     String firma,
     String estado,
     String epp,
-    String codigoTrabajador
-
-) async {
+    String codigoTrabajador) async {
   final response = await http.post(
       Uri.parse(
           "https://ransaapiecuador.azurewebsites.net/InsertActadeEntregaEpp"),
@@ -454,8 +480,6 @@ Future insertActadeEntregaEpp(
         "Estado": estado,
         "epp": epp,
         "CodigoTrabajador": codigoTrabajador,
-
-
       }));
 
   if (response.statusCode == 200) {
@@ -465,62 +489,108 @@ Future insertActadeEntregaEpp(
   }
 }
 
+Future colactualizarFirma(
+  String firma,
+  String estado,
+  String id,
+) async {
+  final response = await http.post(
+      Uri.parse(
+          "https://ransaapiecuador.azurewebsites.net/ColUpdateFirmaFaltanteCedula"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "Firma": firma,
+        "Estado": estado,
+        "ID": id,
+      }));
 
-
-
-
-class EppSelectActadeEntrega{
-  EppSelectActadeEntrega({
-    required this.idepp,
-    required this.nombres,
-    required this.apellidos, 
-    required this.cedula,
-    required this.firma,
-    required this.estado,
-    required this.epp,
-    required this.codigoTrabajador   
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
 }
-  );
-  String idepp;
-  String nombres;
-  String apellidos;
-  String cedula;
-  String firma;
-  String estado;
-  String epp;
-  String codigoTrabajador;
-  factory EppSelectActadeEntrega.fromJson(Map<String, dynamic> map) => EppSelectActadeEntrega(
-        idepp:map["ID_epp"],
-        nombres: map["Nombre"],
-        apellidos: map["Apellidos"],
-        cedula: map["Cedula"],
-        firma: map["Firma"],
-        estado: map["Estado"],
-        epp: map["epp"],
-        codigoTrabajador: map["CodigoTrabajador"],
 
+class TablasColSelectSolicitudEpp {
+  TablasColSelectSolicitudEpp({
+    required this.id,
+    required this.cedula,
+    required this.nombreEpp,
+    required this.estado,
+    required this.motivo,
+    required this.tieneSolicitud,
+    required this.comentario,
+  });
+
+  int id;
+  String cedula;
+  String nombreEpp;
+  String estado;
+  String motivo;
+  String tieneSolicitud;
+  String comentario;
+
+  factory TablasColSelectSolicitudEpp.fromJson(Map<String, dynamic> map) =>
+      TablasColSelectSolicitudEpp(
+        id: map["ID"],
+        cedula: map["Cedula"],
+        nombreEpp: map["NombreEpp"],
+        estado: map["Estado"],
+        motivo: map["Motivo"],
+        tieneSolicitud: map["TieneSolicitud"],
+        comentario: map["Comentarios"],
       );
 }
 
+Future<List<TablasColSelectSolicitudEpp>> obtenerTablasColSelectSolicitudEpp(
+    {String? query}) async {
+  final response = await http.get(Uri.parse(
+      "https://ransaapiecuador.azurewebsites.net/ColSelectSolicitudEpp"));
 
-
-Future<List<EppSelectActadeEntrega>> eppSelectActadeEntrega() async {
-  
-  final response = await http.get(
-      Uri.parse("https://ransaapiecuador.azurewebsites.net/SelectAllActadeEntregaEpp"));
-      
   if (response.statusCode == 200) {
-    //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
-
-    final EppSelectActadeEntregaAll = responseList
-        .map((project) => EppSelectActadeEntrega.fromJson(project))
+    final TablasColSelectSolicitudEppMap = responseList
+        .map((project) => TablasColSelectSolicitudEpp.fromJson(project))
         .toList();
-
-    
-    return EppSelectActadeEntregaAll;
+    if (query != null) {
+      return TablasColSelectSolicitudEppMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return TablasColSelectSolicitudEppMap;
+    }
   } else {
     // Si la llamada no fue exitosa, lanza un error.
     throw Exception('Failed to load post');
+  }
+}
+
+Future colUpdateSolicitudEpp(
+  String estado,
+  String comentarios,
+  String tienesSolicitud,
+  String motivo,
+  String id,
+) async {
+  final response = await http.post(
+      Uri.parse(
+          "https://ransaapiecuador.azurewebsites.net/ColUpdateSolicitudEpp"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "Estado": estado,
+        "Comentarios": comentarios,
+        "TieneSolicitud": tienesSolicitud,
+        "Motivo": motivo,
+        "ID": id,
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
   }
 }

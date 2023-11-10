@@ -33,19 +33,14 @@ void main() {
 }
  */
 
-
 // ignore: use_key_in_widget_constructors
 class MyAppMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        
-        ChangeNotifierProvider(create: (_)=>VariablesExt()),
-        
-        ChangeNotifierProvider(create: (_)=>DropdownService()),
-
-      
+        ChangeNotifierProvider(create: (_) => VariablesExt()),
+        ChangeNotifierProvider(create: (_) => DropdownService()),
       ],
       child: MaterialApp(
         scrollBehavior: MyCustomScrollBehavior(),
@@ -54,11 +49,10 @@ class MyAppMain extends StatelessWidget {
         theme: ThemeData(
             primarySwatch:
                 generateMaterialColor(color: Color.fromARGB(255, 0, 155, 8))),
-        initialRoute: "/ghActasEntrega",
+        initialRoute: "/col_Solicitud",
         onGenerateRoute: Flurorouter.router.generator,
         navigatorKey: locator<NavigationService>().navigatorKey,
       ),
-      
     );
   }
 }
