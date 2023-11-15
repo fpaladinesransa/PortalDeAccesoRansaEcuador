@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:portaltransportistas/PortalEpp/provider/col_registerNew.dart';
 import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/message_input.dart';
+import 'package:provider/provider.dart';
+import 'dart:js';
 
 class TablaColSinFirma extends StatefulWidget {
   late List<TablasColFaltaFirmaSel>? data;
@@ -130,6 +133,8 @@ class TablaColSolicitud extends StatefulWidget {
 class _TablaColSolicitudState extends State<TablaColSolicitud> {
   @override
   Widget build(BuildContext context) {
+    final variables = Provider.of<VariablesExtCol>(context, listen: true);
+
     return Container(
       alignment: Alignment.topLeft,
       child: Row(
@@ -161,22 +166,115 @@ class _TablaColSolicitudState extends State<TablaColSolicitud> {
                       label: Text("Solicitud de renovación"),
                       numeric: false,
                       tooltip: "Solicitud de renovación"),
-                  DataColumn(
-                      label: Text("Comentarios"),
-                      numeric: false,
-                      tooltip: "Comentarios"),
                 ],
                 rows: widget.data!
                     .map(
-                      (valor) =>
-                          DataRow(selected: selectEpp.contains(valor), cells: [
+                      (valor) => DataRow(
+                          selected: variables.selectEpp.contains(valor),
+                          onSelectChanged: (isSelected) {
+                            setState(() {
+                              final isAdding = isSelected != null && isSelected;
+                              if (variables.selectEpp.length >= 1 && isAdding) {
+                                variables.selectEpp.clear();
+                                isAdding
+                                    ? {
+                                        variables.selectEpp.add(valor),
+                                        variables.idfun = valor.id.toString(),
+                                        variables.eppfun =
+                                            valor.nombreEpp.toString(),
+                                      }
+                                    : variables.selectEpp.remove(valor);
+                              } else {
+                                isAdding
+                                    ? {
+                                        variables.selectEpp.add(valor),
+                                        variables.idfun = valor.id.toString(),
+                                        variables.eppfun =
+                                            valor.nombreEpp.toString(),
+                                      }
+                                    : variables.selectEpp.remove(valor);
+                              }
+                            });
+                          },
+                          cells: [
+                            DataCell(Text(valor.id.toString())),
+                            DataCell(Text(valor.cedula)),
+                            DataCell(Text(valor.nombreEpp)),
+                            DataCell(Text(valor.estado)),
+                            DataCell(Text(valor.motivo)),
+                            DataCell(Text(valor.tieneSolicitud)),
+                          ]),
+                    )
+                    .toList(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TablaColEppActivo extends StatefulWidget {
+  late List<ColSelectActivoEpp>? data;
+
+  TablaColEppActivo({super.key, required this.data});
+
+  @override
+  State<TablaColEppActivo> createState() => __TablaColEppActivoState();
+}
+
+class __TablaColEppActivoState extends State<TablaColEppActivo> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.topLeft,
+      child: Row(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: DataTable(
+                decoration: BoxDecoration(
+                    border:
+                        Border.all(color: Color.fromARGB(255, 194, 194, 194)),
+                    borderRadius: BorderRadius.circular(10)),
+                sortColumnIndex: 0,
+                showCheckboxColumn: false,
+                columns: const [
+                  DataColumn(label: Text("ID"), numeric: false, tooltip: "ID"),
+                  DataColumn(
+                      label: Text("EPP"), numeric: false, tooltip: "Epp"),
+                  DataColumn(
+                      label: Text("Estado"), numeric: false, tooltip: "Estado"),
+                  DataColumn(
+                      label: Text("Fecha entrega"),
+                      numeric: false,
+                      tooltip: "Fecha entrega"),
+                  DataColumn(
+                      label: Text("Fecha renovar"),
+                      numeric: false,
+                      tooltip: "Fecha renovar"),
+                  DataColumn(
+                      label: Text("Firma"), numeric: false, tooltip: "Firma"),
+                  DataColumn(
+                      label: Text("Solicitud de renovación"),
+                      numeric: false,
+                      tooltip: "Solicitud de renovación"),
+                ],
+                rows: widget.data!
+                    .map(
+                      (valor) => DataRow(cells: [
                         DataCell(Text(valor.id.toString())),
-                        DataCell(Text(valor.cedula)),
                         DataCell(Text(valor.nombreEpp)),
                         DataCell(Text(valor.estado)),
-                        DataCell(Text(valor.motivo)),
+                        DataCell(Text(
+                            "${valor.fechaEntrega.day}/${valor.fechaEntrega.month}/${valor.fechaEntrega.year}")),
+                        DataCell(Text(
+                            "${valor.fechaRenovar.day}/${valor.fechaRenovar.month}/${valor.fechaRenovar.year}")),
+                        DataCell(Text(valor.firma)),
                         DataCell(Text(valor.tieneSolicitud)),
-                        DataCell(Text(valor.comentario)),
                       ]),
                     )
                     .toList(),

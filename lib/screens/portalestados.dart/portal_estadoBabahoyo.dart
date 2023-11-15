@@ -10,12 +10,13 @@ import '../portal_estadosconsulta.dart';
 class PortalEstadoBabahoyo extends StatelessWidget {
   String query;
 
-  PortalEstadoBabahoyo(this.query,{Key? key}) : super(key: key);
+  PortalEstadoBabahoyo(this.query, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Future<List<TablasBabahoyoConsulta>> dataLista = obtenerTablasBabahoyoConsulta();
-    TextEditingController _textoController = TextEditingController(text: "");
+    Future<List<TablasBabahoyoConsulta>> dataLista =
+        obtenerTablasBabahoyoConsulta(query: query);
+    TextEditingController textoController = TextEditingController(text: "");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -33,14 +34,14 @@ class PortalEstadoBabahoyo extends StatelessWidget {
             child: ListTile(
                 leading: Icon(Icons.search),
                 title: TextField(
-                    controller: _textoController,
+                    controller: textoController,
                     textInputAction: TextInputAction.search,
                     onSubmitted: (_) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: ((context) =>
-                                  PortalEstadoBabahoyo(_textoController.text))));
+                                  PortalEstadoBabahoyo(textoController.text))));
                     },
                     decoration: InputDecoration(
                         hintText: 'Buscar por número de cedula',
@@ -53,7 +54,7 @@ class PortalEstadoBabahoyo extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: ((context) =>
-                                  PortalEstadoBabahoyo(_textoController.text))));
+                                  PortalEstadoBabahoyo(textoController.text))));
                     })),
           ),
           Center(

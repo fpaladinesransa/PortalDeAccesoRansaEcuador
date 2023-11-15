@@ -9,11 +9,12 @@ import '../portal_estadosconsulta.dart';
 
 class PortalEstadoManta extends StatelessWidget {
   String query;
- 
-  PortalEstadoManta(this.query,{Key? key}) : super(key: key);
+
+  PortalEstadoManta(this.query, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Future<List<TablasMantaConsulta>> dataLista = obtenerTablasMantaConsulta();
+    Future<List<TablasMantaConsulta>> dataLista =
+        obtenerTablasMantaConsulta(query: query);
     TextEditingController _textoController = TextEditingController(text: "");
     return Scaffold(
       appBar: AppBar(

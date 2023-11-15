@@ -1,3 +1,4 @@
+import 'package:portaltransportistas/PortalEpp/provider/col_registerNew.dart';
 import 'package:portaltransportistas/PortalEpp/provider/gh_registerNew.dart';
 import 'package:provider/provider.dart';
 
@@ -893,7 +894,7 @@ class _DropdownColSolicitudMotivoState
           titulo: widget.titulo,
         ),
         Container(
-          child: Consumer<DropdownService>(
+          child: Consumer<ColDropdownService>(
             builder: (context, value, child) => Container(
               alignment: Alignment.center,
               margin: EdgeInsets.only(top: 5),
@@ -903,15 +904,17 @@ class _DropdownColSolicitudMotivoState
                   borderRadius: BorderRadius.circular(10),
                 ),
                 width: 300,
-                child: DropdownButton<String>(
+                child: DropdownButtonFormField<String>(
+                  focusColor: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   isExpanded: true,
-                  underline: SizedBox(),
+                  validator: (value) =>
+                      value == null ? 'Llene este campo' : null,
                   dropdownColor: Colors.white,
                   icon: Icon(Icons.arrow_drop_down),
-                  value: value.renovarSelect,
-                  items: value.renovarlista
+                  value: value.motivoselected,
+                  items: value.motivoDropdownList
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -919,7 +922,7 @@ class _DropdownColSolicitudMotivoState
                     );
                   }).toList(),
                   onChanged: (String? v) {
-                    value.setrenovarSelect(v);
+                    value.setMotivoValue(v);
                   },
                 ),
               ),

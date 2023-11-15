@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
+import 'package:portaltransportistas/PortalEpp/pages/dropdownprovider.dart';
+import 'package:portaltransportistas/PortalEpp/provider/col_registerNew.dart';
 import 'package:portaltransportistas/PortalEpp/provider/gh_registerNew.dart';
 import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
+import 'package:portaltransportistas/PortalEpp/widgets/fecha_forms.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu_col.dart';
+import 'package:portaltransportistas/PortalEpp/widgets/message_input.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/tablaCol.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/text_widget.dart';
 import 'package:portaltransportistas/widget/separadortitulo.dart';
@@ -15,23 +20,28 @@ class ColSolicitudes extends StatefulWidget {
 }
 
 String cedula = '0967096733';
+String fecha = "01-01-2023";
 
 Future<List<TablasColSelectSolicitudEpp>> dataLista =
     obtenerTablasColSelectSolicitudEpp(query: cedula);
 
 class _ColSolicitudesState extends State<ColSolicitudes> {
   late String nameValue;
+  late String comentarioValue;
+  final fechaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     double ancho = MediaQuery.of(context).size.width;
     double alto = MediaQuery.of(context).size.height;
+    final variables = Provider.of<VariablesExtCol>(context, listen: true);
+    final variablesDrop =
+        Provider.of<ColDropdownService>(context, listen: true);
 
+    final _formKey = GlobalKey<FormState>();
     return ChangeNotifierProvider(
         create: (context) => RegisterFormProvider(),
         child: Builder(builder: (context) {
-          final registerFormProvider =
-              Provider.of<RegisterFormProvider>(context, listen: false);
           return Scaffold(
               body: Row(
             children: [
@@ -39,8 +49,8 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
               Container(
                 width: ancho * 0.8,
                 child: SingleChildScrollView(
-                  key: registerFormProvider.formKey,
                   child: Form(
+                    key: _formKey,
                     child: Consumer<DropdownService>(
                         builder: (context, value, chil) {
                       return Column(
@@ -53,33 +63,41 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
                           SizedBox(
                             height: 25,
                           ),
-                          SizedBox(
-                            height: 400,
-                            width: 1075,
-                            child: FutureBuilder<
-                                    List<TablasColSelectSolicitudEpp>>(
-                                future: dataLista,
-                                builder: (context, snapshot) {
-                                  var filterData = snapshot.data;
-                                  if (snapshot.hasData) {
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      verticalDirection: VerticalDirection.down,
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: TablaColSolicitud(
-                                            data: filterData,
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return Text("${snapshot.error}");
-                                  }
-                                  return const CircularProgressIndicator();
-                                }),
+                          Row(
+                            children: [
+                              Container(
+                                width: ancho * 0.05,
+                              ),
+                              SizedBox(
+                                height: 400,
+                                width: 1075,
+                                child: FutureBuilder<
+                                        List<TablasColSelectSolicitudEpp>>(
+                                    future: dataLista,
+                                    builder: (context, snapshot) {
+                                      var filterData = snapshot.data;
+                                      if (snapshot.hasData) {
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          verticalDirection:
+                                              VerticalDirection.down,
+                                          children: <Widget>[
+                                            Expanded(
+                                              child: TablaColSolicitud(
+                                                data: filterData,
+                                              ),
+                                            )
+                                          ],
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return Text("${snapshot.error}");
+                                      }
+                                      return const CircularProgressIndicator();
+                                    }),
+                              ),
+                            ],
                           ),
                           SeparadorTitulo(
                             titulo: 'Escribir los motivos',
@@ -94,30 +112,23 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
                                   width: ancho * 0.05,
                                 ),
                                 SizedBox(
+                                  width: 300,
                                   child: FormInput(
                                       "Nombre:",
+                                      variables.epp,
                                       value.cedulaSelect,
                                       value.setcedulaSelect),
-                                  width: 300,
                                 ),
                                 Container(
                                   width: 10,
                                 ),
-                                Container(
-                                  child: FormInput("Fecha:", value.cedulaSelect,
-                                      value.setcedulaSelect),
-                                  width: 300,
-                                ),
+                                DateForm(fecha, fechaController),
                                 Container(
                                   width: 10,
                                 ),
-                                Container(
-                                  child: FormInput(
-                                      "Motivo:",
-                                      value.cedulaSelect,
-                                      value.setcedulaSelect),
-                                  width: 300,
-                                ),
+                                const DropdownColSolicitudMotivo(
+                                  titulo: 'Motivo:',
+                                )
                               ],
                             ),
                           ),
@@ -131,10 +142,40 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
                               ),
                               SizedBox(
                                 width: ancho * 0.6,
-                                child: FormLargeInput("Comentario:",
-                                    value.cedulaSelect, value.setcedulaSelect),
+                                child: FormLargeInput("Comentario:"),
                               ),
                             ],
+                          ),
+                          Container(
+                            height: alto * 0.1,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (variables.epp != "") {
+                                if (_formKey.currentState!.validate()) {
+                                  colUpdateSolicitudEpp(
+                                      "Solicitud",
+                                      variablesDrop.motivoselected,
+                                      "Si",
+                                      comentarioValue,
+                                      variables.id);
+                                  enviadoCorrectamente(context,
+                                      "Solicitud de EPP enviada", ColHome());
+
+                                  // If the form is valid, display a snackbar. In the real world,
+                                  // you'd often call a server or save the information in a database.
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Ingrese un equipo')),
+                                );
+                              }
+                            },
+                            child: Text('Enviar solicitud'),
+                          ),
+                          Container(
+                            height: alto * 0.1,
                           ),
                         ],
                       );
@@ -147,7 +188,9 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
         }));
   }
 
-  Column FormInput(titleinput, valueinput, dynamic setfunction) {
+//------------------------------------
+  Column FormInput(
+      titleinput, String valorInicial, valueinput, dynamic setfunction) {
     return Column(
       children: [
         Align(
@@ -163,26 +206,31 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
         Container(
           height: 3,
         ),
-        TextFormField(
-          onChanged: (String? v) {
-            setfunction(v);
-          },
-          validator: (value) {
-            if (value == null || value.isEmpty) return "Llene este campo";
-            return null;
-          },
-          decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
-          onSaved: (value) {
-            nameValue = value!;
-          },
-        ),
+        Container(
+          width: 400,
+          height: 50,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Center(
+              child: Row(
+            children: [
+              Container(
+                width: 10,
+              ),
+              Text(
+                "$valorInicial",
+                style: TextStyle(fontSize: 16),
+              ),
+            ],
+          )),
+        )
       ],
     );
   }
 
-  Column FormLargeInput(titleinput, valueinput, dynamic setfunction) {
+  // ignore: non_constant_identifier_names
+  Column FormLargeInput(titleinput) {
     return Column(
       children: [
         Align(
@@ -204,9 +252,9 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
             expands: true,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            onChanged: (String? v) {
+            /* onChanged: (String? v) {
               setfunction(v);
-            },
+            }, */
             validator: (value) {
               if (value == null || value.isEmpty) return "Llene este campo";
               return null;
@@ -215,7 +263,7 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10))),
             onSaved: (value) {
-              nameValue = value!;
+              comentarioValue = value!;
             },
           ),
         ),

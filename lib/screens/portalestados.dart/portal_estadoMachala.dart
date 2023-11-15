@@ -10,11 +10,12 @@ import '../portal_estadosconsulta.dart';
 class PortalEstadoMachala extends StatelessWidget {
   String query;
 
-  PortalEstadoMachala(this.query,{Key? key}) : super(key: key);
+  PortalEstadoMachala(this.query, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Future<List<TablasMachalaConsulta>> dataLista = obtenerTablasMachalaConsulta();
+    Future<List<TablasMachalaConsulta>> dataLista =
+        obtenerTablasMachalaConsulta(query: query);
     TextEditingController _textoController = TextEditingController(text: "");
     return Scaffold(
       appBar: AppBar(

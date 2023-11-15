@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Future<List<ProjectListAll>> dataLista = obtenerSegurosTotales();
     TextEditingController _textoController = TextEditingController(text: "");
 
@@ -61,10 +60,7 @@ class MyApp extends StatelessWidget {
             child: FutureBuilder<List<ProjectListAll>>(
               future: dataLista,
               builder: (context, snapshot) {
-
                 var filterData = snapshot.data;
-                print(filterData);
-
 
                 if (snapshot.hasData) {
                   return Column(

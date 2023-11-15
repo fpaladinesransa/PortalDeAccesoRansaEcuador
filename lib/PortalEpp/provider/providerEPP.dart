@@ -594,3 +594,60 @@ Future colUpdateSolicitudEpp(
     throw Exception('Failed to post');
   }
 }
+
+class ColSelectActivoEpp {
+  ColSelectActivoEpp({
+    required this.nombreEpp,
+    required this.id,
+    required this.estado,
+    required this.cedula,
+    required this.fechaEntrega,
+    required this.fechaRenovar,
+    required this.firma,
+    required this.tieneSolicitud,
+  });
+
+  String nombreEpp;
+  int id;
+  String estado;
+  String cedula;
+  DateTime fechaEntrega;
+  DateTime fechaRenovar;
+  String firma;
+  String tieneSolicitud;
+
+  factory ColSelectActivoEpp.fromJson(Map<String, dynamic> map) =>
+      ColSelectActivoEpp(
+        nombreEpp: map["NombreEpp"],
+        id: map["ID"],
+        estado: map["NombreEpp"],
+        cedula: map["Cedula"],
+        fechaEntrega: DateTime.parse(map["FechaDeEntrega"]),
+        fechaRenovar: DateTime.parse(map["FechaRenovar"]),
+        firma: map["Firma"],
+        tieneSolicitud: map["TieneSolicitud"],
+      );
+}
+
+Future<List<ColSelectActivoEpp>> obtenerColSelectActivoEpp(
+    {String? query}) async {
+  final response = await http.get(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/ColEppActivos"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final ColSelectActivoEppMap = responseList
+        .map((project) => ColSelectActivoEpp.fromJson(project))
+        .toList();
+    if (query != null) {
+      return ColSelectActivoEppMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return ColSelectActivoEppMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}

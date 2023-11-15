@@ -2,6 +2,7 @@ import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
+import 'package:portaltransportistas/PortalEpp/widgets/custom_buttomMenu.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu_col.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/tablaCol.dart';
 import 'package:portaltransportistas/widget/separadortitulo.dart';
@@ -19,6 +20,8 @@ Future<List<TablasColFaltaFirmaSel>> dataLista =
 class _ColHomeState extends State<ColHome> {
   @override
   Widget build(BuildContext context) {
+    double ancho = MediaQuery.of(context).size.width;
+    double alto = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Row(
         children: [
@@ -26,41 +29,37 @@ class _ColHomeState extends State<ColHome> {
           SingleChildScrollView(
             child: Column(
               children: [
-                SeparadorTitulo(
-                  titulo: 'Firmas pendientes de realizar',
-                ),
                 SizedBox(
                   height: 25,
                 ),
-                Row(
-                  children: [
-                    Container(
-                      height: 400,
-                      width: 1075,
-                      child: FutureBuilder<List<TablasColFaltaFirmaSel>>(
-                          future: dataLista,
-                          builder: (context, snapshot) {
-                            var filterData = snapshot.data;
-                            if (snapshot.hasData) {
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                verticalDirection: VerticalDirection.down,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: TablaColSinFirma(
-                                      data: filterData,
-                                    ),
-                                  )
-                                ],
-                              );
-                            } else if (snapshot.hasError) {
-                              return Text("${snapshot.error}");
-                            }
-                            return const CircularProgressIndicator();
-                          }),
-                    ),
-                  ],
+                Container(
+                  width: ancho * 0.8,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomButtonMenu(
+                        icon: Icons.account_box,
+                        onPressed: () {
+                          // Handle button press action
+                        },
+                        buttonText: 'Mis EPP',
+                      ),
+                      CustomButtonMenu(
+                        icon: Icons.mode_edit,
+                        onPressed: () {
+                          // Handle button press action
+                        },
+                        buttonText: 'Firmas pendientes',
+                      ),
+                      CustomButtonMenu(
+                        icon: Icons.new_releases,
+                        onPressed: () {
+                          // Handle button press action
+                        },
+                        buttonText: 'Solicitar EPP',
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

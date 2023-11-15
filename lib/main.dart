@@ -6,6 +6,7 @@ import 'package:portaltransportistas/routes/router.dart';
 
 import 'package:portaltransportistas/services/navigation_service.dart';
 import 'PortalEpp/pages/gh_home.dart';
+import 'PortalEpp/provider/col_registerNew.dart';
 import 'PortalEpp/widgets/tableActivos.dart';
 import 'Screens/portal_estado.dart';
 
@@ -39,7 +40,9 @@ class MyAppMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => VariablesExtCol()),
         ChangeNotifierProvider(create: (_) => VariablesExt()),
+        ChangeNotifierProvider(create: (_) => ColDropdownService()),
         ChangeNotifierProvider(create: (_) => DropdownService()),
       ],
       child: MaterialApp(
@@ -49,7 +52,7 @@ class MyAppMain extends StatelessWidget {
         theme: ThemeData(
             primarySwatch:
                 generateMaterialColor(color: Color.fromARGB(255, 0, 155, 8))),
-        initialRoute: "/col_Solicitud",
+        initialRoute: "/col_Home",
         onGenerateRoute: Flurorouter.router.generator,
         navigatorKey: locator<NavigationService>().navigatorKey,
       ),

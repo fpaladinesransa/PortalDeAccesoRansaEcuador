@@ -145,7 +145,10 @@ SingleChildScrollView tablaBodyAllCD3(List? data) {
               label: Text("Fecha"),
               numeric: false,
               tooltip: "Fecha en que realizo el examen"),
-          DataColumn(label: Text("Estado"), numeric: false, tooltip: "Estado"),
+          DataColumn(
+              label: Text("Examen de Seguridad"),
+              numeric: false,
+              tooltip: "Estado"),
           DataColumn(
               label: Text("Antecedentes"),
               numeric: false,
