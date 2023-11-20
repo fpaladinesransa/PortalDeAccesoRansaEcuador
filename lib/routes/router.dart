@@ -6,6 +6,7 @@ import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_agregarCol.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoBabahoyo.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoMachala.dart';
@@ -14,7 +15,7 @@ import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoMil
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoQuito.dart';
 import '../PortalEpp/pages/dropdownprovider.dart';
 import '../PortalEpp/pages/gh_actasEntrega.dart';
-import '../PortalEpp/pages/gh_home.dart';
+import '../PortalEpp/pages/gh_registrarEPP.dart';
 import '../PortalEpp/pages/gh_activo.dart';
 import '../PortalEpp/pages/gh_renovar.dart';
 import '../PortalEpp/pages/gh_solicitudEPP.dart';
@@ -92,6 +93,9 @@ class Flurorouter {
     router.define('/portalEstadoManta',
         handler: _counterHandlerEstadoManta,
         transitionType: TransitionType.fadeIn);
+    router.define('/GhRegistrarEpp',
+        handler: _counterHandlerGhRegistrarEpp,
+        transitionType: TransitionType.fadeIn);
 
     router.notFoundHandler = pageNotFound;
   }
@@ -135,6 +139,9 @@ class Flurorouter {
   );
   static final Handler _counterHandlerGh_MostrarPDF = Handler(
     handlerFunc: (context, parameters) => Gh_MostrarPDF(),
+  );
+  static final Handler _counterHandlerGhRegistrarEpp = Handler(
+    handlerFunc: (context, parameters) => GhRegistrarEpp(),
   );
 
   static final Handler _counterHandlerEstadoMilagro = Handler(

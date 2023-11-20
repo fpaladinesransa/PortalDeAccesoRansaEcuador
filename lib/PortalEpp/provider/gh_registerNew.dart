@@ -132,7 +132,18 @@ class DropdownService with ChangeNotifier {
   }
 
   var botasEstado;
+  var botasfecharenovar;
   var botasfechacompra;
+  setbotasfechacompra(value) {
+    botasfechacompra = value;
+    notifyListeners();
+  }
+
+  setbotasfecharenovar(value) {
+    botasfecharenovar = value;
+    notifyListeners();
+  }
+
   var botasfechaController = TextEditingController();
   setBotasEstado(value) {
     botasEstado = value;
@@ -160,10 +171,21 @@ class DropdownService with ChangeNotifier {
   }
 
   var cascosEstado;
+  var cascosFecharenovar;
   var cascosfechacompra;
   var cascosfechaController = TextEditingController();
   setCascosEstado(value) {
     cascosEstado = value;
+    notifyListeners();
+  }
+
+  setcascosFecharenovar(value) {
+    cascosFecharenovar = value;
+    notifyListeners();
+  }
+
+  setCascofechacompra(value) {
+    cascosfechacompra = value;
     notifyListeners();
   }
 
@@ -188,10 +210,21 @@ class DropdownService with ChangeNotifier {
   }
 
   var camisetasEstado;
+  var camisetasfecharenovar;
   var camisetasfechacompra;
   var camisetasfechaController = TextEditingController();
   setCamisetasEstado(value) {
     camisetasEstado = value;
+    notifyListeners();
+  }
+
+  setcamisetasfecharenovar(value) {
+    camisetasfecharenovar = value;
+    notifyListeners();
+  }
+
+  setcamisetasfechacompra(value) {
+    camisetasfechacompra = value;
     notifyListeners();
   }
 
@@ -217,9 +250,20 @@ class DropdownService with ChangeNotifier {
 
   var camisasEstado;
   var camisasfechacompra;
+  var camisasfecharenovar;
   var camisasfechaController = TextEditingController();
   setCamisasEstado(value) {
     camisasEstado = value;
+    notifyListeners();
+  }
+
+  setcamisasfecharenovar(value) {
+    camisasfecharenovar = value;
+    notifyListeners();
+  }
+
+  setcamisasfechacompra(value) {
+    camisasfechacompra = value;
     notifyListeners();
   }
 
@@ -254,6 +298,17 @@ class DropdownService with ChangeNotifier {
   var chalecosEstado;
   setChalecossEstado(value) {
     chalecosEstado = value;
+    notifyListeners();
+  }
+
+  setchalecosfechacompra(value) {
+    chalecosfechacompra = value;
+    notifyListeners();
+  }
+
+  var chalecosfecharenovar;
+  setchalecosfecharenovar(value) {
+    chalecosfecharenovar = value;
     notifyListeners();
   }
 

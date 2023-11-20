@@ -5,7 +5,7 @@ import 'package:portaltransportistas/services/navigation_service.dart';
 import '../../routes/router.dart';
 import '../pages/gh_actasEntrega.dart';
 import '../pages/gh_activo.dart';
-import '../pages/gh_home.dart';
+import '../pages/gh_registrarEPP.dart';
 import '../pages/gh_renovar.dart';
 import '../pages/gh_solicitudEPP.dart';
 import '../widgets/menu_item.dart';

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:portaltransportistas/routes/router.dart';
 
 import 'package:portaltransportistas/services/navigation_service.dart';
-import 'PortalEpp/pages/gh_home.dart';
+import 'PortalEpp/pages/gh_registrarEPP.dart';
 import 'PortalEpp/provider/col_registerNew.dart';
 import 'PortalEpp/widgets/tableActivos.dart';
 import 'Screens/portal_estado.dart';

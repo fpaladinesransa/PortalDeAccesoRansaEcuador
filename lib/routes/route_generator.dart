@@ -6,10 +6,11 @@ import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_home.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoQuito.dart';
 import '../PortalEpp/pages/dropdownprovider.dart';
 import '../PortalEpp/pages/gh_actasEntrega.dart';
-import '../PortalEpp/pages/gh_home.dart';
+import '../PortalEpp/pages/gh_registrarEPP.dart';
 import '../PortalEpp/pages/gh_activo.dart';
 import '../PortalEpp/pages/gh_renovar.dart';
 import '../PortalEpp/pages/gh_solicitudEPP.dart';
@@ -25,48 +26,57 @@ class RouteGenerator {
     switch (settings.name) {
       case '/home':
         return _fadeRoute(MyApp(asegurados: obtenerSegurosTotales()), '/home');
-        case '/homePortalEPP':
-      return _fadeRoute(SignInScreen(), '/homePortalEPP');
+      case '/homePortalEPP':
+        return _fadeRoute(SignInScreen(), '/homePortalEPP');
 
       case '/prueba':
-      return _fadeRoute(DropdowntextArea(titulo: '',), '/prueba');
+        return _fadeRoute(
+            DropdowntextArea(
+              titulo: '',
+            ),
+            '/prueba');
 
       case '/capacitacion':
         return _fadeRoute(IngresoDataPersonal(), '/capacitacion');
       case '/ghhome':
         return _fadeRoute(Gh_home(), '/ghhome');
+      case '/GhRegistrarEpp':
+        return _fadeRoute(GhRegistrarEpp(), '/GhRegistrarEpp');
       case '/ghRenovar':
-        return _fadeRoute(GhRenovarequipo(), '/ghRenovar');   
+        return _fadeRoute(GhRenovarequipo(), '/ghRenovar');
       case '/ghActivo':
         return _fadeRoute(GhActivoequipo(), '/ghActivo');
 
       case '/ghSolicitudEpp':
         return _fadeRoute(GhSolicitudEPPState(), '/ghSolicitudEpp');
-      
+
       case '/ghActasEntrega':
         return _fadeRoute(GHActasEntrega(), '/ghActasEntrega');
-     
+
       case '/CapacitacionSeguridad':
-        return _fadeRoute(CapacitacionSeguridad(cedula: '', cd: '',),'/CapacitacionSeguridad');
+        return _fadeRoute(
+            CapacitacionSeguridad(
+              cedula: '',
+              cd: '',
+            ),
+            '/CapacitacionSeguridad');
 
       case '/gh_CrearUsuario':
-        return _fadeRoute(Gh_CrearUsuario(),'/gh_CrearUsuario');
-      
+        return _fadeRoute(Gh_CrearUsuario(), '/gh_CrearUsuario');
+
       case '/gh_MostrarPDF':
-        return _fadeRoute(Gh_MostrarPDF(),'/gh_MostrarPDF');
+        return _fadeRoute(Gh_MostrarPDF(), '/gh_MostrarPDF');
       case '/portalEstadoQuito':
-        return _fadeRoute(PortalEstadoQuito(),'/portalEstadoQuito');
+        return _fadeRoute(PortalEstadoQuito(), '/portalEstadoQuito');
       case '/col_Solicitud':
-        return _fadeRoute(ColSolicitudes(),'/col_Solicitud');
+        return _fadeRoute(ColSolicitudes(), '/col_Solicitud');
       case '/col_Home':
-        return _fadeRoute(ColHome(),'/col_Home');
+        return _fadeRoute(ColHome(), '/col_Home');
       case '/col_Firma':
-        return _fadeRoute(ColFirma(),'/col_Firma');
-      
+        return _fadeRoute(ColFirma(), '/col_Firma');
+
       case '/col_EppActivo':
-        return _fadeRoute(ColEppActivo(),'/col_EppActivo');
-
-
+        return _fadeRoute(ColEppActivo(), '/col_EppActivo');
 
       default:
         return _fadeRoute(View404(), '/404');

@@ -170,12 +170,12 @@ Future enviarRenovacionBaja(
 }
 
 Future insertRenovacionNuevoEquipo(
-  String nombreepp,
-  String fechaCompra,
-  String estado,
-  String cedula,
-  String fechaRenovar,
-) async {
+    String nombreepp,
+    String fechaCompra,
+    String estado,
+    String cedula,
+    String fechaRenovar,
+    String fechaDeEntrega) async {
   final response = await http.post(
       Uri.parse("https://ransaapiecuador.azurewebsites.net/insertequiposEpp"),
       headers: <String, String>{
@@ -187,6 +187,7 @@ Future insertRenovacionNuevoEquipo(
         "Estado": estado,
         "Cedula": cedula,
         "FechaRenovar": fechaRenovar,
+        "FechaDeEntrega": fechaDeEntrega,
       }));
 
   if (response.statusCode == 200) {
@@ -692,5 +693,44 @@ Future insertColGH(
   } else {
     // Si la llamada no fue exitosa, lanza un error.
     throw Exception('Failed to post');
+  }
+}
+
+class GhMatrisEpp {
+  GhMatrisEpp({
+    required this.id,
+    required this.nombre,
+    required this.dias,
+  });
+
+  int id;
+  String nombre;
+  int dias;
+
+  factory GhMatrisEpp.fromJson(Map<String, dynamic> map) => GhMatrisEpp(
+        id: map["id"],
+        nombre: map["nombre"],
+        dias: map["diasUtiles"],
+      );
+}
+
+Future<List<GhMatrisEpp>> obtenerGhMatrisEpp({String? query}) async {
+  final response = await http
+      .get(Uri.parse("https://ransaapiecuador.azurewebsites.net/GhMatrisEpp"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final GhMatrisEppMap =
+        responseList.map((project) => GhMatrisEpp.fromJson(project)).toList();
+    if (query != null) {
+      return GhMatrisEppMap.where((element) =>
+          element.nombre.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return GhMatrisEppMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
   }
 }

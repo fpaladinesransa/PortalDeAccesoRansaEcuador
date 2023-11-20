@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:lottie/lottie.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
-import 'package:portaltransportistas/PortalEpp/pages/gh_home.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_registrarEPP.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -21,19 +21,19 @@ Future<void> mostrarDialog(context) async {
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
-      return AlertDialog(
-        // <-- SEE HERE
-        title: const Text(
-          'REGISTRO EPP',
-          style: TextStyle(color: Color(0xff009B3A), fontSize: 30),
-        ),
-        content: Consumer<DropdownService>(builder: (context, value, child) {
-          return SingleChildScrollView(
+      return Consumer<DropdownService>(builder: (context, value, child) {
+        return AlertDialog(
+          // <-- SEE HERE
+          title: const Text(
+            'REGISTRO EPP',
+            style: TextStyle(color: Color(0xff009B3A), fontSize: 30),
+          ),
+          content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text(""),
                 Text(
-                    'Estas seguro/a de registrar este usuario ${value.cedulaSelect}, se le asignara los siguientes recursos:'),
+                    'Estas seguro/a de registrar este usuario, se le asignara los siguientes recursos:'),
                 if (value.botasselected == "Si")
                   Text("${value.botasCantidad} Botas"),
                 if (value.cascoselected == "Si")
@@ -46,23 +46,71 @@ Future<void> mostrarDialog(context) async {
                   Text("${value.chalecosCantidad} Chalecos")
               ],
             ),
-          );
-        }),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Rechazar'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
           ),
-          TextButton(
-            child: const Text('Aceptar'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
+
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Rechazar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Aceptar'),
+              onPressed: () {
+                if (value.botasselected == "Si") {
+                  insertRenovacionNuevoEquipo(
+                      "Botas",
+                      value.botasfechacompra,
+                      "vigente",
+                      value.cedulaSelect,
+                      value.botasfecharenovar,
+                      value.botasfechacompra);
+                }
+                if (value.cascoselected == "Si") {
+                  insertRenovacionNuevoEquipo(
+                      "Casco",
+                      value.cascosfechacompra,
+                      "vigente",
+                      value.cedulaSelect,
+                      value.cascosFecharenovar,
+                      value.cascosfechacompra);
+                }
+
+                if (value.camisetasselected == "Si") {
+                  insertRenovacionNuevoEquipo(
+                      "Camisetas",
+                      value.camisetasfechacompra,
+                      "vigente",
+                      value.cedulaSelect,
+                      value.camisetasfecharenovar,
+                      value.camisetasfechacompra);
+                }
+                if (value.camisasselected == "Si") {
+                  insertRenovacionNuevoEquipo(
+                      "Camisas",
+                      value.cascosfechacompra,
+                      "vigente",
+                      value.cedulaSelect,
+                      value.cascosFecharenovar,
+                      value.cascosfechacompra);
+                }
+                if (value.chalecoselected == "Si") {
+                  insertRenovacionNuevoEquipo(
+                      "Chalecos",
+                      value.chalecosfechacompra,
+                      "vigente",
+                      value.cedulaSelect,
+                      value.chalecosfecharenovar,
+                      value.chalecosfechacompra);
+                }
+                enviadoCorrectamente(
+                    context, "EPP registrado con exito", GhRegistrarEpp());
+              },
+            ),
+          ],
+        );
+      });
     },
   );
 }
@@ -475,7 +523,8 @@ Future<void> mostrarMensajeEnviado(context, cedula, nombre, apellido, numero,
                         "1",
                         DateTime.now().toString(),
                         numero.text);
-                    enviadoCorrectamente(context, "Envio exitoso", Gh_home());
+                    enviadoCorrectamente(
+                        context, "Envio exitoso", GhRegistrarEpp());
                   },
                 ),
                 TextButton(
