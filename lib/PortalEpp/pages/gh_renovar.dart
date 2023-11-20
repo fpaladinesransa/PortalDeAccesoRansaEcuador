@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../widget/separadortitulo.dart';
 import '../provider/gh_registerNew.dart';
 import '../provider/providerEPP.dart';
-import '../widgets/menu.dart';
+import '../widgets/menu_gh.dart';
 import '../widgets/message_input.dart';
 import '../widgets/text_widget.dart';
 

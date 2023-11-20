@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../widget/separadortitulo.dart';
 import '../provider/providerEPP.dart';
-import '../widgets/menu.dart';
+import '../widgets/menu_gh.dart';
 import '../widgets/message_input.dart';
 
 class GhSolicitudEPPState extends StatefulWidget {
@@ -177,26 +177,40 @@ class _GhSolicitudEPPStateState extends State<GhSolicitudEPPState> {
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 )),
-                                                DataCell(
-                                                    onTap: () {
-                                                      mostrarDialogoPendienteEntrega(context,valor.nombres,valor.apellidos,valor.cedula,valor.fechaCompra,valor.fechaDeEntrega,valor.nombreEpp,valor.estado,valor.motivo,valor.comentarios,valor.id);
-
-
-                                                      
-                                                    },
+                                                DataCell(onTap: () {
+                                                  mostrarDialogoPendienteEntrega(
+                                                      context,
+                                                      valor.nombres,
+                                                      valor.apellidos,
+                                                      valor.cedula,
+                                                      valor.fechaCompra,
+                                                      valor.fechaDeEntrega,
+                                                      valor.nombreEpp,
+                                                      valor.estado,
+                                                      valor.motivo,
+                                                      valor.comentarios,
+                                                      valor.id);
+                                                },
                                                     Icon(
-                                                  Icons.check,
-                                                  color: Color(0xff009B3A),
-                                                )),
-                                                DataCell(
-                                                  onTap:(){
-                                                    mostrarDialogoPendienteEntregaRechazo(context,valor.nombres,valor.apellidos,valor.cedula,valor.fechaCompra,valor.fechaDeEntrega,valor.nombreEpp,valor.estado,valor.motivo,valor.comentarios,valor.id);
-
-                                                  },
-                                        
-                                                  Icon(
-                                                    Icons.close_rounded,
-                                                    color: Colors.red)),
+                                                      Icons.check,
+                                                      color: Color(0xff009B3A),
+                                                    )),
+                                                DataCell(onTap: () {
+                                                  mostrarDialogoPendienteEntregaRechazo(
+                                                      context,
+                                                      valor.nombres,
+                                                      valor.apellidos,
+                                                      valor.cedula,
+                                                      valor.fechaCompra,
+                                                      valor.fechaDeEntrega,
+                                                      valor.nombreEpp,
+                                                      valor.estado,
+                                                      valor.motivo,
+                                                      valor.comentarios,
+                                                      valor.id);
+                                                },
+                                                    Icon(Icons.close_rounded,
+                                                        color: Colors.red)),
                                               ]),
                                         )
                                         .toList(),

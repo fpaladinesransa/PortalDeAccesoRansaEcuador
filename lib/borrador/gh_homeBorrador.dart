@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/text_predictivo.dart';
 import 'package:provider/provider.dart';
-import '../provider/gh_registerNew.dart';
-import '../widgets/menu_gh.dart';
-import '../widgets/message_input.dart';
-import '../widgets/text_widget.dart';
-import 'dropdownprovider.dart';
+
 
 class Gh_home extends StatefulWidget {
   const Gh_home({super.key});
@@ -26,8 +22,7 @@ class _Gh_homeState extends State<Gh_home> {
 
   @override
   Widget build(BuildContext context) {
-    double ancho = MediaQuery.of(context).size.width;
-    double alto = MediaQuery.of(context).size.height;
+    //final sideMenuProvider = Provider.of<SideMenuProvider>(context);
 
     return ChangeNotifierProvider(
       create: (context) => RegisterFormProvider(),
@@ -72,14 +67,94 @@ class _Gh_homeState extends State<Gh_home> {
                       ]),
                     ),
                     const SizedBox(height: 30),
-                    Container(
-                      width: ancho * 0.59,
-                      child: Row(
-                        children: [
-                          AutocompleteWidget(value.setcedulaSelect),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 30,
+                        ),
+                        AutocompleteWidget(),
+                        Container(
+                          child: FormInput("Cedula:", value.cedulaSelect,
+                              value.setcedulaSelect),
+                          width: 300,
+                        ),
+                      ],
                     ),
+                    Container(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 30,
+                        ),
+                        DateCampo(context, registerFormProvider.fecha,
+                            fechaController),
+                        Container(
+                          width: 30,
+                        ),
+                        DropdowntextArea(
+                          titulo: 'Area de trabajo',
+                        ),
+                        Container(
+                          width: 30,
+                        ),
+                        DropdowntextRol(
+                          titulo: 'Area asignado',
+                        ),
+
+                        /* Container(child:  DropboxCampo(),) */
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      children: [
+                        Container(
+                          width: 30,
+                        ),
+                        Container(
+                          child: FormInput("Cargo:", value.cargoSelect,
+                              value.setcargoSelect),
+                          width: 300,
+                        ),
+                        Container(
+                          width: 30,
+                        ),
+                        DropdowntextNivel(
+                          titulo: 'Nivel de dotación',
+                        ),
+                        Container(
+                          width: 30,
+                        ),
+                        DropdowntextEmpresa(
+                          titulo: 'Empresa',
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      children: [
+                        Container(
+                          width: 30,
+                        ),
+                        Container(
+                          child: FormInput("Ciudad:", value.ciudadSelect,
+                              value.setciudadSelect),
+                          width: 300,
+                        ),
+                        Container(
+                          width: 30,
+                        ),
+                        DropdowntextPais(
+                          titulo: 'Pais',
+                        ),
+                        Container(
+                          width: 330,
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 30),
 
                     //------------ EPP--------------
 
@@ -572,3 +647,4 @@ class _Gh_homeState extends State<Gh_home> {
     );
   }
 }
+ */

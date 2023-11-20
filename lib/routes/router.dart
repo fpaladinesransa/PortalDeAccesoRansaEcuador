@@ -4,6 +4,7 @@ import 'package:portaltransportistas/PortalEpp/pages/col_firma.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_agregarCol.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoBabahoyo.dart';
@@ -60,6 +61,10 @@ class Flurorouter {
     router.define('/gh_CrearUsuario',
         handler: _counterHandlerGh_CrearUsuario,
         transitionType: TransitionType.fadeIn);
+    router.define('/gh_AgregarCol',
+        handler: _counterHandlerGh_AgregarCol,
+        transitionType: TransitionType.fadeIn);
+
     router.define('/col_Solicitud',
         handler: _counterHandlerColSolicitudes,
         transitionType: TransitionType.fadeIn);
@@ -172,4 +177,6 @@ class Flurorouter {
 
   static final Handler _counterHandlerGhSolicitudEPPState =
       Handler(handlerFunc: (context, parameters) => GhSolicitudEPPState());
+  static final Handler _counterHandlerGh_AgregarCol =
+      Handler(handlerFunc: (context, parameters) => Gh_AgregarCol());
 }

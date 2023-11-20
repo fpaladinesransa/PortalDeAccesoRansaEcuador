@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:lottie/lottie.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -32,7 +33,7 @@ Future<void> mostrarDialog(context) async {
               children: <Widget>[
                 Text(""),
                 Text(
-                    'Estas seguro/a de registrar este usuario, se le asignara los siguientes recursos:'),
+                    'Estas seguro/a de registrar este usuario ${value.cedulaSelect}, se le asignara los siguientes recursos:'),
                 if (value.botasselected == "Si")
                   Text("${value.botasCantidad} Botas"),
                 if (value.cascoselected == "Si")
@@ -418,4 +419,74 @@ Future showSecond(
       ],
     ),
   );
+}
+
+Future<void> mostrarMensajeEnviado(context, cedula, nombre, apellido, numero,
+    fecha, correo, ciudad, cargo) async {
+  return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return Consumer<DropdownService>(
+          builder: (context, value, child) {
+            return AlertDialog(
+              // <-- SEE HERE
+              title: const Text(
+                'REGISTRO DE COLABORADOR',
+                style: TextStyle(color: Color(0xff009B3A), fontSize: 30),
+              ),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(""),
+                    Text(
+                        'Se va a registrar al usuario ${nombre.text} ${apellido.text} con la cedula ${cedula.text} con el cargo de ${cargo.text}.'),
+                  ],
+                ),
+              ),
+
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Aceptar'),
+                  onPressed: () {
+                    print(
+                      DateTime.now().toString(),
+                    );
+                    print(cedula.text);
+                    print(nombre.text);
+                    print(apellido.text);
+                    print(value.areaselected);
+                    print(fecha.text);
+                    print(value.rolselected);
+                    print(cargo.text);
+                    print(correo.text);
+                    print(numero.text);
+                    insertColGH(
+                        cedula.text,
+                        nombre.text,
+                        apellido.text,
+                        value.areaselected,
+                        fecha.text,
+                        value.rolselected,
+                        cargo.text,
+                        cedula.text,
+                        correo.text,
+                        cedula.text,
+                        "1",
+                        DateTime.now().toString(),
+                        numero.text);
+                    enviadoCorrectamente(context, "Envio exitoso", Gh_home());
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancelar'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      });
 }

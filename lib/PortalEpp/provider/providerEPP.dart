@@ -651,3 +651,46 @@ Future<List<ColSelectActivoEpp>> obtenerColSelectActivoEpp(
     throw Exception('Failed to load post');
   }
 }
+
+Future insertColGH(
+  String cedula,
+  String nombre,
+  String apellido,
+  String areaTrabajo,
+  String fechaIngreso,
+  String roles,
+  String cargo,
+  String claveAcceso,
+  String correo,
+  String usuario,
+  String idEmpresa,
+  String fechaCreacion,
+  String numeroColaborador,
+) async {
+  final response = await http.post(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/insertColaborador"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "Cedula": cedula,
+        "Nombres": nombre,
+        "Apellido": apellido,
+        "Area_Trabajo": areaTrabajo,
+        "Fecha_Ingreso": fechaIngreso,
+        "Roles": roles,
+        "Cargo": cargo,
+        "Clave_Acceso": claveAcceso,
+        "Correo": correo,
+        "Usuario": usuario,
+        "ID_empresa": idEmpresa,
+        "Fecha_Creacion": fechaCreacion,
+        "Numero_Colaborador": numeroColaborador,
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
