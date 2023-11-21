@@ -311,7 +311,8 @@ class EppSelectFirmaGH {
     required this.cedula,
     required this.nombreEpp,
     required this.estado,
-    required this.urlFirma,
+    required this.firma,
+    required this.numeroColaborador,
   });
   int id;
   String nombres;
@@ -319,7 +320,8 @@ class EppSelectFirmaGH {
   String cedula;
   String nombreEpp;
   String estado;
-  String urlFirma;
+  String numeroColaborador;
+  String firma;
   factory EppSelectFirmaGH.fromJson(Map<String, dynamic> map) =>
       EppSelectFirmaGH(
         id: map["ID"],
@@ -328,7 +330,8 @@ class EppSelectFirmaGH {
         cedula: map["Cedula"],
         nombreEpp: map["NombreEpp"],
         estado: map["Estado"],
-        urlFirma: map["UrlFirma"],
+        numeroColaborador: map["Numero_Colaborador"],
+        firma: map["Firma"],
       );
 }
 

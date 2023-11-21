@@ -35,19 +35,6 @@ class SignInScreen extends StatelessWidget {
                         textsize: 22,
                         fontWeight: FontWeight.normal,
                       ),
-
-/*                       TextWidget(
-                        text: 'Home',
-                        textcolor: Colors.grey,
-                        textsize: 20,
-                        fontWeight: FontWeight.normal,
-                      ),
-                      TextWidget(
-                        text: 'Join',
-                        textcolor: Colors.grey,
-                        textsize: 20,
-                        fontWeight: FontWeight.normal,
-                      ), */
                     ],
                   ),
                   WSizedBox(wval: 0, hval: 0.2),
@@ -89,29 +76,37 @@ class SignInScreen extends StatelessWidget {
                             ],
                           ),
                           WSizedBox(wval: 0, hval: 0.03),
-                          const CustomTextField(
-                              borderradius: 20,
-                              bordercolor: Color.fromARGB(255, 50, 54, 69),
-                              widh: 0.32,
-                              height: 0.05,
-                              icon: Icons.person,
-                              iconColor: Colors.grey,
-                              hinttext: 'Usuario',
-                              hintColor: Colors.grey,
-                              fontsize: 15,
-                              obscureText: false),
+                          Container(
+                            height: altura * 0.07,
+                            width: ancho * 0.32,
+                            child: CustomTextField(
+                                borderradius: 20,
+                                bordercolor: Color.fromARGB(255, 50, 54, 69),
+                                widh: 0.32,
+                                height: 0.05,
+                                icon: Icons.person,
+                                iconColor: Colors.grey,
+                                hinttext: 'Usuario',
+                                hintColor: Colors.grey,
+                                fontsize: 15,
+                                obscureText: false),
+                          ),
                           WSizedBox(wval: 0, hval: 0.02),
-                          const CustomTextField(
-                              borderradius: 20,
-                              bordercolor: Color.fromARGB(255, 50, 54, 69),
-                              widh: 0.32,
-                              height: 0.05,
-                              icon: Icons.lock,
-                              iconColor: Colors.grey,
-                              hinttext: 'password',
-                              hintColor: Colors.grey,
-                              fontsize: 15,
-                              obscureText: true),
+                          Container(
+                            height: altura * 0.07,
+                            width: ancho * 0.32,
+                            child: CustomTextField(
+                                borderradius: 20,
+                                bordercolor: Color.fromARGB(255, 50, 54, 69),
+                                widh: 0.32,
+                                height: 0.05,
+                                icon: Icons.lock,
+                                iconColor: Colors.grey,
+                                hinttext: 'Contraseña',
+                                hintColor: Colors.grey,
+                                fontsize: 15,
+                                obscureText: true),
+                          ),
                           WSizedBox(wval: 0, hval: 0.04),
                           CustomButton(
                             buttontext: 'Ingresar',
@@ -123,9 +118,8 @@ class SignInScreen extends StatelessWidget {
                             fontweight: FontWeight.bold,
                             fontcolor: Colors.white,
                             onPressed: () {
-                              locator<NavigationService>().navigateTo('/ghhome');
-
-
+                              locator<NavigationService>()
+                                  .navigateTo('/ghhome');
                             },
                           ),
                         ],
@@ -139,7 +133,6 @@ class SignInScreen extends StatelessWidget {
           Row(
             children: [
               Container(width: ancho * 0.4),
-
               ClipPath(
                 child: Container(
                   width: ancho * 0.6,
@@ -151,21 +144,10 @@ class SignInScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.centerRight,
                 ),
-              clipper: CustomClipPath(
+                clipper: CustomClipPath(),
               ),
-              
-
-
-                ),
             ],
           ),
-
-          //Agregar Imagen de ransa
-          /*   const CustomImageWidget(
-            height: 1,
-            width: 0.5,
-            imgpath: 'assets/images/bg.png',
-          ), */
         ],
       ),
     );
@@ -173,7 +155,6 @@ class SignInScreen extends StatelessWidget {
 }
 
 class CustomClipPath extends CustomClipper<Path> {
-  
   @override
   Path getClip(Size size) {
     double height = size.height;
@@ -183,9 +164,8 @@ class CustomClipPath extends CustomClipper<Path> {
     //LineaArriba
     //lineaverticalIzq
     path.lineTo(size.width / 3, size.height);
-     path.lineTo(size.width, size.height);
+    path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0);
-
 
     return path;
   }

@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_registrarEPP.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
+import 'package:portaltransportistas/pdf/pdf_service.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
@@ -365,7 +366,11 @@ Future<void> mostrarDocumentoActEntrega(
         actions: <Widget>[
           TextButton(
             child: const Text('Descargar'),
-            onPressed: () {},
+            onPressed: () {
+              print("object");
+              PdfService().printCustomersPdf(
+                  firma, nombre, apellido, numero, epp, cedula);
+            },
           ),
           TextButton(
             child: const Text('Volver'),

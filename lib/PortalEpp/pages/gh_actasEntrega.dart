@@ -44,7 +44,7 @@ class _GHActasEntregaState extends State<GHActasEntrega> {
                       height: 50,
                     ),
                     SeparadorTitulo(
-                      titulo: 'EPP por Renovar',
+                      titulo: 'Acta de entrega',
                     ),
                     Container(
                       height: 50,
@@ -95,6 +95,10 @@ class _GHActasEntregaState extends State<GHActasEntrega> {
                                           numeric: false,
                                           tooltip: "Estado"),
                                       DataColumn(
+                                          label: Text("Número"),
+                                          numeric: false,
+                                          tooltip: "Estado"),
+                                      DataColumn(
                                           label: Text("Documento"),
                                           numeric: false,
                                           tooltip: "UrlFirma"),
@@ -109,15 +113,17 @@ class _GHActasEntregaState extends State<GHActasEntrega> {
                                             DataCell(Text(valor.cedula)),
                                             DataCell(Text(valor.nombreEpp)),
                                             DataCell(Text(valor.estado)),
+                                            DataCell(
+                                                Text(valor.numeroColaborador)),
                                             DataCell(onTap: () {
                                               mostrarDocumentoActEntrega(
                                                   context,
                                                   valor.nombres,
                                                   valor.apellidos,
-                                                  "123242151",
+                                                  valor.numeroColaborador,
                                                   valor.nombreEpp,
                                                   valor.cedula,
-                                                  "1241241");
+                                                  valor.firma);
                                             },
                                                 Icon(
                                                   Icons.description,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/custom_buttomMenu.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu_gh.dart';
+import 'package:portaltransportistas/locator.dart';
+import 'package:portaltransportistas/services/navigation_service.dart';
 import 'package:portaltransportistas/widget/separadortitulo.dart';
 
 class Gh_home extends StatefulWidget {
@@ -33,25 +35,27 @@ class _Gh_homeState extends State<Gh_home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomButtonMenu(
-                      icon: Icons.mode_edit,
+                      icon: Icons.person,
                       onPressed: () {
-                        // Handle button press action
+                        locator<NavigationService>()
+                            .navigateTo('/gh_AgregarCol');
                       },
-                      buttonText: 'Firmas pendientes',
+                      buttonText: 'Agregar',
                     ),
                     CustomButtonMenu(
-                      icon: Icons.mode_edit,
+                      icon: Icons.file_upload,
                       onPressed: () {
-                        // Handle button press action
+                        locator<NavigationService>()
+                            .navigateTo('/gh_RegistrarEpp');
                       },
-                      buttonText: 'Firmas pendientes',
+                      buttonText: 'Registrar EPP a colaborador',
                     ),
                     CustomButtonMenu(
-                      icon: Icons.mode_edit,
+                      icon: Icons.autorenew,
                       onPressed: () {
-                        // Handle button press action
+                        locator<NavigationService>().navigateTo('/ghRenovar');
                       },
-                      buttonText: 'Firmas pendientes',
+                      buttonText: 'Renovar equipos',
                     ),
                   ],
                 ),
@@ -62,25 +66,26 @@ class _Gh_homeState extends State<Gh_home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomButtonMenu(
-                      icon: Icons.mode_edit,
+                      icon: Icons.dashboard_outlined,
                       onPressed: () {
-                        // Handle button press action
+                        locator<NavigationService>().navigateTo('/ghActivo');
                       },
-                      buttonText: 'Firmas pendientes',
+                      buttonText: 'Equipos activos',
                     ),
                     CustomButtonMenu(
-                      icon: Icons.mode_edit,
+                      icon: Icons.pageview,
                       onPressed: () {
-                        // Handle button press action
+                        locator<NavigationService>().navigateTo('/404');
                       },
-                      buttonText: 'Firmas pendientes',
+                      buttonText: 'Pendientes de entrega',
                     ),
                     CustomButtonMenu(
-                      icon: Icons.mode_edit,
+                      icon: Icons.picture_as_pdf,
                       onPressed: () {
-                        // Handle button press action
+                        locator<NavigationService>()
+                            .navigateTo('/ghActasEntrega');
                       },
-                      buttonText: 'Firmas pendientes',
+                      buttonText: 'Actas de entrega',
                     ),
                   ],
                 ),
@@ -91,27 +96,25 @@ class _Gh_homeState extends State<Gh_home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomButtonMenu(
-                      icon: Icons.mode_edit,
+                      icon: Icons.priority_high,
                       onPressed: () {
-                        // Handle button press action
+                        locator<NavigationService>()
+                            .navigateTo('/ghSolicitudEpp');
                       },
-                      buttonText: 'Firmas pendientes',
+                      buttonText: 'Solicitud EPP',
                     ),
-                    CustomButtonMenu(
-                      icon: Icons.mode_edit,
-                      onPressed: () {
-                        // Handle button press action
-                      },
-                      buttonText: 'Firmas pendientes',
+                    Container(
+                      height: alto * 0.25,
+                      width: ancho * 0.15,
                     ),
-                    CustomButtonMenu(
-                      icon: Icons.mode_edit,
-                      onPressed: () {
-                        // Handle button press action
-                      },
-                      buttonText: 'Firmas pendientes',
+                    Container(
+                      height: alto * 0.25,
+                      width: ancho * 0.15,
                     ),
                   ],
+                ),
+                Container(
+                  height: alto * 0.25,
                 ),
               ]),
             ),

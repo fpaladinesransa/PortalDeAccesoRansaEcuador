@@ -19,7 +19,7 @@ import '../PortalEpp/pages/gh_registrarEPP.dart';
 import '../PortalEpp/pages/gh_activo.dart';
 import '../PortalEpp/pages/gh_renovar.dart';
 import '../PortalEpp/pages/gh_solicitudEPP.dart';
-import '../PortalEpp/pages/home.dart';
+import '../PortalEpp/pages/home_portalEpp.dart';
 import '../PortalEpp/provider/providerEPP.dart';
 import '../screens/portal_estado.dart';
 import '../api/provider.dart';
@@ -53,6 +53,10 @@ class Flurorouter {
     router.define('/capacitacionSeguridad',
         handler: _counterHandlerCapacitacionSeguridad,
         transitionType: TransitionType.fadeIn);
+
+    router.define('/portalEpp',
+        handler: _counterHandlerSignInScreen,
+        transitionType: TransitionType.fadeIn);
     router.define('/ghSolicitudEpp',
         handler: _counterHandlerGhSolicitudEPPState,
         transitionType: TransitionType.fadeIn);
@@ -64,6 +68,9 @@ class Flurorouter {
         transitionType: TransitionType.fadeIn);
     router.define('/gh_AgregarCol',
         handler: _counterHandlerGh_AgregarCol,
+        transitionType: TransitionType.fadeIn);
+    router.define('/gh_RegistrarEpp',
+        handler: _counterHandlerGhRegistrarEpp,
         transitionType: TransitionType.fadeIn);
 
     router.define('/col_Solicitud',
@@ -93,9 +100,6 @@ class Flurorouter {
     router.define('/portalEstadoManta',
         handler: _counterHandlerEstadoManta,
         transitionType: TransitionType.fadeIn);
-    router.define('/GhRegistrarEpp',
-        handler: _counterHandlerGhRegistrarEpp,
-        transitionType: TransitionType.fadeIn);
 
     router.notFoundHandler = pageNotFound;
   }
@@ -106,6 +110,9 @@ class Flurorouter {
   );
   static final Handler _counterHandlerColSolicitudes = Handler(
     handlerFunc: (context, parameters) => const ColSolicitudes(),
+  );
+  static final Handler _counterHandlerSignInScreen = Handler(
+    handlerFunc: (context, parameters) => const SignInScreen(),
   );
   static final Handler _counterHandlerColHome = Handler(
     handlerFunc: (context, parameters) => const ColHome(),

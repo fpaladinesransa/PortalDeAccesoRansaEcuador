@@ -48,11 +48,10 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.all(15),
-           suffixIcon: Icon(
+            suffixIcon: Icon(
               icon,
               color: iconColor,
-            ) ,
-            
+            ),
             hintText: hinttext,
             hintStyle: TextStyle(
               color: hintColor,

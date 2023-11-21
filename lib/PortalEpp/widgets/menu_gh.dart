@@ -33,12 +33,23 @@ class Gh_menu extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         children: [
           SizedBox(height: 10),
-          MenuItem(text: 'Home', icon: Icons.account_box, onPressed: () {}),
           MenuItem(
-              text: 'Generar nuevos regitros',
-              icon: Icons.file_upload,
+              text: 'Home',
+              icon: Icons.account_box,
               onPressed: () {
                 locator<NavigationService>().navigateTo('/ghhome');
+              }),
+          MenuItem(
+              text: 'Agregar colaborar',
+              icon: Icons.person,
+              onPressed: () {
+                locator<NavigationService>().navigateTo('/gh_AgregarCol');
+              }),
+          MenuItem(
+              text: 'Registrar EPP',
+              icon: Icons.file_upload,
+              onPressed: () {
+                locator<NavigationService>().navigateTo('/gh_RegistrarEpp');
               }),
           MenuItem(
               text: 'Renovar equipos',
@@ -66,7 +77,7 @@ class Gh_menu extends StatelessWidget {
               }),
           MenuItem(
               text: 'Solicitud EPP',
-              icon: Icons.person,
+              icon: Icons.priority_high,
               onPressed: () {
                 locator<NavigationService>().navigateTo('/ghSolicitudEpp');
               }),

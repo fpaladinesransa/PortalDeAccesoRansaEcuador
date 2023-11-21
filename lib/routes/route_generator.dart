@@ -5,6 +5,7 @@ import 'package:portaltransportistas/PortalEpp/pages/col_firma.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_agregarCol.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_home.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoQuito.dart';
@@ -14,7 +15,7 @@ import '../PortalEpp/pages/gh_registrarEPP.dart';
 import '../PortalEpp/pages/gh_activo.dart';
 import '../PortalEpp/pages/gh_renovar.dart';
 import '../PortalEpp/pages/gh_solicitudEPP.dart';
-import '../PortalEpp/pages/home.dart';
+import '../PortalEpp/pages/home_portalEpp.dart';
 import '../Screens/portal_estado.dart';
 import '../api/provider.dart';
 import '../screens/Seguridad_Capacitacion.dart';
@@ -60,10 +61,14 @@ class RouteGenerator {
               cd: '',
             ),
             '/CapacitacionSeguridad');
-
+      case '/portalEpp':
+        return _fadeRoute(SignInScreen(), '/portalEpp');
       case '/gh_CrearUsuario':
         return _fadeRoute(Gh_CrearUsuario(), '/gh_CrearUsuario');
-
+      case '/Gh_AgregarCol':
+        return _fadeRoute(Gh_AgregarCol(), '/Gh_AgregarCol');
+      case '/gh_RegistrarEpp':
+        return _fadeRoute(GhRegistrarEpp(), '/gh_RegistrarEpp');
       case '/gh_MostrarPDF':
         return _fadeRoute(Gh_MostrarPDF(), '/gh_MostrarPDF');
       case '/portalEstadoQuito':

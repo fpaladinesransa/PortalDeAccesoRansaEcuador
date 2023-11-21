@@ -5,7 +5,6 @@ import 'package:portaltransportistas/PortalEpp/widgets/campo_fecha.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu_gh.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/message_input.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/text_widget.dart';
-import 'package:portaltransportistas/pdf/pdf_service.dart';
 import 'package:portaltransportistas/widget/separadortitulo.dart';
 
 class Gh_AgregarCol extends StatefulWidget {
