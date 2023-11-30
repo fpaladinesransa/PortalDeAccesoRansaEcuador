@@ -27,7 +27,7 @@ Future<List<TablasColSelectSolicitudEpp>> dataLista =
 
 class _ColSolicitudesState extends State<ColSolicitudes> {
   late String nameValue;
-  late String comentarioValue;
+  final comentarioValue = TextEditingController();
   final fechaController = TextEditingController();
 
   @override
@@ -142,7 +142,8 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
                               ),
                               SizedBox(
                                 width: ancho * 0.6,
-                                child: FormLargeInput("Comentario:"),
+                                child: FormLargeInput(
+                                    "Comentario:", comentarioValue),
                               ),
                             ],
                           ),
@@ -153,11 +154,13 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
                             onPressed: () {
                               if (variables.epp != "") {
                                 if (_formKey.currentState!.validate()) {
+                                  print(variables.id);
+                                  print(comentarioValue.text);
                                   colUpdateSolicitudEpp(
                                       "Solicitud",
+                                      comentarioValue.text,
+                                      "correo",
                                       variablesDrop.motivoselected,
-                                      "Si",
-                                      comentarioValue,
                                       variables.id);
                                   enviadoCorrectamente(context,
                                       "Solicitud de EPP enviada", ColHome());
@@ -230,7 +233,7 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
   }
 
   // ignore: non_constant_identifier_names
-  Column FormLargeInput(titleinput) {
+  Column FormLargeInput(titleinput, valor) {
     return Column(
       children: [
         Align(
@@ -249,6 +252,7 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
         SizedBox(
           height: 100,
           child: TextFormField(
+            controller: valor,
             expands: true,
             keyboardType: TextInputType.multiline,
             maxLines: null,
@@ -262,9 +266,6 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10))),
-            onSaved: (value) {
-              comentarioValue = value!;
-            },
           ),
         ),
       ],

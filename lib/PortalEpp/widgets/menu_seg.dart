@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:portaltransportistas/locator.dart';
 import 'package:portaltransportistas/services/navigation_service.dart';
-import '../widgets/menu_item.dart';
 
-class Col_menu extends StatelessWidget {
-  const Col_menu({super.key});
+import '../../routes/router.dart';
+import '../pages/gh_actasEntrega.dart';
+import '../pages/gh_activo.dart';
+import '../pages/gh_registrarEPP.dart';
+import '../pages/gh_renovar.dart';
+import '../pages/gh_solicitudEPP.dart';
+import '../widgets/menu_item.dart';
+import '../widgets/text_separator.dart';
+
+class Seg_menu extends StatelessWidget {
+  const Seg_menu({super.key});
+
+/*   void navigateTo( String routeName ) {
+    NavigationService.navigateTo( routeName );
+    SideMenuProvider.closeMenu();
+  } */
 
   @override
   Widget build(BuildContext context) {
     double ancho = MediaQuery.of(context).size.width;
+
+    //final sideMenuProvider = Provider.of<SideMenuProvider>(context);
 
     return Container(
       width: ancho * 0.2,
@@ -18,24 +33,17 @@ class Col_menu extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         children: [
           SizedBox(height: 10),
-          MenuItem(text: 'Home', icon: Icons.home, onPressed: () {}),
           MenuItem(
-              text: 'Mis epp',
+              text: 'Home',
               icon: Icons.account_box,
               onPressed: () {
-                locator<NavigationService>().navigateTo('/col_EppActivo');
+                locator<NavigationService>().navigateTo('/seg_home');
               }),
           MenuItem(
-              text: 'Firma pendiente epp',
-              icon: Icons.mode_edit,
+              text: 'Solicitudes EPP',
+              icon: Icons.person,
               onPressed: () {
-                locator<NavigationService>().navigateTo('/col_Firma');
-              }),
-          MenuItem(
-              text: 'Solicitud epp',
-              icon: Icons.new_releases,
-              onPressed: () {
-                locator<NavigationService>().navigateTo('/col_Solicitud');
+                locator<NavigationService>().navigateTo('/seg_Solicitud');
               }),
         ],
       ),

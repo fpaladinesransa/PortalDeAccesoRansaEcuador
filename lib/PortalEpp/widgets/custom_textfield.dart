@@ -44,7 +44,11 @@ class CustomTextField extends StatelessWidget {
       ),
       width: MediaQuery.of(context).size.width * widh,
       height: MediaQuery.of(context).size.height * height,
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) return "Llene este campo";
+          return null;
+        },
         controller: controller,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.all(15),

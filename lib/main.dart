@@ -52,7 +52,7 @@ class MyAppMain extends StatelessWidget {
         theme: ThemeData(
             primarySwatch:
                 generateMaterialColor(color: Color.fromARGB(255, 0, 155, 8))),
-        initialRoute: "/portalEpp",
+        initialRoute: "/ghSolicitudEpp",
         onGenerateRoute: Flurorouter.router.generator,
         navigatorKey: locator<NavigationService>().navigatorKey,
       ),

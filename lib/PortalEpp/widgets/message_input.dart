@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_registrarEPP.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
+import 'package:portaltransportistas/PortalEpp/widgets/campo_fecha.dart';
 import 'package:portaltransportistas/pdf/pdf_service.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -66,7 +67,8 @@ Future<void> mostrarDialog(context) async {
                       "vigente",
                       value.cedulaSelect,
                       value.botasfecharenovar,
-                      value.botasfechacompra);
+                      value.botasfechacompra,
+                      value.botasProveedor);
                 }
                 if (value.cascoselected == "Si") {
                   insertRenovacionNuevoEquipo(
@@ -75,7 +77,8 @@ Future<void> mostrarDialog(context) async {
                       "vigente",
                       value.cedulaSelect,
                       value.cascosFecharenovar,
-                      value.cascosfechacompra);
+                      value.cascosfechacompra,
+                      value.cascosProveedor);
                 }
 
                 if (value.camisetasselected == "Si") {
@@ -85,7 +88,8 @@ Future<void> mostrarDialog(context) async {
                       "vigente",
                       value.cedulaSelect,
                       value.camisetasfecharenovar,
-                      value.camisetasfechacompra);
+                      value.camisetasfechacompra,
+                      value.camisetasProveedor);
                 }
                 if (value.camisasselected == "Si") {
                   insertRenovacionNuevoEquipo(
@@ -94,7 +98,8 @@ Future<void> mostrarDialog(context) async {
                       "vigente",
                       value.cedulaSelect,
                       value.cascosFecharenovar,
-                      value.cascosfechacompra);
+                      value.cascosfechacompra,
+                      value.cascosProveedor);
                 }
                 if (value.chalecoselected == "Si") {
                   insertRenovacionNuevoEquipo(
@@ -103,7 +108,8 @@ Future<void> mostrarDialog(context) async {
                       "vigente",
                       value.cedulaSelect,
                       value.chalecosfecharenovar,
-                      value.chalecosfechacompra);
+                      value.chalecosfechacompra,
+                      value.chalecosProveedor);
                 }
                 enviadoCorrectamente(
                     context, "EPP registrado con exito", GhRegistrarEpp());
@@ -212,6 +218,8 @@ Future<void> mostrarDialogoPendienteEntrega(context, nombre, apellido, cedula,
           TextButton(
             child: const Text('No'),
             onPressed: () {
+              insertGHsolicitud(epp, cedula, motivo, fechaEntrega.toString(),
+                  comentarios, "Rechazado", id.toString());
               Navigator.of(context).pop();
             },
           ),
@@ -230,6 +238,112 @@ Future<void> mostrarDialogoPendienteEntrega(context, nombre, apellido, cedula,
             },
           )
         ],
+      );
+    },
+  );
+}
+
+Future<void> mostrarDialogoEntregaRealizada(context, nombre, apellido, cedula,
+    fechacompra, fechaEntrega, epp, estado, motivo, comentarios, id) async {
+  final _formKey = GlobalKey<FormState>();
+  dynamic fechavalue;
+  TextEditingController fechaController = TextEditingController();
+  TextEditingController proveedorController = TextEditingController();
+  final now = new DateTime.now();
+  String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+  int eppDias = 0;
+
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return Form(
+        key: _formKey,
+        child: AlertDialog(
+          // <-- SEE HERE
+          title: const Text(
+            'REGISTRO EPP',
+            style: TextStyle(color: Color(0xff009B3A), fontSize: 30),
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("Generar "),
+                FechaCampo(fechavalue, fechaController),
+                Container(
+                  height: 0,
+                  width: 0,
+                  child: FutureBuilder(
+                    future: obtenerGhMatrisEpp(),
+                    builder:
+                        (context, AsyncSnapshot<List<GhMatrisEpp>> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Muestra un indicador de carga mientras espera el resultado
+                        return Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        // Muestra un mensaje de error si hay un error
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      } else {
+                        List<GhMatrisEpp> datos = snapshot.requireData;
+                        if (epp == 'Casco') {
+                          eppDias = datos[0].dias;
+                        }
+                        if (epp == 'Camisas') {
+                          eppDias = datos[1].dias;
+                        }
+                        if (epp == 'Camisetas') {
+                          eppDias = datos[2].dias;
+                        }
+                        if (epp == 'Botas') {
+                          eppDias = datos[3].dias;
+                        }
+                        if (epp == 'Chalecos') {
+                          eppDias = datos[4].dias;
+                        }
+
+                        return Container();
+                      }
+                    },
+                  ),
+                ),
+                TextFormField(
+                  controller: proveedorController,
+                  decoration: InputDecoration(labelText: 'Proveedor'),
+                  keyboardType: TextInputType.text,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Por favor, ingrese el proveedor.';
+                    }
+                    return null;
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Actualizar'),
+              onPressed: () {
+                insertRenovacionNuevoEquipo(
+                    epp,
+                    fechavalue,
+                    "vigente",
+                    cedula,
+                    DateFormat("yyyy-MM-dd")
+                        .format(fechavalue.add(Duration(days: eppDias))),
+                    formattedDate,
+                    proveedorController.text);
+                actualizarGHsolicitud("", "Baja", "", id.toString());
+                enviadoCorrectamente(
+                    context, "Solicitud EPP exitosa", GhSolicitudEPPState());
+
+                //Insertar nuevos registros
+                /*                   insertRenovacionNuevoEquipo(value.epp,value.fechaCompra,"Vigente",value.cedula,value.fechaRenovar),
+                    print("Nuevo recurso") */
+              },
+            )
+          ],
+        ),
       );
     },
   );

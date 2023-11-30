@@ -5,6 +5,8 @@ import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/custom_buttomMenu.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu_col.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/tablaCol.dart';
+import 'package:portaltransportistas/locator.dart';
+import 'package:portaltransportistas/services/navigation_service.dart';
 import 'package:portaltransportistas/widget/separadortitulo.dart';
 
 class ColHome extends StatefulWidget {
@@ -40,6 +42,8 @@ class _ColHomeState extends State<ColHome> {
                       CustomButtonMenu(
                         icon: Icons.account_box,
                         onPressed: () {
+                          locator<NavigationService>()
+                              .navigateTo('/col_EppActivo');
                           // Handle button press action
                         },
                         buttonText: 'Mis EPP',
@@ -47,6 +51,8 @@ class _ColHomeState extends State<ColHome> {
                       CustomButtonMenu(
                         icon: Icons.mode_edit,
                         onPressed: () {
+                          locator<NavigationService>().navigateTo('/col_Firma');
+
                           // Handle button press action
                         },
                         buttonText: 'Firmas pendientes',
@@ -54,6 +60,8 @@ class _ColHomeState extends State<ColHome> {
                       CustomButtonMenu(
                         icon: Icons.new_releases,
                         onPressed: () {
+                          locator<NavigationService>()
+                              .navigateTo('/col_Solicitud');
                           // Handle button press action
                         },
                         buttonText: 'Solicitar EPP',

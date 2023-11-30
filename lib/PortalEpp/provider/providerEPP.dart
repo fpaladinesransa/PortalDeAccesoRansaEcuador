@@ -175,7 +175,8 @@ Future insertRenovacionNuevoEquipo(
     String estado,
     String cedula,
     String fechaRenovar,
-    String fechaDeEntrega) async {
+    String fechaDeEntrega,
+    String proveedor) async {
   final response = await http.post(
       Uri.parse("https://ransaapiecuador.azurewebsites.net/insertequiposEpp"),
       headers: <String, String>{
@@ -188,6 +189,7 @@ Future insertRenovacionNuevoEquipo(
         "Cedula": cedula,
         "FechaRenovar": fechaRenovar,
         "FechaDeEntrega": fechaDeEntrega,
+        "Proveedor": proveedor
       }));
 
   if (response.statusCode == 200) {
@@ -238,6 +240,25 @@ class EppSolicitudList {
 Future<List<EppSolicitudList>> eppSolicitudEppGH() async {
   final response = await http.get(
       Uri.parse("https://ransaapiecuador.azurewebsites.net/SelectGHsolicitud"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+
+    final EppSolicitudListAll = responseList
+        .map((project) => EppSolicitudList.fromJson(project))
+        .toList();
+
+    return EppSolicitudListAll;
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+Future<List<EppSolicitudList>> eppSolicitudEppGHRenovar() async {
+  final response = await http.get(Uri.parse(
+      "https://ransaapiecuador.azurewebsites.net/SelectGHsolicitudRenovar"));
 
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE     EL TEXTO LITERAL DE LA CONSULTA
@@ -731,6 +752,56 @@ Future<List<GhMatrisEpp>> obtenerGhMatrisEpp({String? query}) async {
           element.nombre.toLowerCase().contains(query.toLowerCase())).toList();
     } else {
       return GhMatrisEppMap;
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+class SelectNivelDeAcceso {
+  SelectNivelDeAcceso({
+    required this.cedula,
+    required this.nombre,
+    required this.apellido,
+    required this.usuario,
+    required this.claveAcceso,
+    required this.nivelAcceso,
+  });
+
+  String cedula;
+  String nombre;
+  String apellido;
+  String usuario;
+  String claveAcceso;
+  String nivelAcceso;
+
+  factory SelectNivelDeAcceso.fromJson(Map<String, dynamic> map) =>
+      SelectNivelDeAcceso(
+        cedula: map["Cedula"],
+        nombre: map["Nombres"],
+        apellido: map["Apellido"],
+        usuario: map["Usuario"],
+        claveAcceso: map["Clave_Acceso"],
+        nivelAcceso: map["NivelAcceso"],
+      );
+}
+
+Future<List<SelectNivelDeAcceso>> obtenerNivelDeAcceso({String? query}) async {
+  final response = await http.get(Uri.parse(
+      "https://ransaapiecuador.azurewebsites.net/SelectNivelDeAcceso"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final SelectNivelDeAccesoMap = responseList
+        .map((project) => SelectNivelDeAcceso.fromJson(project))
+        .toList();
+    if (query != null) {
+      return SelectNivelDeAccesoMap.where((element) =>
+          element.nombre.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return SelectNivelDeAccesoMap;
     }
   } else {
     // Si la llamada no fue exitosa, lanza un error.

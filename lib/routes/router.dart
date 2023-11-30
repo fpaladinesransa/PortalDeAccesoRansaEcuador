@@ -8,6 +8,8 @@ import 'package:portaltransportistas/PortalEpp/pages/gh_agregarCol.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
+import 'package:portaltransportistas/PortalEpp/pages/seg_home.dart';
+import 'package:portaltransportistas/PortalEpp/pages/seg_solicitud.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoBabahoyo.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoMachala.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoManta.dart';
@@ -85,6 +87,13 @@ class Flurorouter {
         handler: _counterHandlerColEppActivo,
         transitionType: TransitionType.fadeIn);
 
+    router.define('/seg_home',
+        handler: _counterHandlerSeg_home,
+        transitionType: TransitionType.fadeIn);
+    router.define('/seg_Solicitud',
+        handler: _counterHandlerSegSolicitud,
+        transitionType: TransitionType.fadeIn);
+
     router.define('/portalEstadoQuito',
         handler: _counterHandlerportalEstadoQuito,
         transitionType: TransitionType.fadeIn);
@@ -122,6 +131,12 @@ class Flurorouter {
   );
   static final Handler _counterHandlerColEppActivo = Handler(
     handlerFunc: (context, parameters) => const ColEppActivo(),
+  );
+  static final Handler _counterHandlerSeg_home = Handler(
+    handlerFunc: (context, parameters) => const Seg_home(),
+  );
+  static final Handler _counterHandlerSegSolicitud = Handler(
+    handlerFunc: (context, parameters) => const SegSolicitud(),
   );
 
   static final Handler _counterHandlerCapacitacion = Handler(

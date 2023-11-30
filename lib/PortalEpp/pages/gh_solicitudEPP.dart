@@ -18,7 +18,7 @@ class _GhSolicitudEPPStateState extends State<GhSolicitudEPPState> {
   @override
   Widget build(BuildContext context) {
     double ancho = MediaQuery.of(context).size.width;
-    Future<List<EppSolicitudList>> dataLista = eppSolicitudEppGH();
+    Future<List<EppSolicitudList>> dataLista = eppSolicitudEppGHRenovar();
 
     return Scaffold(
       body: Row(
