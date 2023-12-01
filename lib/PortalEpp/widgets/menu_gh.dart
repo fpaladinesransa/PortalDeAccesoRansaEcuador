@@ -64,10 +64,11 @@ class Gh_menu extends StatelessWidget {
                 locator<NavigationService>().navigateTo('/ghActivo');
               }),
           MenuItem(
-              text: 'Pendientes de entrega',
+              text: 'Almacenar en inventario',
               icon: Icons.pageview,
               onPressed: () {
-                locator<NavigationService>().navigateTo('/404');
+                locator<NavigationService>()
+                    .navigateTo('/gh_AlmacenarInventario');
               }),
           MenuItem(
               text: 'Actas de entrega',

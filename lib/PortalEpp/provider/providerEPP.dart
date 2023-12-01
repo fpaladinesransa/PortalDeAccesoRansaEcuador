@@ -324,6 +324,31 @@ Future actualizarGHsolicitud(
   }
 }
 
+Future eppDarDeBaja(
+  String tieneSolicitud,
+  String estado,
+  String fechaBaja,
+  String id,
+) async {
+  final response = await http.post(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/EppDarDeBaja"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "TieneSolicitud": tieneSolicitud,
+        "Estado": estado,
+        "FechaBaja": fechaBaja,
+        "ID": id,
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
+
 class EppSelectFirmaGH {
   EppSelectFirmaGH({
     required this.id,

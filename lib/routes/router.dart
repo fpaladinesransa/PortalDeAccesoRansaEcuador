@@ -3,6 +3,7 @@ import 'package:portaltransportistas/PortalEpp/pages/col_eppActivo.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_firma.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_AlmacenarInventario.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_agregarCol.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
@@ -73,6 +74,9 @@ class Flurorouter {
         transitionType: TransitionType.fadeIn);
     router.define('/gh_RegistrarEpp',
         handler: _counterHandlerGhRegistrarEpp,
+        transitionType: TransitionType.fadeIn);
+    router.define('/gh_AlmacenarInventario',
+        handler: _counterHandlerGH_AlmacenarInventario,
         transitionType: TransitionType.fadeIn);
 
     router.define('/col_Solicitud',
@@ -154,6 +158,10 @@ class Flurorouter {
     handlerFunc: (context, parameters) => const DropdowntextArea(
       titulo: '',
     ),
+  );
+
+  static final Handler _counterHandlerGH_AlmacenarInventario = Handler(
+    handlerFunc: (context, parameters) => GH_AlmacenarInventario(),
   );
 
   static final Handler _counterHandlerGhRenovarequipo = Handler(

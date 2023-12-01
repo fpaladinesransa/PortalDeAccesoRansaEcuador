@@ -52,7 +52,7 @@ class DropdownService with ChangeNotifier {
 
   var cedulaSelect;
   setcedulaSelect(value) {
-    nombreSelect = value;
+    cedulaSelect = value;
     notifyListeners();
   }
 

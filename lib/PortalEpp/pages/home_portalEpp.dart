@@ -269,6 +269,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                       "Administrador") {
                                     locator<NavigationService>()
                                         .navigateTo('/ghhome');
+                                  } else if (nivelAcceso[
+                                          cedula.indexOf(usuario.text)] ==
+                                      "Seguridad") {
+                                    locator<NavigationService>()
+                                        .navigateTo('/seg_home');
                                   } else {
                                     locator<NavigationService>()
                                         .navigateTo('/col_Home');

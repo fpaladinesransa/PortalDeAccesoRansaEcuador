@@ -110,13 +110,9 @@ class _GhSolicitudEPPStateState extends State<GhSolicitudEPPState> {
                                           numeric: false,
                                           tooltip: "Comentarios"),
                                       DataColumn(
-                                          label: Text("Aprobar"),
+                                          label: Text("Solicitud"),
                                           numeric: false,
-                                          tooltip: "Aprobar"),
-                                      DataColumn(
-                                          label: Text("Rechazar"),
-                                          numeric: false,
-                                          tooltip: "Rechazar"),
+                                          tooltip: "Solicitud"),
                                     ],
                                     rows: filterData!
                                         .map(
@@ -178,7 +174,7 @@ class _GhSolicitudEPPStateState extends State<GhSolicitudEPPState> {
                                                   ),
                                                 )),
                                                 DataCell(onTap: () {
-                                                  mostrarDialogoPendienteEntrega(
+                                                  mostrarDialogoEntregaRealizada(
                                                       context,
                                                       valor.nombres,
                                                       valor.apellidos,
@@ -195,22 +191,6 @@ class _GhSolicitudEPPStateState extends State<GhSolicitudEPPState> {
                                                       Icons.check,
                                                       color: Color(0xff009B3A),
                                                     )),
-                                                DataCell(onTap: () {
-                                                  mostrarDialogoPendienteEntregaRechazo(
-                                                      context,
-                                                      valor.nombres,
-                                                      valor.apellidos,
-                                                      valor.cedula,
-                                                      valor.fechaCompra,
-                                                      valor.fechaDeEntrega,
-                                                      valor.nombreEpp,
-                                                      valor.estado,
-                                                      valor.motivo,
-                                                      valor.comentarios,
-                                                      valor.id);
-                                                },
-                                                    Icon(Icons.close_rounded,
-                                                        color: Colors.red)),
                                               ]),
                                         )
                                         .toList(),

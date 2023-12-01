@@ -504,7 +504,7 @@ class _GhRegistrarEppState extends State<GhRegistrarEpp> {
                           child: FormInput(
                             "Proveedor:",
                             value.chalecosProveedor,
-                            value.setChalecossCanitdad,
+                            value.setChalecosProveedor,
                           ),
                           width: 300,
                         ),

@@ -48,7 +48,7 @@ class _Gh_homeState extends State<Gh_home> {
                         locator<NavigationService>()
                             .navigateTo('/gh_RegistrarEpp');
                       },
-                      buttonText: 'Registrar EPP a colaborador',
+                      buttonText: 'Registrar EPP Colaborador',
                     ),
                     CustomButtonMenu(
                       icon: Icons.autorenew,
@@ -77,13 +77,13 @@ class _Gh_homeState extends State<Gh_home> {
                       onPressed: () {
                         locator<NavigationService>().navigateTo('/404');
                       },
-                      buttonText: 'Pendientes de entrega',
+                      buttonText: 'Almacenar en inventario',
                     ),
                     CustomButtonMenu(
                       icon: Icons.picture_as_pdf,
                       onPressed: () {
                         locator<NavigationService>()
-                            .navigateTo('/ghActasEntrega');
+                            .navigateTo('/gh_AlmacenarInventario');
                       },
                       buttonText: 'Actas de entrega',
                     ),

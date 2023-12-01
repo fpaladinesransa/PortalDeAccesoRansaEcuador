@@ -4,6 +4,7 @@ import 'package:portaltransportistas/PortalEpp/pages/col_eppActivo.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_firma.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_AlmacenarInventario.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_MostrarPdf.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_agregarCol.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_crearUsuario.dart';
@@ -47,6 +48,8 @@ class RouteGenerator {
         return _fadeRoute(GhRenovarequipo(), '/ghRenovar');
       case '/ghActivo':
         return _fadeRoute(GhActivoequipo(), '/ghActivo');
+      case '/gh_AlmacenarInventario':
+        return _fadeRoute(GH_AlmacenarInventario(), '/gh_AlmacenarInventario');
 
       case '/ghSolicitudEpp':
         return _fadeRoute(GhSolicitudEPPState(), '/ghSolicitudEpp');

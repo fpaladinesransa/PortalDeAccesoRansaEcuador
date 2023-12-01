@@ -19,7 +19,7 @@ class ColSolicitudes extends StatefulWidget {
   State<ColSolicitudes> createState() => _ColSolicitudesState();
 }
 
-String cedula = '0967096733';
+String cedula = '0976839123';
 String fecha = "01-01-2023";
 
 Future<List<TablasColSelectSolicitudEpp>> dataLista =

@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:lottie/lottie.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
+import 'package:portaltransportistas/PortalEpp/pages/gh_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_registrarEPP.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
-import 'package:portaltransportistas/PortalEpp/widgets/campo_fecha.dart';
+import 'package:portaltransportistas/PortalEpp/pages/seg_home.dart';
+import 'package:portaltransportistas/PortalEpp/widgets/campo_string.dart';
 import 'package:portaltransportistas/pdf/pdf_service.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -102,6 +104,11 @@ Future<void> mostrarDialog(context) async {
                       value.cascosProveedor);
                 }
                 if (value.chalecoselected == "Si") {
+/*                   print(value.chalecosfechacompra);
+                  print(value.chalecosfecharenovar);
+                  print(value.cedulaSelect);
+                  print(value.chalecosfechacompra);
+                  print(value.chalecosProveedor); */
                   insertRenovacionNuevoEquipo(
                       "Chalecos",
                       value.chalecosfechacompra,
@@ -112,7 +119,7 @@ Future<void> mostrarDialog(context) async {
                       value.chalecosProveedor);
                 }
                 enviadoCorrectamente(
-                    context, "EPP registrado con exito", GhRegistrarEpp());
+                    context, "EPP registrado con exito", Gh_home());
               },
             ),
           ],
@@ -228,9 +235,9 @@ Future<void> mostrarDialogoPendienteEntrega(context, nombre, apellido, cedula,
             onPressed: () {
               insertGHsolicitud(epp, cedula, motivo, fechaEntrega.toString(),
                   comentarios, "aprobado", id.toString());
-              actualizarGHsolicitud("", "Renovar", "", id.toString());
+              actualizarGHsolicitud("", "Renovar", comentarios, id.toString());
               enviadoCorrectamente(
-                  context, "Solicitud EPP exitosa", GhSolicitudEPPState());
+                  context, "Solicitud EPP exitosa", Seg_home());
 
               //Insertar nuevos registros
 /*                   insertRenovacionNuevoEquipo(value.epp,value.fechaCompra,"Vigente",value.cedula,value.fechaRenovar),
@@ -246,7 +253,7 @@ Future<void> mostrarDialogoPendienteEntrega(context, nombre, apellido, cedula,
 Future<void> mostrarDialogoEntregaRealizada(context, nombre, apellido, cedula,
     fechacompra, fechaEntrega, epp, estado, motivo, comentarios, id) async {
   final _formKey = GlobalKey<FormState>();
-  dynamic fechavalue;
+  String fechavalue = "";
   TextEditingController fechaController = TextEditingController();
   TextEditingController proveedorController = TextEditingController();
   final now = new DateTime.now();
@@ -257,19 +264,38 @@ Future<void> mostrarDialogoEntregaRealizada(context, nombre, apellido, cedula,
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
+      double ancho = MediaQuery.of(context).size.width;
+      double alto = MediaQuery.of(context).size.height;
+
       return Form(
         key: _formKey,
         child: AlertDialog(
           // <-- SEE HERE
           title: const Text(
-            'REGISTRO EPP',
+            'Se va a generar una nueva entrega:',
             style: TextStyle(color: Color(0xff009B3A), fontSize: 30),
           ),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("Generar "),
-                FechaCampo(fechavalue, fechaController),
+                Text(
+                    "$nombre $apellido se le asignara un/as $epp, llene la siguiente información: ",
+                    style:
+                        TextStyle(color: Color.fromARGB(255, 110, 110, 110))),
+                const Text("llene la siguiente información: ",
+                    style:
+                        TextStyle(color: Color.fromARGB(255, 110, 110, 110))),
+                Container(
+                  height: alto * 0.015,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        width: ancho * 0.2,
+                        child: FechaCampo(fechavalue, fechaController)),
+                  ],
+                ),
                 Container(
                   height: 0,
                   width: 0,
@@ -306,16 +332,16 @@ Future<void> mostrarDialogoEntregaRealizada(context, nombre, apellido, cedula,
                     },
                   ),
                 ),
-                TextFormField(
-                  controller: proveedorController,
-                  decoration: InputDecoration(labelText: 'Proveedor'),
-                  keyboardType: TextInputType.text,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Por favor, ingrese el proveedor.';
-                    }
-                    return null;
-                  },
+                Container(
+                  height: alto * 0.015,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        width: ancho * 0.2,
+                        child: CampoTexto("Proveedor:", proveedorController)),
+                  ],
                 ),
               ],
             ),
@@ -324,24 +350,34 @@ Future<void> mostrarDialogoEntregaRealizada(context, nombre, apellido, cedula,
             TextButton(
               child: const Text('Actualizar'),
               onPressed: () {
-                insertRenovacionNuevoEquipo(
-                    epp,
-                    fechavalue,
-                    "vigente",
-                    cedula,
-                    DateFormat("yyyy-MM-dd")
-                        .format(fechavalue.add(Duration(days: eppDias))),
-                    formattedDate,
-                    proveedorController.text);
-                actualizarGHsolicitud("", "Baja", "", id.toString());
-                enviadoCorrectamente(
-                    context, "Solicitud EPP exitosa", GhSolicitudEPPState());
+                if (_formKey.currentState!.validate()) {
+                  DateTime fecha = DateTime.parse(fechaController.text);
+
+                  insertRenovacionNuevoEquipo(
+                      epp,
+                      fechaController.text,
+                      "Falta Firmar",
+                      cedula,
+                      DateFormat("yyyy-MM-dd")
+                          .format(fecha.add(Duration(days: eppDias))),
+                      formattedDate,
+                      proveedorController.text);
+                  eppDarDeBaja("", "Baja", formattedDate, id.toString());
+                  enviadoCorrectamente(
+                      context, "Solicitud EPP exitosa", GhSolicitudEPPState());
+                }
 
                 //Insertar nuevos registros
                 /*                   insertRenovacionNuevoEquipo(value.epp,value.fechaCompra,"Vigente",value.cedula,value.fechaRenovar),
                     print("Nuevo recurso") */
               },
-            )
+            ),
+            TextButton(
+              child: const Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           ],
         ),
       );
