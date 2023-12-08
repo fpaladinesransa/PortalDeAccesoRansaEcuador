@@ -11,6 +11,7 @@ import 'package:portaltransportistas/PortalEpp/pages/gh_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/gh_mostrarActaEntrega.dart';
 import 'package:portaltransportistas/PortalEpp/pages/seg_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/seg_solicitud.dart';
+import 'package:portaltransportistas/PortalEpp/provider/auth_provider.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoBabahoyo.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoMachala.dart';
 import 'package:portaltransportistas/screens/portalestados.dart/portal_estadoManta.dart';
@@ -24,15 +25,16 @@ import '../PortalEpp/pages/gh_renovar.dart';
 import '../PortalEpp/pages/gh_solicitudEPP.dart';
 import '../PortalEpp/pages/home_portalEpp.dart';
 import '../PortalEpp/provider/providerEPP.dart';
+import 'package:provider/provider.dart';
 import '../screens/portal_estado.dart';
 import '../api/provider.dart';
 import '../screens/Seguridad_Capacitacion.dart';
 import '../screens/Seguridad_ingresoPersonal.dart';
 import '../screens/view_404.dart';
 
+//Comentario: Esta funcion esta conectada con el Main, es la que define las rutas y los url dentro de los dos portales
 class Flurorouter {
   static final FluroRouter router = FluroRouter();
-  static String rootRoute = '/';
 
   static void configureRoutes() {
     router.define("home",
@@ -44,9 +46,7 @@ class Flurorouter {
         handler: _counterhomePortalEPP, transitionType: TransitionType.fadeIn);
     router.define('/ghhome',
         handler: _counterHandlerGh_home, transitionType: TransitionType.fadeIn);
-    router.define('/prueba',
-        handler: _counterHandlerGh_prueba,
-        transitionType: TransitionType.fadeIn);
+
     router.define('/ghRenovar',
         handler: _counterHandlerGhRenovarequipo,
         transitionType: TransitionType.fadeIn);
@@ -117,62 +117,194 @@ class Flurorouter {
     router.notFoundHandler = pageNotFound;
   }
 
+  static final Handler _counterhomePortalEPP = Handler(
+    handlerFunc: (context, parameters) => const SignInScreen(),
+  );
+
+  //-------------PortalEpp_GH-------------------------------
+
+  static final Handler _counterHandlerGh_home = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return Gh_home();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerGhActivoequipo = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return GhActivoequipo();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+  static final Handler _counterHandlerGHActasEntrega = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return GHActasEntrega();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerGh_CrearUsuario = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return Gh_CrearUsuario();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerGH_AlmacenarInventario = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return GH_AlmacenarInventario('');
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerGhRenovarequipo = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return GhRenovarequipo();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerGh_MostrarPDF = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return Gh_MostrarPDF();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerGhRegistrarEpp = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return GhRegistrarEpp();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+  static final Handler _counterHandlerGhSolicitudEPPState = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return GhSolicitudEPPState();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  //-------------PortalEpp_Col--------------------------------
+
+  static final Handler _counterHandlerColHome = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Participante') {
+        return ColHome();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerColFirma = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Participante') {
+        return ColFirma();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerColEppActivo = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Participante') {
+        return ColEppActivo();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerGh_AgregarCol = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Participante') {
+        return Gh_AgregarCol();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  //-------------PortalEpp_Seg--------------------------------
+
+  static final Handler _counterHandlerSeg_home = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Seguridad') {
+        return Seg_home();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  static final Handler _counterHandlerSegSolicitud = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Seguridad') {
+        return SegSolicitud();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
+
+  //-------------PortalDeAcceso----------------
+
   static final Handler _counterHandler = Handler(
     handlerFunc: (context, parameters) =>
         MyApp(asegurados: obtenerSegurosTotales()),
   );
-  static final Handler _counterHandlerColSolicitudes = Handler(
-    handlerFunc: (context, parameters) => const ColSolicitudes(),
-  );
-  static final Handler _counterHandlerSignInScreen = Handler(
-    handlerFunc: (context, parameters) => const SignInScreen(),
-  );
-  static final Handler _counterHandlerColHome = Handler(
-    handlerFunc: (context, parameters) => const ColHome(),
-  );
-  static final Handler _counterHandlerColFirma = Handler(
-    handlerFunc: (context, parameters) => const ColFirma(),
-  );
-  static final Handler _counterHandlerColEppActivo = Handler(
-    handlerFunc: (context, parameters) => const ColEppActivo(),
-  );
-  static final Handler _counterHandlerSeg_home = Handler(
-    handlerFunc: (context, parameters) => const Seg_home(),
-  );
-  static final Handler _counterHandlerSegSolicitud = Handler(
-    handlerFunc: (context, parameters) => const SegSolicitud(),
-  );
-
   static final Handler _counterHandlerCapacitacion = Handler(
     handlerFunc: (context, parameters) => const IngresoDataPersonal(),
   );
 
-  static final Handler _counterHandlerGh_home = Handler(
-    handlerFunc: (context, parameters) => const Gh_home(),
-  );
-  static final Handler _counterHandlerportalEstadoQuito = Handler(
-    handlerFunc: (context, parameters) => const PortalEstadoQuito(),
-  );
-
-  static final Handler _counterHandlerGh_prueba = Handler(
-    handlerFunc: (context, parameters) => const DropdowntextArea(
-      titulo: '',
-    ),
-  );
-
-  static final Handler _counterHandlerGH_AlmacenarInventario = Handler(
-    handlerFunc: (context, parameters) => GH_AlmacenarInventario(),
-  );
-
-  static final Handler _counterHandlerGhRenovarequipo = Handler(
-    handlerFunc: (context, parameters) => GhRenovarequipo(),
-  );
-  static final Handler _counterHandlerGh_MostrarPDF = Handler(
-    handlerFunc: (context, parameters) => Gh_MostrarPDF(),
-  );
-  static final Handler _counterHandlerGhRegistrarEpp = Handler(
-    handlerFunc: (context, parameters) => GhRegistrarEpp(),
-  );
+  static final Handler _counterHandlerCapacitacionSeguridad = Handler(
+      handlerFunc: (context, parameters) => CapacitacionSeguridad(
+            cedula: '',
+            cd: '',
+          ));
 
   static final Handler _counterHandlerEstadoMilagro = Handler(
     handlerFunc: (context, parameters) => PortalEstadoMilagro(""),
@@ -190,30 +322,16 @@ class Flurorouter {
     handlerFunc: (context, parameters) => PortalEstadoManta(""),
   );
 
-  static final Handler _counterHandlerGhActivoequipo = Handler(
-    handlerFunc: (context, parameters) => GhActivoequipo(),
+  static final Handler _counterHandlerportalEstadoQuito = Handler(
+    handlerFunc: (context, parameters) => const PortalEstadoQuito(),
   );
-  static final Handler _counterHandlerGHActasEntrega = Handler(
-    handlerFunc: (context, parameters) => GHActasEntrega(),
+  static final Handler _counterHandlerColSolicitudes = Handler(
+    handlerFunc: (context, parameters) => const ColSolicitudes(),
   );
-  static final Handler _counterHandlerGh_CrearUsuario = Handler(
-    handlerFunc: (context, parameters) => Gh_CrearUsuario(),
-  );
-
-  static final Handler _counterhomePortalEPP = Handler(
+  static final Handler _counterHandlerSignInScreen = Handler(
     handlerFunc: (context, parameters) => const SignInScreen(),
   );
+
   static Handler pageNotFound =
       Handler(handlerFunc: (context, parameters) => View404());
-
-  static final Handler _counterHandlerCapacitacionSeguridad = Handler(
-      handlerFunc: (context, parameters) => CapacitacionSeguridad(
-            cedula: '',
-            cd: '',
-          ));
-
-  static final Handler _counterHandlerGhSolicitudEPPState =
-      Handler(handlerFunc: (context, parameters) => GhSolicitudEPPState());
-  static final Handler _counterHandlerGh_AgregarCol =
-      Handler(handlerFunc: (context, parameters) => Gh_AgregarCol());
 }

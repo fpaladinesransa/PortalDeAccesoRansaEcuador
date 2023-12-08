@@ -104,11 +104,6 @@ Future<void> mostrarDialog(context) async {
                       value.cascosProveedor);
                 }
                 if (value.chalecoselected == "Si") {
-/*                   print(value.chalecosfechacompra);
-                  print(value.chalecosfecharenovar);
-                  print(value.cedulaSelect);
-                  print(value.chalecosfechacompra);
-                  print(value.chalecosProveedor); */
                   insertRenovacionNuevoEquipo(
                       "Chalecos",
                       value.chalecosfechacompra,
@@ -693,4 +688,50 @@ Future<void> mostrarMensajeEnviado(context, cedula, nombre, apellido, numero,
           },
         );
       });
+}
+
+Future<void> mostrarInventariooBaja(
+    context, nombre, apellido, numero, epp, cedula, id) async {
+  final now = new DateTime.now();
+  String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        // <-- SEE HERE
+        title: const Text(
+          "Estatus del EPP",
+          style: TextStyle(color: Color(0xff009B3A), fontSize: 30),
+        ),
+        content: Text("Desea cambiar "),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Dar de Baja'),
+            onPressed: () {
+              ghUpdateBaja('Baja', '', formattedDate, '', id);
+              enviadoCorrectamente(
+                  context, "Se ha dado de baja Correctamente", Gh_home());
+            },
+          ),
+          TextButton(
+            child: const Text('Mantar a Inventario'),
+            onPressed: () {
+              ghUpdateInventario("Inventario", "", formattedDate, id);
+              enviadoCorrectamente(
+                  context, "Se ha enviado a Inventario", Gh_home());
+            },
+          ),
+          TextButton(
+            child: const Text('Cancelar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+/*                   insertRenovacionNuevoEquipo(value.epp,value.fechaCompra,"Vigente",value.cedula,value.fechaRenovar),
+                  print("Nuevo recurso") */
+            },
+          )
+        ],
+      );
+    },
+  );
 }

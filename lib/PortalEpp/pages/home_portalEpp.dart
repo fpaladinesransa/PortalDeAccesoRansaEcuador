@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portaltransportistas/PortalEpp/provider/auth_provider.dart';
 import 'package:portaltransportistas/PortalEpp/provider/gh_registerNew.dart';
 import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
 import '../../locator.dart';
@@ -7,6 +8,7 @@ import '../widgets/custom_buttom.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/text_widget.dart';
 import '../widgets/wsixed.dart';
+import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -22,6 +24,9 @@ class _SignInScreenState extends State<SignInScreen> {
   List cedula = [];
   List clave = [];
   List nivelAcceso = [];
+  String token = '1241241241243124';
+  String nivelAccesoStr = '';
+  late int indice;
   final usuario = TextEditingController();
   final password = TextEditingController();
 
@@ -30,6 +35,7 @@ class _SignInScreenState extends State<SignInScreen> {
     double ancho = MediaQuery.of(context).size.width;
     double altura = MediaQuery.of(context).size.height;
     GlobalKey<FormState> formKeyUsuario = new GlobalKey<FormState>();
+    final auth = Provider.of<AuthService>(context, listen: true);
 
     return Scaffold(
       body: Stack(
@@ -60,13 +66,10 @@ class _SignInScreenState extends State<SignInScreen> {
                               snapshot.requireData;
                           datos.forEach((valor) {
                             cedula.add(valor.cedula);
-                          });
-                          datos.forEach((valor) {
                             clave.add(valor.claveAcceso);
-                          });
-                          datos.forEach((valor) {
                             nivelAcceso.add(valor.nivelAcceso);
                           });
+
                           return Container();
                         }
                       },
@@ -198,6 +201,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                         if (value ==
                                             clave[
                                                 cedula.indexOf(usuario.text)]) {
+                                          indice = cedula.indexOf(usuario.text);
                                           return null;
                                         } else {
                                           setState(() {
@@ -264,9 +268,16 @@ class _SignInScreenState extends State<SignInScreen> {
                               fontcolor: Colors.white,
                               onPressed: () {
                                 if (formKeyUsuario.currentState!.validate()) {
+                                  auth.setUsuarioValue(usuario.text);
+                                  auth.setCedulaValue(usuario.text);
+                                  auth.setModuloValue(
+                                      cedula.indexOf(usuario.text));
+
                                   if (nivelAcceso[
                                           cedula.indexOf(usuario.text)] ==
                                       "Administrador") {
+                                    auth.setTokenValue(nivelAcceso[indice]);
+
                                     locator<NavigationService>()
                                         .navigateTo('/ghhome');
                                   } else if (nivelAcceso[

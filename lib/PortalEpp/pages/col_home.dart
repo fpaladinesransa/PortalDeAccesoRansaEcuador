@@ -1,6 +1,7 @@
 import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
+import 'package:portaltransportistas/PortalEpp/provider/auth_provider.dart';
 import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/custom_buttomMenu.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu_col.dart';
@@ -8,6 +9,7 @@ import 'package:portaltransportistas/PortalEpp/widgets/tablaCol.dart';
 import 'package:portaltransportistas/locator.dart';
 import 'package:portaltransportistas/services/navigation_service.dart';
 import 'package:portaltransportistas/widget/separadortitulo.dart';
+import 'package:provider/provider.dart';
 
 class ColHome extends StatefulWidget {
   const ColHome({super.key});
@@ -24,6 +26,8 @@ class _ColHomeState extends State<ColHome> {
   Widget build(BuildContext context) {
     double ancho = MediaQuery.of(context).size.width;
     double alto = MediaQuery.of(context).size.height;
+    final auth = Provider.of<AuthService>(context, listen: true);
+
     return Scaffold(
       body: Row(
         children: [
@@ -31,6 +35,7 @@ class _ColHomeState extends State<ColHome> {
           SingleChildScrollView(
             child: Column(
               children: [
+                Text(auth.cedulaselected),
                 SizedBox(
                   height: 25,
                 ),

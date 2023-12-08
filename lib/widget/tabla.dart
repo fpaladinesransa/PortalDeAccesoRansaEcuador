@@ -35,8 +35,6 @@ SingleChildScrollView tablaBody(List<ProjectList>? data) {
               label: Text("Fecha sub"),
               numeric: false,
               tooltip: "Fecha subida"),
-          DataColumn(
-              label: Text("Comentario"), numeric: false, tooltip: "Comentario"),
         ],
         rows: data!
             .map(
@@ -57,7 +55,6 @@ SingleChildScrollView tablaBody(List<ProjectList>? data) {
                     valor.fechaHoraSistema.month.toString() +
                     "/" +
                     valor.fechaHoraSistema.year.toString())),
-                DataCell(Text(valor.comentario)),
               ]),
             )
             .toList(),
@@ -99,8 +96,6 @@ SingleChildScrollView tablaBodyAll(List<ProjectListAll>? data) {
               label: Text("Fecha sub"),
               numeric: false,
               tooltip: "Fecha subida"),
-          DataColumn(
-              label: Text("Comentario"), numeric: false, tooltip: "Comentario"),
         ],
         rows: data!
             .map(
@@ -121,7 +116,6 @@ SingleChildScrollView tablaBodyAll(List<ProjectListAll>? data) {
                     valor.fechaHoraSistema.month.toString() +
                     "/" +
                     valor.fechaHoraSistema.year.toString())),
-                DataCell(Text(valor.comentario)),
               ]),
             )
             .toList(),
@@ -153,10 +147,6 @@ SingleChildScrollView tablaBodyAllCD3(List? data) {
               label: Text("Antecedentes"),
               numeric: false,
               tooltip: "Antecedentes"),
-          DataColumn(
-              label: Text("Comentarios"),
-              numeric: false,
-              tooltip: "Comentarios"),
         ],
         rows: data!
             .map(
@@ -167,7 +157,6 @@ SingleChildScrollView tablaBodyAllCD3(List? data) {
                     "${valor.fecha.day}/${valor.fecha.month}/${valor.fecha.year}")),
                 DataCell(EstadoSeguridad(valor.estado)),
                 DataCell(EstadoAntecedentesCD3(valor.antedentes)),
-                DataCell(Text(valor.comentario)),
               ]),
             )
             .toList(),

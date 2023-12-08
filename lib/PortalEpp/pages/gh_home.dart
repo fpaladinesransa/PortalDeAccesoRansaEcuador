@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
+import 'package:portaltransportistas/PortalEpp/provider/auth_provider.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/custom_buttomMenu.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu_gh.dart';
 import 'package:portaltransportistas/locator.dart';
 import 'package:portaltransportistas/services/navigation_service.dart';
 import 'package:portaltransportistas/widget/separadortitulo.dart';
+import 'package:provider/provider.dart';
 
 class Gh_home extends StatefulWidget {
   const Gh_home({super.key});
@@ -18,6 +20,8 @@ class _Gh_homeState extends State<Gh_home> {
   Widget build(BuildContext context) {
     double ancho = MediaQuery.of(context).size.width;
     double alto = MediaQuery.of(context).size.height;
+    final auth = Provider.of<AuthService>(context, listen: true);
+
     return Scaffold(
       body: Row(
         children: [
@@ -26,6 +30,7 @@ class _Gh_homeState extends State<Gh_home> {
             width: ancho * 0.8,
             child: SingleChildScrollView(
               child: Column(children: [
+                Text(auth.cedulaselected),
                 ImagenRansaTop(ancho: ancho),
                 SeparadorTitulo(titulo: "Menu"),
                 SizedBox(

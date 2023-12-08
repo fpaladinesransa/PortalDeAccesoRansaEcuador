@@ -41,11 +41,31 @@ Future<List<EppActivo>> eppActivostotales() async {
   if (response.statusCode == 200) {
     //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
     final responseList = json.decode(response.body) as List;
-
     final EppActivoAll =
         responseList.map((project) => EppActivo.fromJson(project)).toList();
 
     return EppActivoAll;
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }
+}
+
+Future<List<EppActivo>> eppActivosInventario({String? query}) async {
+  final response = await http.get(Uri.parse(
+      "https://ransaapiecuador.azurewebsites.net/EppequiposInventario"));
+
+  if (response.statusCode == 200) {
+    //RESPONSE.BODY ME DEVUELVE EL TEXTO LITERAL DE LA CONSULTA
+    final responseList = json.decode(response.body) as List;
+    final EppActivoMap =
+        responseList.map((project) => EppActivo.fromJson(project)).toList();
+    if (query != null) {
+      return EppActivoMap.where((element) =>
+          element.cedula.toLowerCase().contains(query.toLowerCase())).toList();
+    } else {
+      return EppActivoMap;
+    }
   } else {
     // Si la llamada no fue exitosa, lanza un error.
     throw Exception('Failed to load post');
@@ -831,5 +851,57 @@ Future<List<SelectNivelDeAcceso>> obtenerNivelDeAcceso({String? query}) async {
   } else {
     // Si la llamada no fue exitosa, lanza un error.
     throw Exception('Failed to load post');
+  }
+}
+
+Future ghUpdateInventario(
+  String estado,
+  String comentarios,
+  String fechaenInventario,
+  String id,
+) async {
+  final response = await http.post(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/GhUpdateInventario"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "Estado": estado,
+        "Comentarios": comentarios,
+        "FechaenInventario": fechaenInventario,
+        "ID": id,
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
+  }
+}
+
+Future ghUpdateBaja(
+  String estado,
+  String comentarios,
+  String fechaBaja,
+  String motivo,
+  String id,
+) async {
+  final response = await http.post(
+      Uri.parse("https://ransaapiecuador.azurewebsites.net/GhUpdateBaja"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "Estado": estado,
+        "Comentarios": comentarios,
+        "FechaBaja": fechaBaja,
+        "Motivo": motivo,
+        "ID": id,
+      }));
+
+  if (response.statusCode == 200) {
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to post');
   }
 }

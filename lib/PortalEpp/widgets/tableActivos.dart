@@ -97,6 +97,18 @@ EstadosEpp(estado) {
         ),
         child: Text("Falta Firmar"));
   }
+  if (estado == "Solicitud") {
+    return Container(
+        decoration: BoxDecoration(
+          color: Colors.lightBlue,
+          border: Border.all(
+            color: Colors.red,
+            width: 8,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text("Solicitud"));
+  }
   if (estado == "") {
     return Container(child: Text(""));
   } else {

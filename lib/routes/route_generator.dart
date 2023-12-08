@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/* import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:portaltransportistas/PortalEpp/pages/col_eppActivo.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_firma.dart';
@@ -49,7 +49,8 @@ class RouteGenerator {
       case '/ghActivo':
         return _fadeRoute(GhActivoequipo(), '/ghActivo');
       case '/gh_AlmacenarInventario':
-        return _fadeRoute(GH_AlmacenarInventario(), '/gh_AlmacenarInventario');
+        return _fadeRoute(
+            GH_AlmacenarInventario(''), '/gh_AlmacenarInventario');
 
       case '/ghSolicitudEpp':
         return _fadeRoute(GhSolicitudEPPState(), '/ghSolicitudEpp');
@@ -90,7 +91,7 @@ class RouteGenerator {
         return _fadeRoute(View404(), '/404');
     }
   }
-
+s
   static PageRoute _fadeRoute(Widget child, String routeName) {
     return PageRouteBuilder(
         settings: RouteSettings(name: routeName),
@@ -108,3 +109,4 @@ class RouteGenerator {
                 linearTransition: true));
   }
 }
+ */

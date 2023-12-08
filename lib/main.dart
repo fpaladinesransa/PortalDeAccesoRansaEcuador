@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_color_generator/material_color_generator.dart';
+import 'package:portaltransportistas/PortalEpp/provider/auth_provider.dart';
 import 'package:portaltransportistas/PortalEpp/provider/gh_registerNew.dart';
 import 'package:provider/provider.dart';
 import 'package:portaltransportistas/routes/router.dart';
@@ -17,24 +18,7 @@ void main() {
   Flurorouter.configureRoutes();
   runApp(MyAppMain());
 }
-/* class AppState extends StatelessWidget {
-  const AppState({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return  MultiBlocProvider(
-      providers: [
-        BlocProvider<GhBloc>(
-          create: (context) => GhBloc(),
-        ),
-      ],
-      child: MyAppMain(),
-    );
-  }
-}
- */
-
-// ignore: use_key_in_widget_constructors
 class MyAppMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -44,6 +28,7 @@ class MyAppMain extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => VariablesExt()),
         ChangeNotifierProvider(create: (_) => ColDropdownService()),
         ChangeNotifierProvider(create: (_) => DropdownService()),
+        ChangeNotifierProvider(create: (_) => AuthService()),
       ],
       child: MaterialApp(
         scrollBehavior: MyCustomScrollBehavior(),
