@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_solicitud.dart';
+import 'package:portaltransportistas/PortalEpp/provider/auth_provider.dart';
 import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/menu_col.dart';
 import 'package:portaltransportistas/PortalEpp/widgets/tablaCol.dart';
 import 'package:portaltransportistas/widget/separadortitulo.dart';
+import 'package:provider/provider.dart';
 
 class ColEppActivo extends StatefulWidget {
   const ColEppActivo({super.key});
@@ -12,13 +14,12 @@ class ColEppActivo extends StatefulWidget {
   State<ColEppActivo> createState() => _ColEppActivoState();
 }
 
-String cedula = '';
-Future<List<ColSelectActivoEpp>> dataLista =
-    obtenerColSelectActivoEpp(query: cedula);
-
 class _ColEppActivoState extends State<ColEppActivo> {
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthService>(context, listen: true);
+    Future<List<ColSelectActivoEpp>> dataLista =
+        obtenerColSelectActivoEpp(query: auth.cedulaselected);
     double ancho = MediaQuery.of(context).size.width;
     double alto = MediaQuery.of(context).size.height;
     return Scaffold(

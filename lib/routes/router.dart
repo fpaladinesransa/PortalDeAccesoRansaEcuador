@@ -219,6 +219,16 @@ class Flurorouter {
       }
     },
   );
+  static final Handler _counterHandlerGh_AgregarCol = Handler(
+    handlerFunc: (context, parameters) {
+      final auth = Provider.of<AuthService>(context!, listen: true);
+      if (auth.tokenselected == 'Administrador') {
+        return Gh_AgregarCol();
+      } else {
+        return SignInScreen();
+      }
+    },
+  );
 
   //-------------PortalEpp_Col--------------------------------
 
@@ -243,23 +253,22 @@ class Flurorouter {
       }
     },
   );
-
-  static final Handler _counterHandlerColEppActivo = Handler(
+  static final Handler _counterHandlerColSolicitudes = Handler(
     handlerFunc: (context, parameters) {
       final auth = Provider.of<AuthService>(context!, listen: true);
       if (auth.tokenselected == 'Participante') {
-        return ColEppActivo();
+        return ColSolicitudes();
       } else {
         return SignInScreen();
       }
     },
   );
 
-  static final Handler _counterHandlerGh_AgregarCol = Handler(
+  static final Handler _counterHandlerColEppActivo = Handler(
     handlerFunc: (context, parameters) {
       final auth = Provider.of<AuthService>(context!, listen: true);
       if (auth.tokenselected == 'Participante') {
-        return Gh_AgregarCol();
+        return ColEppActivo();
       } else {
         return SignInScreen();
       }
@@ -325,9 +334,7 @@ class Flurorouter {
   static final Handler _counterHandlerportalEstadoQuito = Handler(
     handlerFunc: (context, parameters) => const PortalEstadoQuito(),
   );
-  static final Handler _counterHandlerColSolicitudes = Handler(
-    handlerFunc: (context, parameters) => const ColSolicitudes(),
-  );
+
   static final Handler _counterHandlerSignInScreen = Handler(
     handlerFunc: (context, parameters) => const SignInScreen(),
   );

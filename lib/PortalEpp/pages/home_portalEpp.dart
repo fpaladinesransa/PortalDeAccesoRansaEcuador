@@ -285,9 +285,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                       "Seguridad") {
                                     locator<NavigationService>()
                                         .navigateTo('/seg_home');
+                                    auth.setTokenValue(nivelAcceso[indice]);
                                   } else {
                                     locator<NavigationService>()
                                         .navigateTo('/col_Home');
+                                    auth.setTokenValue(nivelAcceso[indice]);
                                   }
                                 }
                               },

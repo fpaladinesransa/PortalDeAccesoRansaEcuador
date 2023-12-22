@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
                                   MyAppConsulta(_textoController.text))));
                     },
                     decoration: InputDecoration(
-                        hintText: 'Buscar por número de cedula',
+                        hintText: 'Buscar por número de cédula',
                         border: InputBorder.none),
                     onChanged: (value) {}),
                 trailing: IconButton(

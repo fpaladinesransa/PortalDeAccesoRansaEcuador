@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portaltransportistas/PortalEpp/pages/col_home.dart';
 import 'package:portaltransportistas/PortalEpp/pages/dropdownprovider.dart';
+import 'package:portaltransportistas/PortalEpp/provider/auth_provider.dart';
 import 'package:portaltransportistas/PortalEpp/provider/col_registerNew.dart';
 import 'package:portaltransportistas/PortalEpp/provider/gh_registerNew.dart';
 import 'package:portaltransportistas/PortalEpp/provider/providerEPP.dart';
@@ -19,12 +20,6 @@ class ColSolicitudes extends StatefulWidget {
   State<ColSolicitudes> createState() => _ColSolicitudesState();
 }
 
-String cedula = '0123456789';
-String fecha = "01-01-2023";
-
-Future<List<TablasColSelectSolicitudEpp>> dataLista =
-    obtenerTablasColSelectSolicitudEpp(query: cedula);
-
 class _ColSolicitudesState extends State<ColSolicitudes> {
   late String nameValue;
   final comentarioValue = TextEditingController();
@@ -32,6 +27,9 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthService>(context, listen: true);
+    Future<List<TablasColSelectSolicitudEpp>> dataLista =
+        obtenerTablasColSelectSolicitudEpp(query: auth.cedulaselected);
     double ancho = MediaQuery.of(context).size.width;
     double alto = MediaQuery.of(context).size.height;
     final variables = Provider.of<VariablesExtCol>(context, listen: true);
@@ -122,7 +120,6 @@ class _ColSolicitudesState extends State<ColSolicitudes> {
                                 Container(
                                   width: 10,
                                 ),
-                                DateForm(fecha, fechaController),
                                 Container(
                                   width: 10,
                                 ),

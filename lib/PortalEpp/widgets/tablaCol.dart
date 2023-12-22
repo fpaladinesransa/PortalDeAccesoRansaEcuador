@@ -337,11 +337,9 @@ class _TablaColSolicitudState extends State<TablaColSolicitud> {
                 columns: const [
                   DataColumn(label: Text("ID"), numeric: false, tooltip: "ID"),
                   DataColumn(
-                      label: Text("Epp"), numeric: false, tooltip: "Epp"),
+                      label: Text("Cedula"), numeric: false, tooltip: "Cedula"),
                   DataColumn(
-                      label: Text("Nombre Epp"),
-                      numeric: false,
-                      tooltip: "Nombre Epp"),
+                      label: Text("EPP"), numeric: false, tooltip: "EPP"),
                   DataColumn(
                       label: Text("Estado"), numeric: false, tooltip: "Estado"),
                   DataColumn(

@@ -40,16 +40,10 @@ SingleChildScrollView tablaActivo(List<EppActivo>? data) {
                 DataCell(Text(valor.nombres)),
                 DataCell(Text(valor.apellidos)),
                 DataCell(Text(valor.cedula)),
-                DataCell(Text(valor.fechaCompra.day.toString() +
-                    "/" +
-                    valor.fechaCompra.month.toString() +
-                    "/" +
-                    valor.fechaCompra.year.toString())),
-                DataCell(Text(valor.fechaRenovar.day.toString() +
-                    "/" +
-                    valor.fechaRenovar.month.toString() +
-                    "/" +
-                    valor.fechaRenovar.year.toString())),
+                DataCell(Text(
+                    "${valor.fechaCompra.day}/${valor.fechaCompra.month}/${valor.fechaCompra.year}")),
+                DataCell(Text(
+                    "${valor.fechaRenovar.day}/${valor.fechaRenovar.month}/${valor.fechaRenovar.year}")),
                 DataCell(Text(valor.nombreEpp)),
                 DataCell(EstadosEpp(valor.estado)),
               ]),
@@ -100,9 +94,9 @@ EstadosEpp(estado) {
   if (estado == "Solicitud") {
     return Container(
         decoration: BoxDecoration(
-          color: Colors.lightBlue,
+          color: Colors.blue,
           border: Border.all(
-            color: Colors.red,
+            color: Colors.blue,
             width: 8,
           ),
           borderRadius: BorderRadius.circular(12),
@@ -112,7 +106,16 @@ EstadosEpp(estado) {
   if (estado == "") {
     return Container(child: Text(""));
   } else {
-    return Text("");
+    return Container(
+        decoration: BoxDecoration(
+          color: Colors.red,
+          border: Border.all(
+            color: Colors.red,
+            width: 8,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(estado.toString()));
   }
 }
 

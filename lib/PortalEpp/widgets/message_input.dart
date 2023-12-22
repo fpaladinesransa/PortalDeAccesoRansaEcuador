@@ -704,22 +704,21 @@ Future<void> mostrarInventariooBaja(
           "Estatus del EPP",
           style: TextStyle(color: Color(0xff009B3A), fontSize: 30),
         ),
-        content: Text("Desea cambiar "),
+        content: Text("¿Qué Desea cambiar?"),
         actions: <Widget>[
           TextButton(
             child: const Text('Dar de Baja'),
             onPressed: () {
-              ghUpdateBaja('Baja', '', formattedDate, '', id);
-              enviadoCorrectamente(
-                  context, "Se ha dado de baja Correctamente", Gh_home());
+              ghUpdateBaja('Baja', '', formattedDate, '', id.toString());
+              enviadoCorrectamente(context, "Baja enviada", Gh_home());
             },
           ),
           TextButton(
             child: const Text('Mantar a Inventario'),
             onPressed: () {
-              ghUpdateInventario("Inventario", "", formattedDate, id);
-              enviadoCorrectamente(
-                  context, "Se ha enviado a Inventario", Gh_home());
+              ghUpdateInventario(
+                  "Inventario", "", formattedDate, id.toString());
+              enviadoCorrectamente(context, "Inventario enviado", Gh_home());
             },
           ),
           TextButton(
